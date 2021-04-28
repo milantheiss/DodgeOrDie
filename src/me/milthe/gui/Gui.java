@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import me.milthe.clocks.CircleSpawn;
 import me.milthe.draw.DrawMain;
 import me.milthe.events.*;
 
@@ -62,6 +63,7 @@ public class Gui {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent windowEvent) {
+                //System.out.println(CircleSpawn.circles.size());
                 Platform.exit();
                 System.exit(0);
             }

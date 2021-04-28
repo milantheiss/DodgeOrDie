@@ -2,6 +2,8 @@ package me.milthe.draw;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import me.milthe.clocks.CircleSpawn;
+import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Player;
 import me.milthe.gui.Gui;
 import me.milthe.gui.ImageLoader;
@@ -12,6 +14,8 @@ public class DrawMain {
         g.fillRect(0, 0, Gui.width, Gui.height);
 
         g.drawImage(ImageLoader.imagePlayer, Player.xPos, Player.yPos, Player.width, Player.height);
-        g.drawImage(ImageLoader.imageEnemyRound, 200, 200, 100, 100);
+        for (int i = 0; i < CircleSpawn.circles.size(); i++) {
+            g.drawImage(ImageLoader.imageCircleEnemy, CircleSpawn.circles.get(i).getxPos(), CircleSpawn.circles.get(i).getyPos(), CircleSpawn.circles.get(i).getWidth(), CircleSpawn.circles.get(i).getHeight());
+        }
     }
 }

@@ -2,8 +2,11 @@ package me.milthe;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import me.milthe.clocks.CircleMovement;
+import me.milthe.clocks.CircleSpawn;
 import me.milthe.clocks.ClockMain;
-import me.milthe.clocks.PlayerMovementClock;
+import me.milthe.clocks.PlayerMovement;
+import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Player;
 import me.milthe.gui.Gui;
 
@@ -23,6 +26,8 @@ public class Main extends Application{
 
         new ClockMain();
 
-        new PlayerMovementClock();
+        new CircleMovement();
+        CircleSpawn.start();
+        new PlayerMovement();
     }
 }

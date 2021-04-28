@@ -11,13 +11,13 @@ public class KeyPressed implements EventHandler<KeyEvent> {
         if (keyEvent.getCode() == KeyCode.SPACE) {
             Player.dash();
         } else if (keyEvent.getCode() == KeyCode.W) {
-            Player.setYVelocity(-1);
+            Player.setYVelocity(-(Player.speed));
         } else if (keyEvent.getCode() == KeyCode.S) {
-            Player.setYVelocity(1);
+            Player.setYVelocity(Player.speed);
         } else if (keyEvent.getCode() == KeyCode.A) {
-            Player.setXVelocity(-1);
+            Player.setXVelocity(-(Player.speed));
         } else if (keyEvent.getCode() == KeyCode.D) {
-            Player.setXVelocity(1);
+            Player.setXVelocity(Player.speed);
         }
     }
 

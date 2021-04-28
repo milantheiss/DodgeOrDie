@@ -6,10 +6,10 @@ import me.milthe.gui.Gui;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PlayerMovementClock {
+public class PlayerMovement {
     Timer timer;
 
-    public PlayerMovementClock() {
+    public PlayerMovement() {
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -20,6 +20,6 @@ public class PlayerMovementClock {
                     System.out.println("Player Movement Timer Error");
                 }
             }
-        }, 3, 3);
+        }, 7, 7);
     }
 }
