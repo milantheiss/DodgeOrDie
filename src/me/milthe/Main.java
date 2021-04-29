@@ -7,6 +7,7 @@ import me.milthe.clocks.CircleSpawn;
 import me.milthe.clocks.ClockMain;
 import me.milthe.clocks.PlayerMovement;
 import me.milthe.entities.Player;
+import me.milthe.events.Collision;
 import me.milthe.gui.Gui;
 
 public class Main extends Application {

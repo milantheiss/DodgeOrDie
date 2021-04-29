@@ -1,6 +1,7 @@
 package me.milthe.clocks;
 
 import me.milthe.entities.CircleEnemy;
+import me.milthe.events.Collision;
 import me.milthe.gui.Gui;
 
 import java.util.ArrayList;

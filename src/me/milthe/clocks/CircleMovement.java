@@ -19,6 +19,6 @@ public class CircleMovement {
                     System.out.println("Circle Movement Timer Error");
                 }
             }
-        }, 20, 20);
+        }, 10, 20);
     }
 }
