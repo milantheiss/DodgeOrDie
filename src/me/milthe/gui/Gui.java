@@ -1,24 +1,15 @@
 package me.milthe.gui;
 
-import com.sun.javafx.collections.ElementObservableListDecorator;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import me.milthe.clocks.CircleSpawn;
 import me.milthe.draw.DrawMain;
 import me.milthe.events.*;
 
 import java.awt.*;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class Gui {
     public static DrawMain dm;
@@ -27,8 +18,8 @@ public class Gui {
     public static GraphicsContext gc_main;
 
     public Gui() {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        width = gd.getDisplayMode().getWidth();
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); //Setzt den Bildschirm auf dem das Programm laufen soll
+        width = gd.getDisplayMode().getWidth(); //--> GetScreensize
         height = gd.getDisplayMode().getHeight();
     }
 
@@ -60,13 +51,9 @@ public class Gui {
         stage.centerOnScreen();
         stage.show();
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent windowEvent) {
-                //System.out.println(CircleSpawn.circles.size());
-                Platform.exit();
-                System.exit(0);
-            }
+        stage.setOnCloseRequest(windowEvent -> {
+            Platform.exit();
+            System.exit(0);
         });
     }
 }

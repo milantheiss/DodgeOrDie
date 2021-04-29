@@ -3,7 +3,7 @@ package me.milthe.entities;
 import me.milthe.gui.Gui;
 
 public class CircleEnemy {
-    public int xPos, yPos, targetX, targetY, width = 100, height = 100, xVel, yVel, startingSite, speed = 20;
+    public int xPos, yPos, targetX, targetY, width = 100, height = 100, xVel, yVel, startingSite;
 
 
     public CircleEnemy() {
@@ -37,10 +37,11 @@ public class CircleEnemy {
         int xOffset = targetX - xPos;
         int yOffset = targetY - yPos;
 
-       xVel = xOffset / 30;
-       yVel = yOffset / 30;
+        xVel = xOffset / 30;
+        yVel = yOffset / 30;
     }
-//Umgehen von static --> getter und setter
+
+    //Umgehen von static --> getter und setter
     public void move() {
         xPos += xVel;
         yPos += yVel;
@@ -61,29 +62,5 @@ public class CircleEnemy {
 
     public int getHeight() {
         return height;
-    }
-
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
-    }
-
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
-    }
-
-    public int getxVel() {
-        return xVel;
-    }
-
-    public void setxVel(int xVel) {
-        this.xVel = xVel;
-    }
-
-    public int getyVel() {
-        return yVel;
-    }
-
-    public void setyVel(int yVel) {
-        this.yVel = yVel;
     }
 }

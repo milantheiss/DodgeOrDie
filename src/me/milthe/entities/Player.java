@@ -1,5 +1,6 @@
 package me.milthe.entities;
 
+import me.milthe.events.MouseMoved;
 import me.milthe.gui.Gui;
 
 public class Player {
@@ -54,5 +55,41 @@ public class Player {
                 yPos = tempY;
             }
         }
+    }
+
+    public static void mouseDash() {
+        System.out.println("xPos " + xPos);
+        System.out.println("yPos " + yPos);
+        double xMouse = MouseMoved.x;
+        System.out.println("xMouse " + xMouse);
+        double yMouse = MouseMoved.y;
+        System.out.println("yMouse " + yMouse);
+        double m = (yMouse - yPos) / (xMouse - xPos);
+        System.out.println("M " + m);
+
+        double yTemp = m * xPos;
+        System.out.println("yTemp " + yTemp);
+
+        double n = yPos - yTemp;
+        System.out.println("N " + n);
+
+        double a = 250 * (Math.sin(Math.atan(m)));
+        System.out.println("A " + a);
+        double yTarget;
+        double offset = (xMouse - xPos);
+        System.out.println("Offset " + offset);
+        if (offset < 0) {
+            yTarget = yPos - a;
+            System.out.println("Hier");
+        } else {
+            yTarget = yPos + a;
+        }
+        System.out.println("yTarget " + yTarget);
+        double xTarget = (yTarget - n) / m;
+        System.out.println("xTarget " + xTarget);
+        xPos = (int) xTarget;
+        yPos = (int) yTarget;
+        //springt immer nach rechts
+
     }
 }

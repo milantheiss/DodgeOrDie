@@ -9,7 +9,7 @@ public class KeyPressed implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.SPACE) {
-            Player.dash();
+            Player.mouseDash();
         } else if (keyEvent.getCode() == KeyCode.W) {
             Player.setYVelocity(-(Player.speed));
         } else if (keyEvent.getCode() == KeyCode.S) {

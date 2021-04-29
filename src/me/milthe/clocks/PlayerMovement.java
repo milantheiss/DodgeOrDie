@@ -1,7 +1,6 @@
 package me.milthe.clocks;
 
 import me.milthe.entities.Player;
-import me.milthe.gui.Gui;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +19,6 @@ public class PlayerMovement {
                     System.out.println("Player Movement Timer Error");
                 }
             }
-        }, 7, 7);
+        }, 0, 7);
     }
 }

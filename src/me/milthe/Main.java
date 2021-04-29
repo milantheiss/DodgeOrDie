@@ -6,11 +6,10 @@ import me.milthe.clocks.CircleMovement;
 import me.milthe.clocks.CircleSpawn;
 import me.milthe.clocks.ClockMain;
 import me.milthe.clocks.PlayerMovement;
-import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Player;
 import me.milthe.gui.Gui;
 
-public class Main extends Application{
+public class Main extends Application {
     Gui g = new Gui();
 
     public static void main(String[] args) {
@@ -18,7 +17,7 @@ public class Main extends Application{
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage){
         g.init();
         g.create(stage);
 
@@ -26,8 +25,8 @@ public class Main extends Application{
 
         new ClockMain();
 
-        new CircleMovement();
-        CircleSpawn.start();
         new PlayerMovement();
+        CircleSpawn.start();
+        new CircleMovement();
     }
 }

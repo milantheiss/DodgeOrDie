@@ -9,14 +9,12 @@ import java.util.TimerTask;
 
 public class CircleSpawn {
     public static ArrayList<CircleEnemy> circles = new ArrayList<>();
-
     public static Timer timer;
+    static int spawnTimer = 5000; //SpawnTimer in Millisekunden
 
-   public static void start() {
-       circles.add(new CircleEnemy());
-       circles.add(new CircleEnemy());
-       circles.add(new CircleEnemy());
-       timer = new Timer();
+    public static void start() {
+        timer = new Timer();
+
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -27,6 +25,6 @@ public class CircleSpawn {
                 }
                 circles.add(new CircleEnemy());
             }
-        }, 500, 500);
+        }, spawnTimer, 500);
     }
 }

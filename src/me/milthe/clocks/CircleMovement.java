@@ -1,7 +1,5 @@
 package me.milthe.clocks;
 
-import me.milthe.entities.CircleEnemy;
-
 import java.util.Timer;
 import java.util.TimerTask;
 

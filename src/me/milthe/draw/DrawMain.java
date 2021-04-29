@@ -3,10 +3,8 @@ package me.milthe.draw;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import me.milthe.clocks.CircleSpawn;
-import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Player;
 import me.milthe.gui.Gui;
-import me.milthe.gui.ImageLoader;
 
 public class DrawMain {
     public void draw(GraphicsContext g) {

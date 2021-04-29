@@ -20,6 +20,6 @@ public class ClockMain {
                     System.out.println("Main Timer Error");
                 }
             }
-        }, 7, 7);
+        }, 0, 7);
     }
 }
