@@ -6,13 +6,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import me.milthe.draw.DrawMain;
+import me.milthe.draw.Draw;
 import me.milthe.events.*;
 
 import java.awt.*;
 
 public class Gui {
-    public static DrawMain dm;
+    public static Draw dm;
 
     public static int width, height;
     public static GraphicsContext gc_main;
@@ -27,7 +27,7 @@ public class Gui {
     }
 
     public void init() {
-        dm = new DrawMain();
+        dm = new Draw();
     }
 
     public void create(Stage stage) { //JavaFX Setup
