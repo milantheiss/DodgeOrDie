@@ -17,17 +17,20 @@ public class Gui {
     public static int width, height;
     public static GraphicsContext gc_main;
 
+    public static Input in;
+
     public Gui() {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); //Setzt den Bildschirm auf dem das Programm laufen soll
         width = gd.getDisplayMode().getWidth(); //--> GetScreensize
         height = gd.getDisplayMode().getHeight();
+        in = new Input();
     }
 
     public void init() {
         dm = new DrawMain();
     }
 
-    public void create(Stage stage) {
+    public void create(Stage stage) { //JavaFX Setup
         Canvas canvas_main;
         StackPane root = new StackPane();
         int cWidth = width - 10, cHeight = height - 10;
@@ -39,6 +42,7 @@ public class Gui {
         root.getChildren().add(canvas_main);
         Scene scene = new Scene(root, cWidth, cHeight);
 
+        //EventListeners
         scene.setOnMouseMoved(new MouseMoved());
         scene.setOnKeyPressed(new KeyPressed());
         scene.setOnKeyReleased(new KeyReleased());

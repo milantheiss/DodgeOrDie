@@ -2,10 +2,7 @@ package me.milthe;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import me.milthe.clocks.CircleMovement;
-import me.milthe.clocks.CircleSpawn;
-import me.milthe.clocks.ClockMain;
-import me.milthe.clocks.PlayerMovement;
+import me.milthe.clocks.*;
 import me.milthe.entities.Player;
 import me.milthe.events.Collision;
 import me.milthe.gui.Gui;
@@ -13,6 +10,7 @@ import me.milthe.gui.Gui;
 public class Main extends Application {
     Gui g = new Gui();
 
+    //Launcht Application
     public static void main(String[] args) {
         launch(args);
     }
@@ -22,12 +20,11 @@ public class Main extends Application {
         g.init();
         g.create(stage);
 
+        //Erstellt neue Entity Objekte
         new Player();
-
-        new ClockMain();
-
-        new PlayerMovement();
         CircleSpawn.start();
-        new CircleMovement();
+
+        //Startet Clock
+        new Thread(new ClockMain()).start();
     }
 }
