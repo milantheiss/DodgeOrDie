@@ -3,6 +3,8 @@ package me.milthe.events;
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Player;
 
+//TODO Collision Klasse aufräumen
+
 public class Collision {
     public boolean collisionPlayerCircle(CircleEnemy ce) {
         int xCenter = ce.getxPos() + 50; //Mittelpunkt von Kreis --> X

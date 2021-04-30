@@ -2,6 +2,8 @@ package me.milthe.entities;
 
 import me.milthe.gui.Gui;
 
+//TODO CircleEnemy Klasse aufräumen
+
 public class CircleEnemy {
     public int xPos, yPos, targetX, targetY, width = 100, height = 100, xVel, yVel, startingSite;
 

@@ -4,21 +4,11 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import me.milthe.entities.Player;
+import me.milthe.gui.Gui;
 
-public class KeyPressed implements EventHandler<KeyEvent> {
+public class KeyPressed implements EventHandler<KeyEvent> {//Wenn Taste gedrückt wird, wird die Taste an Input.java geschickt in Zahl umgewandelt und assoziierter Array Spot auf true gesetzt
     @Override
     public void handle(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.SPACE) {
-            Player.dash();
-        } else if (keyEvent.getCode() == KeyCode.W) {
-            Player.setYVelocity(-(Player.speed));
-        } else if (keyEvent.getCode() == KeyCode.S) {
-            Player.setYVelocity(Player.speed);
-        } else if (keyEvent.getCode() == KeyCode.A) {
-            Player.setXVelocity(-(Player.speed));
-        } else if (keyEvent.getCode() == KeyCode.D) {
-            Player.setXVelocity(Player.speed);
-        }
+        Gui.in.pressed[Gui.in.getKeyCode(keyEvent.getCode())] = true;
     }
-
 }

@@ -9,7 +9,7 @@ import me.milthe.events.Collision;
 import me.milthe.gui.Gui;
 
 
-public class DrawMain {
+public class DrawMain { //JavaFX Draw um Grafik anzuzeigen Wird in ClockMain.java render() aufgerufen
     Collision col = new Collision();
     int score = 0;
 
@@ -19,24 +19,15 @@ public class DrawMain {
 
         g.drawImage(ImageLoader.imagePlayer, Player.xPos, Player.yPos, Player.width, Player.height);
         for (int i = 0; i < CircleSpawn.circles.size(); i++) {
-            if (col.collisionPlayerCircle(CircleSpawn.circles.get(i))){
+            if (col.collisionPlayerCircle(CircleSpawn.circles.get(i))) { //Kollisionsdetektion für Gegner zu Spieler --> Muss noch ausgelagert werden
                 CircleSpawn.circles.remove(i);
                 score++;
-            }else {
+            } else {
                 g.drawImage(ImageLoader.imageCircleEnemy, CircleSpawn.circles.get(i).getxPos(), CircleSpawn.circles.get(i).getyPos(), CircleSpawn.circles.get(i).getWidth(), CircleSpawn.circles.get(i).getHeight());
             }
         }
         g.setFill(Color.WHITE);
         g.setFont(new Font(50));
         g.fillText(String.valueOf(score), 30, 60);
-
-
-        /*for (CircleEnemy c : CircleSpawn.circles){
-            if (col.collisionPlayerCircle(c)){
-                c
-            }else {
-                g.drawImage(ImageLoader.imageCircleEnemy, c.getxPos(), c.getyPos(), c.getWidth(), c.getHeight());
-            }
-        }*/
     }
 }

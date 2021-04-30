@@ -1,7 +1,6 @@
 package me.milthe.clocks;
 
 import me.milthe.entities.CircleEnemy;
-import me.milthe.events.Collision;
 import me.milthe.gui.Gui;
 
 import java.util.ArrayList;
@@ -11,7 +10,8 @@ import java.util.TimerTask;
 public class CircleSpawn {
     public static ArrayList<CircleEnemy> circles = new ArrayList<>();
     public static Timer timer;
-    static int spawnTimer = 5000; //SpawnTimer in Millisekunden
+    static int spawnDelay = 5000; //SpawnDelay nach aufrufen der Methode in Millisekunden(1000ms = 1s)
+    static int spawnInterval = 500; //Zeit zwischen Enemyspawn in Millisekunden
 
     public static void start() {
         timer = new Timer();
@@ -26,6 +26,6 @@ public class CircleSpawn {
                 }
                 circles.add(new CircleEnemy());
             }
-        }, spawnTimer, 500);
+        }, spawnDelay, spawnInterval);
     }
 }
