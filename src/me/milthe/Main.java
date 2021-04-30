@@ -8,6 +8,7 @@ import me.milthe.clocks.ClockMain;
 import me.milthe.clocks.PlayerMovement;
 import me.milthe.entities.Player;
 import me.milthe.events.Collision;
+import me.milthe.events.Input;
 import me.milthe.gui.Gui;
 
 public class Main extends Application {
@@ -23,6 +24,8 @@ public class Main extends Application {
         g.create(stage);
 
         new Player();
+
+        new Input();
 
         new ClockMain();
 
