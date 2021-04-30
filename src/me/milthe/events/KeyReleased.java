@@ -6,7 +6,7 @@ import javafx.scene.input.KeyEvent;
 import me.milthe.entities.Player;
 
 public class KeyReleased implements EventHandler<KeyEvent> {
-   /* @Override
+    @Override
     public void handle(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.W) {
             Player.setYVelocity(0);
@@ -17,11 +17,11 @@ public class KeyReleased implements EventHandler<KeyEvent> {
         } else if (keyEvent.getCode() == KeyCode.D) {
             Player.setXVelocity(0);
         }
-    }*/
+    }
 
-    @Override
+   /* @Override
     public void handle(KeyEvent keyEvent) {
         //bool version
 
-    }
+    }*/
 }

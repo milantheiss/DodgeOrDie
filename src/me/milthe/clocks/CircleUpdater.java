@@ -1,12 +1,14 @@
 package me.milthe.clocks;
 
+import javafx.scene.canvas.GraphicsContext;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CircleMovement {
+public class CircleUpdater {
     Timer timer;
 
-    public CircleMovement() {
+    public CircleUpdater(GraphicsContext g) {
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override

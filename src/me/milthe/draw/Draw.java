@@ -9,7 +9,7 @@ import me.milthe.events.Collision;
 import me.milthe.gui.Gui;
 
 
-public class DrawMain {
+public class Draw {
     Collision col = new Collision();
     int score = 0;
 
@@ -17,7 +17,7 @@ public class DrawMain {
         g.setFill(new Color(4. / 255., 0. / 255., 17. / 255., 1));
         g.fillRect(0, 0, Gui.width, Gui.height);
 
-        g.drawImage(ImageLoader.imagePlayer, Player.xPos, Player.yPos, Player.width, Player.height);
+
         for (int i = 0; i < CircleSpawn.circles.size(); i++) {
             if (col.collisionPlayerCircle(CircleSpawn.circles.get(i))){
                 CircleSpawn.circles.remove(i);

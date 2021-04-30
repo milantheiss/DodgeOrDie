@@ -2,7 +2,6 @@ package me.milthe.events;
 
 import javafx.scene.input.KeyCode;
 
-import java.awt.event.KeyEvent;
 
 public class Input{
 
@@ -15,7 +14,6 @@ public class Input{
     }
 
     public short getKeycode(KeyCode code){
-        if ()
         return 0;
     }
 }
