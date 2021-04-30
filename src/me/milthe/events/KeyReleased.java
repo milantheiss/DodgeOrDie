@@ -11,10 +11,4 @@ public class KeyReleased implements EventHandler<KeyEvent> {//Wenn Taste losgela
     public void handle(KeyEvent keyEvent) {
         Gui.in.pressed[Gui.in.getKeyCode(keyEvent.getCode())] = false;
     }
-
-   /* @Override
-    public void handle(KeyEvent keyEvent) {
-        //bool version
-
-    }*/
 }
