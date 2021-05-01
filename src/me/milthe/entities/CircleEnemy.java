@@ -1,11 +1,13 @@
 package me.milthe.entities;
 
+import javafx.scene.image.Image;
 import me.milthe.gui.Gui;
 
 //TODO CircleEnemy Klasse aufräumen
 
 public class CircleEnemy {
     public int xPos, yPos, targetX, targetY, width = 100, height = 100, xVel, yVel, startingSite;
+    Image sprite = new Image("file:rsc/enemy-circle.png");
 
 
     public CircleEnemy() {
@@ -49,6 +51,9 @@ public class CircleEnemy {
         yPos += yVel;
     }
 
+    public Image getSprite() {
+        return sprite;
+    }
 
     public int getxPos() {
         return xPos;

@@ -1,12 +1,15 @@
 package me.milthe.entities;
 
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import me.milthe.events.MouseMoved;
 import me.milthe.gui.Gui;
 
+
 public class Player {
     public static int xPos, yPos, width = 50, height = 50, xVel, yVel, speed = 16, dashCooldown = 500, dashRange = 250;
     private static long lastDash = 0;
+    private static Image sprite = new Image("file:rsc/player.png");
 
     public Player() {
         xPos = Gui.width / 2 - 25;
@@ -48,6 +51,10 @@ public class Player {
 
         xPos += xVel;
         yPos += yVel;
+    }
+
+    public static Image getSprite() {
+        return sprite;
     }
 
     public static void dash() { //Dash in Richtung in die sich der Spieler bewegt (
