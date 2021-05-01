@@ -1,11 +1,7 @@
 package me.milthe.clocks;
 
-import me.milthe.entities.CircleEnemy;
-import me.milthe.events.Collision;
 import me.milthe.gui.Gui;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ClockMain implements Runnable{
 
@@ -43,6 +39,7 @@ public class ClockMain implements Runnable{
 
     private void update() {
         update.entitiesUpdate();
+        update.collisionPlayerCircle();
     }
 
     private void render() {
