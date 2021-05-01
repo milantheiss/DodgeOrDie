@@ -12,6 +12,7 @@ public class Collision {
         int[] x = new int[4];
         int[] y = new int[4];
 
+        //Muss hart gecodet werden ansonsten wird Kollision zu langsam berechnet
         x[0] = Player.xPos;
         y[0] = Player.yPos;
         x[1] = Player.xPos + 50;
@@ -24,20 +25,13 @@ public class Collision {
         double[] a = new double[4];
         double[] b = new double[4];
         double[] c = new double[4];
+
         for (int i = 0; i < 4; i++) {
-            /*if (i != 0) {
-                x[i] = (i == 1 || i == 3) ? (x[0] + 50) : x[0];
-                y[i] = (i == 2 || i == 3) ? (y[0] - 50) : y[0];
-            }*/
             a[i] = x[i] - xCenter;
             b[i] = y[i] - yCenter;
             c[i] = Math.sqrt((a[i] * a[i]) + (b[i] * b[i]));
         }
 
         return !(c[0] > 50) || !(c[1] > 50) || !(c[2] > 50) || !(c[3] > 50);
-        /*if (c[0] < 50 && c[1] < 50 && c[2] < 50 && c[3] < 50) {
-            System.out.println("Collision");
-        }*/
-
     }
 }
