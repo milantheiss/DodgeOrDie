@@ -1,19 +1,22 @@
 package me.milthe.entities;
 
+import javafx.scene.image.Image;
+import me.milthe.Main;
 import me.milthe.gui.Gui;
 
 //TODO CircleEnemy Klasse aufräumen
 
-public class CircleEnemy {
-    public int xPos, yPos, targetX, targetY, width = 100, height = 100, xVel, yVel, startingSite;
+public class CircleEnemy extends Entity {
+    public int xPos, yPos, targetX, targetY, width = 100, height = 100, startingSite;
+    Image sprite = new Image("file:rsc/player.png");
 
 
-    public CircleEnemy() {
+    public CircleEnemy(Main main){
         //Beim erstellen eines Neuen Circle Enemies wird der Startpunkt festgelegt und der Richtung
         startingSite = (int) (Math.random() * 4);
         //Sucht einen Random Punkt im Screen
-        targetX = Player.xPos;
-        targetY = Player.yPos;
+        targetX = main.getEntities().get(0).xPos;
+        targetY = main.getEntities().get(0).yPos;
 
         if (startingSite == 0) {
             //start von Oben -> Y = 0
@@ -39,8 +42,8 @@ public class CircleEnemy {
         int xOffset = targetX - xPos;
         int yOffset = targetY - yPos;
 
-        xVel = xOffset / 30;
-        yVel = yOffset / 30;
+        xVel = xOffset / speed;
+        yVel = yOffset / speed;
     }
 
     //Umgehen von static --> getter und setter
@@ -49,6 +52,10 @@ public class CircleEnemy {
         yPos += yVel;
     }
 
+    @Override
+    public Image getSprite() {
+        return sprite;
+    }
 
     public int getxPos() {
         return xPos;

@@ -6,10 +6,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import me.milthe.Main;
 import me.milthe.draw.DrawMain;
+import me.milthe.entities.Entity;
 import me.milthe.events.*;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Gui {
     public static DrawMain dm;
@@ -18,12 +22,15 @@ public class Gui {
     public static GraphicsContext gc_main;
 
     public static Input in;
+    Main main;
 
-    public Gui() {
+
+    public Gui(Main main) {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); //Setzt den Bildschirm auf dem das Programm laufen soll
         width = gd.getDisplayMode().getWidth(); //--> GetScreensize
         height = gd.getDisplayMode().getHeight();
         in = new Input();
+        this.main = main;
     }
 
     public void init() {
@@ -37,7 +44,7 @@ public class Gui {
 
         canvas_main = new Canvas(width, height);
         gc_main = canvas_main.getGraphicsContext2D();
-        dm.draw(gc_main);
+        dm.draw(gc_main, main);
 
         root.getChildren().add(canvas_main);
         Scene scene = new Scene(root, cWidth, cHeight);

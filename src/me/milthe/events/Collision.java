@@ -1,25 +1,32 @@
 package me.milthe.events;
 
+import me.milthe.Main;
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Player;
 
 //TODO Collision Klasse aufräumen
 
 public class Collision {
+    Main main;
+
+    public Collision(Main main){
+        this.main = main;
+    }
+    
     public boolean collisionPlayerCircle(CircleEnemy ce) {
         int xCenter = ce.getxPos() + 50; //Mittelpunkt von Kreis --> X
         int yCenter = ce.getyPos() + 50; //Mittelpunkt von Kreis --> Y
         int[] x = new int[4];
         int[] y = new int[4];
 
-        x[0] = Player.xPos;
-        y[0] = Player.yPos;
-        x[1] = Player.xPos + 50;
-        x[2] = Player.xPos;
-        x[3] = Player.xPos + 50;
-        y[1] = Player.yPos + 50;
-        y[2] = Player.yPos;
-        y[3] = Player.yPos + 50;
+        x[0] = main.getEntities().get(0).getxPos();
+        y[0] = main.getEntities().get(0).getyPos();
+        x[1] = main.getEntities().get(0).getxPos() + 50;
+        x[2] = main.getEntities().get(0).getxPos();
+        x[3] = main.getEntities().get(0).getxPos() + 50;
+        y[1] = main.getEntities().get(0).getyPos() + 50;
+        y[2] = main.getEntities().get(0).getyPos();
+        y[3] = main.getEntities().get(0).getyPos() + 50;
 
         double[] a = new double[4];
         double[] b = new double[4];

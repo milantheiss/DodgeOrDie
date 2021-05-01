@@ -1,11 +1,7 @@
 package me.milthe.clocks;
 
-import me.milthe.entities.CircleEnemy;
-import me.milthe.events.Collision;
+import me.milthe.Main;
 import me.milthe.gui.Gui;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ClockMain implements Runnable{
 
@@ -13,9 +9,11 @@ public class ClockMain implements Runnable{
     private final double updateRate = 1.0d/60d;
 
     Update update;
+    Main main;
 
-    public ClockMain() {
-        this.update = new Update();
+    public ClockMain(Main main) {
+        this.main = main;
+        this.update = new Update(main);
     }
 
 
@@ -42,11 +40,12 @@ public class ClockMain implements Runnable{
     }
 
     private void update() {
-        update.entitiesUpdate();
+        update.entitiesMovement();
+        update.collisionPlayerCircle();
     }
 
     private void render() {
         Gui.gc_main.clearRect(0, 0, Gui.width, Gui.height);
-        Gui.dm.draw(Gui.gc_main);
+        Gui.dm.draw(Gui.gc_main, main);
     }
 }
