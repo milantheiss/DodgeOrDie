@@ -2,6 +2,7 @@ package me.milthe.events;
 
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Player;
+import me.milthe.gui.Gui;
 
 //TODO Collision Klasse aufräumen
 
@@ -13,14 +14,14 @@ public class Collision {
         int[] y = new int[4];
 
         //Muss hart gecodet werden ansonsten wird Kollision zu langsam berechnet
-        x[0] = Player.xPos;
-        y[0] = Player.yPos;
-        x[1] = Player.xPos + 50;
-        x[2] = Player.xPos;
-        x[3] = Player.xPos + 50;
-        y[1] = Player.yPos + 50;
-        y[2] = Player.yPos;
-        y[3] = Player.yPos + 50;
+        x[0] = Gui.entitylist.getEntities().get(0).getxPos();
+        y[0] = Gui.entitylist.getEntities().get(0).getyPos();
+        x[1] = Gui.entitylist.getEntities().get(0).getxPos() + 50;
+        x[2] = Gui.entitylist.getEntities().get(0).getxPos();
+        x[3] = Gui.entitylist.getEntities().get(0).getxPos() + 50;
+        y[1] = Gui.entitylist.getEntities().get(0).getyPos() + 50;
+        y[2] = Gui.entitylist.getEntities().get(0).getyPos();
+        y[3] = Gui.entitylist.getEntities().get(0).getyPos() + 50;
 
         double[] a = new double[4];
         double[] b = new double[4];

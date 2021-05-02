@@ -4,28 +4,40 @@ import me.milthe.entities.CircleEnemy;
 import me.milthe.gui.Gui;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CircleSpawn {
-    public static ArrayList<CircleEnemy> circles = new ArrayList<>();
+    public List<CircleEnemy> circles = new CopyOnWriteArrayList<CircleEnemy>();
     public static Timer timer;
     static int spawnDelay = 5000; //SpawnDelay nach aufrufen der Methode in Millisekunden(1000ms = 1s)
     static int spawnInterval = 500; //Zeit zwischen Enemyspawn in Millisekunden
 
-    public static void start() {
+    public void start() {
         timer = new Timer();
-
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                for (int i = 0; i < circles.size(); i++) {
-                    if (circles.get(i).getxPos() >= (Gui.width + 100) || circles.get(i).getxPos() <= -100 || circles.get(i).getyPos() >= (Gui.height + 100) || circles.get(i).getyPos() <= -100) {
-                        circles.remove(i);
-                    }
-                }
-                circles.add(new CircleEnemy());
+                newCircle(new CircleEnemy());
             }
         }, spawnDelay, spawnInterval);
+    }
+
+    public void removeCircle(int index){
+        circles.remove(index);
+        circles.forEach(circle -> circle.setCircleIndex(circles.indexOf(circle)));
+    }
+
+    public void newCircle(CircleEnemy circle){
+        circles.add(circle);
+        circle.setCircleIndex(circles.indexOf(circle));
+        Gui.entitylist.setEntity(circle);
+        circle.setListIndex(Gui.entitylist.entities.indexOf(circle));
+    }
+
+    public List<CircleEnemy> getCircles() {
+        return circles;
     }
 }

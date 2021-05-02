@@ -38,12 +38,12 @@ public class ClockMain implements Runnable{
     }
 
     private void update() {
-        update.entitiesUpdate();
-        update.collisionPlayerCircle();
+        update.runUpdate();
     }
 
     private void render() {
         Gui.gc_main.clearRect(0, 0, Gui.width, Gui.height);
         Gui.dm.draw(Gui.gc_main);
+        Gui.renderEntites.render(Gui.gc_main);
     }
 }

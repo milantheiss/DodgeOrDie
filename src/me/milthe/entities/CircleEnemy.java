@@ -5,17 +5,20 @@ import me.milthe.gui.Gui;
 
 //TODO CircleEnemy Klasse aufräumen
 
-public class CircleEnemy {
-    public int xPos, yPos, targetX, targetY, width = 100, height = 100, xVel, yVel, startingSite;
-    Image sprite = new Image("file:rsc/enemy-circle.png");
+public class CircleEnemy extends Entity{
+    public int targetX, targetY, startingSite, circleIndex;
 
 
     public CircleEnemy() {
+        width = 100;
+        height = 100;
+        speed = 30; //Jehöher desto langsamer
+        sprite = new Image("file:rsc/enemy-circle.png");
         //Beim erstellen eines Neuen Circle Enemies wird der Startpunkt festgelegt und der Richtung
         startingSite = (int) (Math.random() * 4);
         //Sucht einen Random Punkt im Screen
-        targetX = Player.xPos;
-        targetY = Player.yPos;
+        targetX = Gui.entitylist.getEntities().get(0).getxPos();
+        targetY = Gui.entitylist.getEntities().get(0).getyPos();
 
         if (startingSite == 0) {
             //start von Oben -> Y = 0
@@ -41,18 +44,14 @@ public class CircleEnemy {
         int xOffset = targetX - xPos;
         int yOffset = targetY - yPos;
 
-        xVel = xOffset / 30;
-        yVel = yOffset / 30;
+        xVel = xOffset / speed;
+        yVel = yOffset / speed;
     }
 
     //Umgehen von static --> getter und setter
     public void move() {
         xPos += xVel;
         yPos += yVel;
-    }
-
-    public Image getSprite() {
-        return sprite;
     }
 
     public int getxPos() {
@@ -69,5 +68,9 @@ public class CircleEnemy {
 
     public int getHeight() {
         return height;
+    }
+
+    public void setCircleIndex(int index){
+        circleIndex = index;
     }
 }

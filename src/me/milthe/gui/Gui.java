@@ -6,28 +6,38 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import me.milthe.clocks.CircleSpawn;
 import me.milthe.draw.DrawMain;
+import me.milthe.draw.RenderEntites;
+import me.milthe.entities.Entitylist;
 import me.milthe.events.*;
 
 import java.awt.*;
 
 public class Gui {
     public static DrawMain dm;
+    public static RenderEntites renderEntites;
 
     public static int width, height;
     public static GraphicsContext gc_main;
 
     public static Input in;
+    public static CircleSpawn circleSpawn;
+    public static Entitylist entitylist;
 
     public Gui() {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); //Setzt den Bildschirm auf dem das Programm laufen soll
         width = gd.getDisplayMode().getWidth(); //--> GetScreensize
         height = gd.getDisplayMode().getHeight();
         in = new Input();
+        circleSpawn = new CircleSpawn();
+        entitylist = new Entitylist();
     }
 
     public void init() {
         dm = new DrawMain();
+        renderEntites = new RenderEntites();
+        entitylist.queueInitSpawn();
     }
 
     public void create(Stage stage) { //JavaFX Setup
@@ -38,6 +48,7 @@ public class Gui {
         canvas_main = new Canvas(width, height);
         gc_main = canvas_main.getGraphicsContext2D();
         dm.draw(gc_main);
+        renderEntites.render(gc_main);
 
         root.getChildren().add(canvas_main);
         Scene scene = new Scene(root, cWidth, cHeight);
@@ -60,4 +71,5 @@ public class Gui {
             System.exit(0);
         });
     }
+
 }

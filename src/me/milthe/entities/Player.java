@@ -6,45 +6,48 @@ import me.milthe.events.MouseMoved;
 import me.milthe.gui.Gui;
 
 
-public class Player {
-    public static int xPos, yPos, width = 50, height = 50, xVel, yVel, speed = 16, dashCooldown = 500, dashRange = 250;
+public class Player extends Entity{
+    public int dashCooldown = 500, dashRange = 250;
     private static long lastDash = 0;
-    private static Image sprite = new Image("file:rsc/player.png");
 
     public Player() {
+        width = 50;
+        height = 50;
+        speed = 16;
         xPos = Gui.width / 2 - 25;
         yPos = Gui.height / 2 - 25;
+        sprite = new Image("file:rsc/player.png");
     }
 
-    public static void move() { //Movement wird in Update.java aufgerufen
+    public void move() { //Movement wird in Update.java aufgerufen
         xVel = 0;
         yVel = 0;
         if (Gui.in.isPressed(KeyCode.W)) {
             if ((yPos - speed) >= 0) {
                 yVel = (-speed);
                 if (Gui.in.isPressed(KeyCode.SPACE)) {
-                    Player.dash();
+                    dash();
                 }
             }
         } else if (Gui.in.isPressed(KeyCode.S)) {
             if ((yPos + speed) <= Gui.height - height) {
                 yVel = speed;
                 if (Gui.in.isPressed(KeyCode.SPACE)) {
-                    Player.dash();
+                    dash();
                 }
             }
         } else if (Gui.in.isPressed(KeyCode.A)) {
             if ((xPos - speed) >= 0) {
                 xVel = (-speed);
                 if (Gui.in.isPressed(KeyCode.SPACE)) {
-                    Player.dash();
+                    dash();
                 }
             }
         } else if (Gui.in.isPressed(KeyCode.D)) {
             if ((xPos + speed) <= Gui.width - width) {
                 xVel = speed;
                 if (Gui.in.isPressed(KeyCode.SPACE)) {
-                    Player.dash();
+                    dash();
                 }
             }
         }
@@ -53,11 +56,7 @@ public class Player {
         yPos += yVel;
     }
 
-    public static Image getSprite() {
-        return sprite;
-    }
-
-    public static void dash() { //Dash in Richtung in die sich der Spieler bewegt (
+    public void dash() { //Dash in Richtung in die sich der Spieler bewegt (
         if ((System.currentTimeMillis() - dashCooldown) > lastDash) {
             if (xVel > 0) {
                 int tempX = xPos + dashRange;
@@ -89,7 +88,7 @@ public class Player {
         }
     }
 
-    public static void mouseDash() {
+    /*public void mouseDash() {
         System.out.println("xPos " + xPos);
         System.out.println("yPos " + yPos);
         double xMouse = MouseMoved.x;
@@ -121,5 +120,5 @@ public class Player {
         System.out.println("xTarget " + xTarget);
         xPos = (int) xTarget;
         yPos = (int) yTarget;
-    } //Dash zur Maus wird nicht genutzt und ist seit V0.0.1 nicht geupdatet --> Wahrscheinlich seit V0.0.2 nicht mehr kompatibel
+    } //Dash zur Maus wird nicht genutzt und ist seit V0.0.1 nicht geupdatet --> Wahrscheinlich seit V0.0.2 nicht mehr kompatibel*/
 }
