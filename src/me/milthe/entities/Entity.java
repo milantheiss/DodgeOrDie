@@ -1,11 +1,12 @@
 package me.milthe.entities;
 
 import javafx.scene.image.Image;
+import me.milthe.core.Game;
 
 public abstract class Entity {
-    Image sprite;
+    Game game;
     public int xPos, yPos, width, height, xVel, yVel, speed, listIndex;
-
+    Image sprite;
 
     public abstract void move();
 
@@ -35,5 +36,9 @@ public abstract class Entity {
 
     public Image getSprite() {
         return sprite;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

@@ -1,4 +1,4 @@
-package me.milthe.gui;
+package me.milthe.graphic;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -6,59 +6,39 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import me.milthe.clocks.CircleSpawn;
-import me.milthe.draw.DrawMain;
-import me.milthe.draw.RenderEntites;
-import me.milthe.entities.Entitylist;
-import me.milthe.events.*;
-
 import java.awt.*;
 
 public class Gui {
-    public static DrawMain dm;
-    public static RenderEntites renderEntites;
-
-    public static int width, height;
+    public static DrawEnvironment dm;
+    public static DrawEntities drawEntities;
     public static GraphicsContext gc_main;
-
-    public static Input in;
-    public static CircleSpawn circleSpawn;
-    public static Entitylist entitylist;
+    public static int width, height;
+    public static Scene scene;
 
     public Gui() {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); //Setzt den Bildschirm auf dem das Programm laufen soll
         width = gd.getDisplayMode().getWidth(); //--> GetScreensize
         height = gd.getDisplayMode().getHeight();
-        in = new Input();
-        circleSpawn = new CircleSpawn();
-        entitylist = new Entitylist();
+
     }
 
     public void init() {
-        dm = new DrawMain();
-        renderEntites = new RenderEntites();
-        entitylist.queueInitSpawn();
+        dm = new DrawEnvironment();
+        drawEntities = new DrawEntities();
     }
 
     public void create(Stage stage) { //JavaFX Setup
         Canvas canvas_main;
         StackPane root = new StackPane();
-        int cWidth = width - 10, cHeight = height - 10;
 
+        int cWidth = width - 10, cHeight = height - 10;
         canvas_main = new Canvas(width, height);
         gc_main = canvas_main.getGraphicsContext2D();
-        dm.draw(gc_main);
-        renderEntites.render(gc_main);
 
         root.getChildren().add(canvas_main);
-        Scene scene = new Scene(root, cWidth, cHeight);
+        scene = new Scene(root, cWidth, cHeight);
 
-        //EventListeners
-        scene.setOnMouseMoved(new MouseMoved());
-        scene.setOnKeyPressed(new KeyPressed());
-        scene.setOnKeyReleased(new KeyReleased());
-
-
+        //Setzt die Window Properties
         stage.setTitle("Dodge or Die");
         stage.setScene(scene);
         stage.setFullScreen(true);
@@ -66,6 +46,7 @@ public class Gui {
         stage.centerOnScreen();
         stage.show();
 
+        //Close Settings
         stage.setOnCloseRequest(windowEvent -> {
             Platform.exit();
             System.exit(0);

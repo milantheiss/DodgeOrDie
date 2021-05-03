@@ -2,8 +2,8 @@ package me.milthe.entities;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import me.milthe.events.MouseMoved;
-import me.milthe.gui.Gui;
+import me.milthe.core.Game;
+import me.milthe.graphic.Gui;
 
 
 public class Player extends Entity{
@@ -11,42 +11,43 @@ public class Player extends Entity{
     private static long lastDash = 0;
 
     public Player() {
+        xPos = Gui.width / 2 - 25;
+        yPos = Gui.height / 2 - 25;
         width = 50;
         height = 50;
         speed = 16;
-        xPos = Gui.width / 2 - 25;
-        yPos = Gui.height / 2 - 25;
         sprite = new Image("file:rsc/player.png");
     }
 
     public void move() { //Movement wird in Update.java aufgerufen
         xVel = 0;
         yVel = 0;
-        if (Gui.in.isPressed(KeyCode.W)) {
+
+        if (Game.in.isPressed(KeyCode.W)) {
             if ((yPos - speed) >= 0) {
                 yVel = (-speed);
-                if (Gui.in.isPressed(KeyCode.SPACE)) {
+                if (Game.in.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
-        } else if (Gui.in.isPressed(KeyCode.S)) {
+        } else if (Game.in.isPressed(KeyCode.S)) {
             if ((yPos + speed) <= Gui.height - height) {
                 yVel = speed;
-                if (Gui.in.isPressed(KeyCode.SPACE)) {
+                if (Game.in.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
-        } else if (Gui.in.isPressed(KeyCode.A)) {
+        } else if (Game.in.isPressed(KeyCode.A)) {
             if ((xPos - speed) >= 0) {
                 xVel = (-speed);
-                if (Gui.in.isPressed(KeyCode.SPACE)) {
+                if (Game.in.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
-        } else if (Gui.in.isPressed(KeyCode.D)) {
+        } else if (Game.in.isPressed(KeyCode.D)) {
             if ((xPos + speed) <= Gui.width - width) {
                 xVel = speed;
-                if (Gui.in.isPressed(KeyCode.SPACE)) {
+                if (Game.in.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }

@@ -2,9 +2,9 @@ package me.milthe;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import me.milthe.clocks.*;
-import me.milthe.entities.Player;
-import me.milthe.gui.Gui;
+import me.milthe.core.Game;
+import me.milthe.core.GameLoop;
+import me.milthe.graphic.Gui;
 
 public class Main extends Application {
     Gui g = new Gui();
@@ -20,6 +20,6 @@ public class Main extends Application {
         g.create(stage);
 
         //Startet Clock
-        new Thread(new ClockMain()).start();
+        new Thread(new GameLoop(new Game())).start();
     }
 }
