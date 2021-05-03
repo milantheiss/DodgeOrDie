@@ -5,7 +5,7 @@ import me.milthe.core.Game;
 
 public abstract class Entity {
     Game game;
-    public int xPos, yPos, width, height, xVel, yVel, speed, listIndex;
+    public int xPos, yPos, width, height, xVel, yVel, speed, listIndex, xDirection, yDirection;
     Image sprite;
 
     public abstract void move();

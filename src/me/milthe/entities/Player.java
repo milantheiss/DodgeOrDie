@@ -2,6 +2,7 @@ package me.milthe.entities;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import me.milthe.calculations.DiagonalSpeedNormalizer;
 import me.milthe.core.Game;
 import me.milthe.graphic.Gui;
 
@@ -20,41 +21,44 @@ public class Player extends Entity{
     }
 
     public void move() { //Movement wird in Update.java aufgerufen
-        xVel = 0;
-        yVel = 0;
+        xDirection = 0;
+        yDirection = 0;
 
         if (Game.in.isPressed(KeyCode.W)) {
             if ((yPos - speed) >= 0) {
-                yVel = (-speed);
+                yDirection--;
                 if (Game.in.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
-        } else if (Game.in.isPressed(KeyCode.S)) {
+        }
+        if (Game.in.isPressed(KeyCode.S)) {
             if ((yPos + speed) <= Gui.height - height) {
-                yVel = speed;
+                yDirection++;
                 if (Game.in.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
-        } else if (Game.in.isPressed(KeyCode.A)) {
+        }
+        if (Game.in.isPressed(KeyCode.A)) {
             if ((xPos - speed) >= 0) {
-                xVel = (-speed);
+                xDirection--;
                 if (Game.in.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
-        } else if (Game.in.isPressed(KeyCode.D)) {
+        }
+        if (Game.in.isPressed(KeyCode.D)) {
             if ((xPos + speed) <= Gui.width - width) {
-                xVel = speed;
+                xDirection++;
                 if (Game.in.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
         }
 
-        xPos += xVel;
-        yPos += yVel;
+        xPos += DiagonalSpeedNormalizer.applySpeed(speed, DiagonalSpeedNormalizer.normalizeX(xDirection, yDirection));
+        yPos += DiagonalSpeedNormalizer.applySpeed(speed, DiagonalSpeedNormalizer.normalizeY(xDirection, yDirection));
     }
 
     public void dash() { //Dash in Richtung in die sich der Spieler bewegt (
