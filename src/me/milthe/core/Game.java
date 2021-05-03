@@ -13,16 +13,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Game {
-    public static Input in;
+    public static Input input;
     public static Player player;
 
     public CircleSpawn circleSpawn;
     public List<Entity> entities;
 
     public Game(){
-        in = new Input();
-        circleSpawn = new CircleSpawn(this);
-        entities = new CopyOnWriteArrayList<>();
+        input = new Input();
+
+        Gamestate.state = GamestateEnum.menu;
 
         queueInitSpawn();
 
@@ -53,6 +53,8 @@ public class Game {
     }
 
     public void queueInitSpawn(){
+        circleSpawn = new CircleSpawn(this);
+        entities = new CopyOnWriteArrayList<>();
         player = new Player();
         setEntity(player);
         circleSpawn.start();

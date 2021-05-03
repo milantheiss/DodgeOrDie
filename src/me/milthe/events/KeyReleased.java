@@ -8,6 +8,6 @@ public class KeyReleased implements EventHandler<KeyEvent> {//Wenn Taste losgela
 
     @Override
     public void handle(KeyEvent keyEvent) {
-        Game.in.pressed[Game.in.getKeyCode(keyEvent.getCode())] = false;
+        Game.input.pressed[Game.input.getKeyCode(keyEvent.getCode())] = false;
     }
 }

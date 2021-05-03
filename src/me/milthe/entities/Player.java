@@ -24,34 +24,34 @@ public class Player extends Entity{
         xDirection = 0;
         yDirection = 0;
 
-        if (Game.in.isPressed(KeyCode.W)) {
+        if (Game.input.isPressed(KeyCode.W)) {
             if ((yPos - speed) >= 0) {
                 yDirection--;
-                if (Game.in.isPressed(KeyCode.SPACE)) {
+                if (Game.input.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
         }
-        if (Game.in.isPressed(KeyCode.S)) {
+        if (Game.input.isPressed(KeyCode.S)) {
             if ((yPos + speed) <= Gui.height - height) {
                 yDirection++;
-                if (Game.in.isPressed(KeyCode.SPACE)) {
+                if (Game.input.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
         }
-        if (Game.in.isPressed(KeyCode.A)) {
+        if (Game.input.isPressed(KeyCode.A)) {
             if ((xPos - speed) >= 0) {
                 xDirection--;
-                if (Game.in.isPressed(KeyCode.SPACE)) {
+                if (Game.input.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
         }
-        if (Game.in.isPressed(KeyCode.D)) {
+        if (Game.input.isPressed(KeyCode.D)) {
             if ((xPos + speed) <= Gui.width - width) {
                 xDirection++;
-                if (Game.in.isPressed(KeyCode.SPACE)) {
+                if (Game.input.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
@@ -63,13 +63,13 @@ public class Player extends Entity{
 
     public void dash() { //Dash in Richtung in die sich der Spieler bewegt (
         if ((System.currentTimeMillis() - dashCooldown) > lastDash) {
-            if (xVel > 0) {
+            if (xDirection == 1) {
                 int tempX = xPos + dashRange;
                 if (tempX >= 0 && tempX <= Gui.width - width) {
                     xPos = tempX;
                 }
                 lastDash = System.currentTimeMillis();
-            } else if (xVel < 0) {
+            } else if (xDirection == -1) {
                 int tempX = xPos - dashRange;
                 if (tempX >= 0 && tempX <= Gui.width - width) {
                     xPos = tempX;
@@ -77,13 +77,13 @@ public class Player extends Entity{
                 lastDash = System.currentTimeMillis();
             }
 
-            if (yVel > 0) {
+            if (yDirection == 1) {
                 int tempY = yPos + dashRange;
                 if (tempY >= 0 && tempY <= Gui.height - height) {
                     yPos = tempY;
                 }
                 lastDash = System.currentTimeMillis();
-            } else if (yVel < 0) {
+            } else if (yDirection == -1) {
                 int tempY = yPos - dashRange;
                 if (tempY >= 0 && tempY <= Gui.height - height) {
                     yPos = tempY;

@@ -1,9 +1,10 @@
 package me.milthe.core;
 
+import javafx.scene.input.KeyCode;
 import me.milthe.graphic.DrawEnvironment;
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Entity;
-import me.milthe.events.Collision;
+import me.milthe.entities.actions.Collision;
 import me.milthe.graphic.Gui;
 
 public class Update {
@@ -16,9 +17,12 @@ public class Update {
     }
 
     public void runUpdate(){
-        entitiesUpdate();
-        collisionPlayerCircle();
-        game.circleSpawn.getCircles().forEach(this::checkForCircleOutOfBounce);
+        updateGamestate();
+        if (Gamestate.state == GamestateEnum.ingame) {
+            entitiesUpdate();
+            collisionPlayerCircle();
+            game.circleSpawn.getCircles().forEach(this::checkForCircleOutOfBounce);
+        }
     }
 
     public void entitiesUpdate(){ //Updatet alle Methoden von Entities die wiederholt geupdatet werden müssen --> Hauptsächlich bewegung
@@ -39,5 +43,30 @@ public class Update {
                 .height + 100) || circleEnemy.getyPos() <= -100) {
             game.removeCircleEntity(circleEnemy.listIndex, circleEnemy.circleIndex);
         }
+    }
+
+    public void updateGamestate(){
+        if (Gamestate.state == GamestateEnum.ingame){
+            if (Game.input.isPressed(KeyCode.H)){
+                Gamestate.state = GamestateEnum.pause;
+                System.out.println("Pause");
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.H)] = false;
+            }
+        }
+        if (Gamestate.state == GamestateEnum.pause){
+            if (Game.input.isPressed(KeyCode.H)){
+                Gamestate.state = GamestateEnum.ingame;
+                System.out.println("Ingame");
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.H)] = false;
+            }
+        }
+        if (Gamestate.state == GamestateEnum.menu){
+            if (Game.input.isPressed(KeyCode.H)){
+                Gamestate.state = GamestateEnum.ingame;
+                System.out.println("Ingame");
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.H)] = false;
+            }
+        }
+
     }
 }

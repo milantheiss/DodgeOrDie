@@ -1,6 +1,8 @@
 package me.milthe.spawner;
 
 import me.milthe.core.Game;
+import me.milthe.core.Gamestate;
+import me.milthe.core.GamestateEnum;
 import me.milthe.entities.CircleEnemy;
 
 import java.util.List;
@@ -15,26 +17,29 @@ public class CircleSpawn {
     static int spawnDelay = 5000; //SpawnDelay nach aufrufen der Methode in Millisekunden(1000ms = 1s)
     static int spawnInterval = 500; //Zeit zwischen Enemyspawn in Millisekunden
 
-    public CircleSpawn(Game game){
+    public CircleSpawn(Game game) {
         this.game = game;
     }
 
     public void start() {
+
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                newCircle(new CircleEnemy());
+                if (Gamestate.state == GamestateEnum.ingame) {
+                    newCircle(new CircleEnemy());
+                }
             }
         }, spawnDelay, spawnInterval);
     }
 
-    public void removeCircle(int index){
+    public void removeCircle(int index) {
         circles.remove(index);
         circles.forEach(circle -> circle.setCircleIndex(circles.indexOf(circle)));
     }
 
-    public void newCircle(CircleEnemy circle){
+    public void newCircle(CircleEnemy circle) {
         circles.add(circle);
         circle.setCircleIndex(circles.indexOf(circle));
         game.setEntity(circle);

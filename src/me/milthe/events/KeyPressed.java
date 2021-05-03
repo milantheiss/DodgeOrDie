@@ -8,6 +8,6 @@ public class KeyPressed implements EventHandler<KeyEvent> {//Wenn Taste gedrück
 
     @Override
     public void handle(KeyEvent keyEvent) {
-        Game.in.pressed[Game.in.getKeyCode(keyEvent.getCode())] = true;
+        Game.input.pressed[Game.input.getKeyCode(keyEvent.getCode())] = true;
     }
 }
