@@ -25,6 +25,8 @@ public class Update {
         }
     }
 
+    //Comment
+
     public void entitiesUpdate(){ //Updatet alle Methoden von Entities die wiederholt geupdatet werden müssen --> Hauptsächlich bewegung
         game.entities.forEach(Entity::move);
     }
