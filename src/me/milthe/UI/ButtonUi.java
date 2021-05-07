@@ -16,9 +16,8 @@ public class ButtonUi {
          this.uiContainer = uiContainer;
     }
 
-    public void allign(){
-        x = uiContainer.x+marginLeft;
-        y = uiContainer.y+marginTop;
+    public void applyMarginTop(){
+        y += marginTop;
     }
 
     public int getX() {
@@ -34,7 +33,7 @@ public class ButtonUi {
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.y = uiContainer.y + y;
     }
 
     public int getWidth() {

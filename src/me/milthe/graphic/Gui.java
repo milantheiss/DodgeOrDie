@@ -20,6 +20,7 @@ public class Gui {
     public static int width, height;
     public static Scene scene;
     public static List<UiContainer> uiComponents = new ArrayList<>();
+    public static Stage stage;
 
     public Gui() {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); //Setzt den Bildschirm auf dem das Programm laufen soll
@@ -36,6 +37,7 @@ public class Gui {
     }
 
     public void create(Stage stage) { //JavaFX Setup
+        Gui.stage = stage;
         Canvas canvas_main;
         StackPane root = new StackPane();
 
@@ -61,4 +63,13 @@ public class Gui {
         });
     }
 
+    public static void close(){
+        System.out.println("close");/*
+        stage.setOnCloseRequest(windowEvent -> {
+            Platform.exit();
+            System.exit(0);
+        });*/
+        Platform.exit();
+        System.exit(0);
+    }
 }

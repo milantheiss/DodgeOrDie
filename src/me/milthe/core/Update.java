@@ -66,16 +66,21 @@ public class Update {
             }
         }
         if (Gamestate.state == GamestateEnum.menu){
-            for (UiContainer uiContainer : Gui.uiComponents){
-                for (ButtonUi buttonUi : uiContainer.components){
-                    if (clickOnButton(buttonUi)){
-                        if (buttonUi.getButtonName().equals("start")){
+            Gui.uiComponents.forEach(uiContainer -> {
+                uiContainer.components.forEach(buttonUi -> {
+                    if (clickOnButton(buttonUi) && !MouseClicked.clickHandeled) {
+                        if (buttonUi.getButtonName().equals("start")) {
+                            MouseClicked.clickHandeled = true;
                             Gamestate.state = GamestateEnum.ingame;
                             System.out.println("Ingame");
                         }
+                        if (buttonUi.getButtonName().equals("verlassen")){
+                            MouseClicked.clickHandeled = true;
+                            Gui.close();
+                        }
                     }
-                }
-            }
+                });
+            });
         }
 
     }
