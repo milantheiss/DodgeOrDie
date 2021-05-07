@@ -51,5 +51,6 @@ public class GameLoop implements Runnable{
         Gui.gc_main.clearRect(0, 0, Gui.width, Gui.height);
         Gui.dm.draw(Gui.gc_main);
         Gui.drawEntities.render(Gui.gc_main, game);
+        Gui.drawUI.render(Gui.gc_main);
     }
 }

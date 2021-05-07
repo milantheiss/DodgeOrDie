@@ -1,6 +1,9 @@
 package me.milthe.core;
 
 import javafx.scene.input.KeyCode;
+import me.milthe.UI.ButtonUi;
+import me.milthe.UI.UiContainer;
+import me.milthe.events.MouseClicked;
 import me.milthe.graphic.DrawEnvironment;
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Entity;
@@ -63,12 +66,24 @@ public class Update {
             }
         }
         if (Gamestate.state == GamestateEnum.menu){
-            if (Game.input.isPressed(KeyCode.H)){
-                Gamestate.state = GamestateEnum.ingame;
-                System.out.println("Ingame");
-                Game.input.pressed[Game.input.getKeyCode(KeyCode.H)] = false;
+            for (UiContainer uiContainer : Gui.uiComponents){
+                for (ButtonUi buttonUi : uiContainer.components){
+                    if (clickOnButton(buttonUi)){
+                        if (buttonUi.getButtonName().equals("start")){
+                            Gamestate.state = GamestateEnum.ingame;
+                            System.out.println("Ingame");
+                        }
+                    }
+                }
             }
         }
 
+    }
+
+    private boolean clickOnButton(ButtonUi buttonUi){
+        if (MouseClicked.x > buttonUi.getX() && MouseClicked.x < (buttonUi.getX()+buttonUi.getWidth()) && MouseClicked.y > buttonUi.getY() && MouseClicked.y < (buttonUi.getY()+buttonUi.getHeight())){
+            return true;
+        }
+        return false;
     }
 }

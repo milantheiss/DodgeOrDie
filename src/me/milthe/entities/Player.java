@@ -17,7 +17,7 @@ public class Player extends Entity{
         width = 50;
         height = 50;
         speed = 16;
-        sprite = new Image("file:rsc/player.png");
+        sprite = new Image("file:rsc/sprites/player.png");
     }
 
     public void move() { //Movement wird in Update.java aufgerufen

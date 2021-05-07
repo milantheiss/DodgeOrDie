@@ -11,7 +11,7 @@ public class CircleEnemy extends Entity{
         width = 100;
         height = 100;
         speed = 30; //Desto höher desto langsamer
-        sprite = new Image("file:rsc/enemy-circle.png");
+        sprite = new Image("file:rsc/sprites/enemy-circle.png");
 
         setPath();
     }

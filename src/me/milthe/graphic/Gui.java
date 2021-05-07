@@ -6,25 +6,33 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import me.milthe.UI.UiContainer;
+
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Gui {
     public static DrawEnvironment dm;
     public static DrawEntities drawEntities;
+    public static DrawUI drawUI;
     public static GraphicsContext gc_main;
     public static int width, height;
     public static Scene scene;
+    public static List<UiContainer> uiComponents = new ArrayList<>();
 
     public Gui() {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); //Setzt den Bildschirm auf dem das Programm laufen soll
         width = gd.getDisplayMode().getWidth(); //--> GetScreensize
         height = gd.getDisplayMode().getHeight();
-
     }
 
     public void init() {
         dm = new DrawEnvironment();
         drawEntities = new DrawEntities();
+        drawUI = new DrawUI();
+
+        uiComponents.add(new UiContainer());
     }
 
     public void create(Stage stage) { //JavaFX Setup

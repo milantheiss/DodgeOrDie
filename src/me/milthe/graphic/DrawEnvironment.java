@@ -15,7 +15,7 @@ public class DrawEnvironment {
 
         //Collision Score
         g.setFill(Color.WHITE);
-        g.setFont(new Font(50));
+        g.setFont(Font.loadFont("file:rsc/font/DodgeFont.ttf", 50));
         g.fillText(String.valueOf(score), 30, 60);
     }
 }

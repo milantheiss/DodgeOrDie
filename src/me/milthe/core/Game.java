@@ -2,10 +2,7 @@ package me.milthe.core;
 
 import me.milthe.entities.Entity;
 import me.milthe.entities.Player;
-import me.milthe.events.Input;
-import me.milthe.events.KeyPressed;
-import me.milthe.events.KeyReleased;
-import me.milthe.events.MouseMoved;
+import me.milthe.events.*;
 import me.milthe.graphic.Gui;
 import me.milthe.spawner.CircleSpawn;
 import java.util.List;
@@ -27,6 +24,7 @@ public class Game {
         queueInitSpawn();
 
         //EventListeners
+        Gui.scene.setOnMouseClicked(new MouseClicked());
         Gui.scene.setOnMouseMoved(new MouseMoved());
         Gui.scene.setOnKeyPressed(new KeyPressed());
         Gui.scene.setOnKeyReleased(new KeyReleased());
