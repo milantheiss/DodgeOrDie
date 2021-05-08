@@ -7,15 +7,18 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import me.milthe.UI.UiContainer;
+import me.milthe.core.GameLoop;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Gui {
-    public static DrawEnvironment dm;
+    public static DrawEnvironment drawEnvironment;
     public static DrawEntities drawEntities;
     public static DrawUI drawUI;
+    public static DrawIngameUi drawIngameUi;
+    public static DrawTutorial drawTutorial;
     public static GraphicsContext gc_main;
     public static int width, height;
     public static Scene scene;
@@ -29,9 +32,11 @@ public class Gui {
     }
 
     public void init() {
-        dm = new DrawEnvironment();
+        drawEnvironment = new DrawEnvironment();
         drawEntities = new DrawEntities();
         drawUI = new DrawUI();
+        drawIngameUi = new DrawIngameUi();
+        drawTutorial = new DrawTutorial();
 
         uiComponents.add(new UiContainer());
     }
@@ -64,11 +69,7 @@ public class Gui {
     }
 
     public static void close(){
-        System.out.println("close");/*
-        stage.setOnCloseRequest(windowEvent -> {
-            Platform.exit();
-            System.exit(0);
-        });*/
+        System.out.println("close");
         Platform.exit();
         System.exit(0);
     }

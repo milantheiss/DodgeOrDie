@@ -2,12 +2,11 @@ package me.milthe.core;
 
 import javafx.scene.input.KeyCode;
 import me.milthe.UI.ButtonUi;
-import me.milthe.UI.UiContainer;
 import me.milthe.events.MouseClicked;
-import me.milthe.graphic.DrawEnvironment;
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Entity;
 import me.milthe.entities.actions.Collision;
+import me.milthe.graphic.DrawIngameUi;
 import me.milthe.graphic.Gui;
 
 public class Update {
@@ -28,8 +27,6 @@ public class Update {
         }
     }
 
-    //Comment
-
     public void entitiesUpdate(){ //Updatet alle Methoden von Entities die wiederholt geupdatet werden müssen --> Hauptsächlich bewegung
         game.entities.forEach(Entity::move);
     }
@@ -38,7 +35,7 @@ public class Update {
         for (int i = 0; i < game.circleSpawn.circles.size(); i++) {
             if (col.collisionPlayerCircle(game.circleSpawn.circles.get(i))) {
                 game.removeCircleEntity(game.circleSpawn.circles.get(i).listIndex, game.circleSpawn.circles.get(i).circleIndex);
-                DrawEnvironment.score++;
+                DrawIngameUi.score++;
             }
         }
     }
@@ -76,6 +73,7 @@ public class Update {
                         }
                         if (buttonUi.getButtonName().equals("steuerung")){
                             MouseClicked.clickHandeled = true;
+                            Gamestate.state = GamestateEnum.tutorial;
                             System.out.println("Tutorial");
                         }
                         if (buttonUi.getButtonName().equals("verlassen")){
@@ -86,13 +84,15 @@ public class Update {
                 });
             });
         }
-
+        if (Gamestate.state == GamestateEnum.tutorial){
+            if (Game.input.isPressed(KeyCode.P)){
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
+                Gui.close();
+            }
+        }
     }
 
     private boolean clickOnButton(ButtonUi buttonUi){
-        if (MouseClicked.x > buttonUi.getX() && MouseClicked.x < (buttonUi.getX()+buttonUi.getWidth()) && MouseClicked.y > buttonUi.getY() && MouseClicked.y < (buttonUi.getY()+buttonUi.getHeight())){
-            return true;
-        }
-        return false;
+        return MouseClicked.x > buttonUi.getX() && MouseClicked.x < (buttonUi.getX() + buttonUi.getWidth()) && MouseClicked.y > buttonUi.getY() && MouseClicked.y < (buttonUi.getY() + buttonUi.getHeight());
     }
 }
