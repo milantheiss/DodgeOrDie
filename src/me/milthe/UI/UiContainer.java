@@ -9,9 +9,11 @@ public class UiContainer {
     public int x, y, width, height;
     public List<ButtonUi> components = new ArrayList<>();
     public UiContainer(){
-        addCompontent("start", "file:rsc/sprites/start.png");
-        addCompontent("verlassen", "file:rsc/sprites/verlassen.png");
+        addComponent("start", "file:rsc/sprites/start.png");
+        addComponent("steuerung", "file:rsc/sprites/steuerung.png");
+        addComponent("verlassen", "file:rsc/sprites/verlassen.png");
         components.get(1).setMarginTop(components.get(1).getHeight()/2);
+        components.get(2).setMarginTop(components.get(1).getHeight()/2);
         int maxWidth = 0;
         int tempY = 0;
         for (ButtonUi buttonUI : components) {
@@ -24,12 +26,12 @@ public class UiContainer {
         this.y = (Gui.height-height)/2;
         for (ButtonUi buttonUi : components){
             buttonUi.setY(tempY);
-            tempY += buttonUi.getHeight();
+            buttonUi.applyMarginTop();
+            tempY += buttonUi.getHeight()+ buttonUi.getMarginTop() + buttonUi.getMarginButton();
+            buttonUi.setX(this.x);
         }
-        components.forEach(buttonUi -> buttonUi.setX(this.x));
-        components.forEach(ButtonUi::applyMarginTop);
     }
-    public void addCompontent(String compontenName, String filepath){
-        components.add(new ButtonUi(compontenName, filepath, this));
+    public void addComponent(String componentName, String filepath){
+        components.add(new ButtonUi(componentName, filepath, this));
     }
 }

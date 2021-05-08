@@ -52,17 +52,17 @@ public class Update {
 
     public void updateGamestate(){
         if (Gamestate.state == GamestateEnum.ingame){
-            if (Game.input.isPressed(KeyCode.H)){
+            if (Game.input.isPressed(KeyCode.P)){
                 Gamestate.state = GamestateEnum.pause;
                 System.out.println("Pause");
-                Game.input.pressed[Game.input.getKeyCode(KeyCode.H)] = false;
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
             }
         }
         if (Gamestate.state == GamestateEnum.pause){
-            if (Game.input.isPressed(KeyCode.H)){
+            if (Game.input.isPressed(KeyCode.P)){
                 Gamestate.state = GamestateEnum.ingame;
                 System.out.println("Ingame");
-                Game.input.pressed[Game.input.getKeyCode(KeyCode.H)] = false;
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
             }
         }
         if (Gamestate.state == GamestateEnum.menu){
@@ -73,6 +73,10 @@ public class Update {
                             MouseClicked.clickHandeled = true;
                             Gamestate.state = GamestateEnum.ingame;
                             System.out.println("Ingame");
+                        }
+                        if (buttonUi.getButtonName().equals("steuerung")){
+                            MouseClicked.clickHandeled = true;
+                            System.out.println("Tutorial");
                         }
                         if (buttonUi.getButtonName().equals("verlassen")){
                             MouseClicked.clickHandeled = true;

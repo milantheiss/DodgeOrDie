@@ -20,7 +20,7 @@ public class Input {
             return 4;
         }else if (code == KeyCode.SPACE){
             return 5;
-        }else if (code == KeyCode.H){
+        }else if (code == KeyCode.P){
             return 6;
         }else {
             System.out.println("Fehler KeyCode Translation: KeyCode fehlerhaft oder KeyCode wird nicht berücksichtigt");

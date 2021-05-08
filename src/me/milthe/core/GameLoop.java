@@ -4,10 +4,14 @@ import me.milthe.graphic.Gui;
 
 
 public class GameLoop implements Runnable{
+    public static final int UPDATES_PER_SECOND = 60;
 
     private final Game game;
 
     Update update;
+
+    private long nextStatTime;
+    private int fps, ups;
 
     public GameLoop(Game game) {
         this.update = new Update(game);
@@ -17,9 +21,9 @@ public class GameLoop implements Runnable{
 
     @Override //Main Loop fürs Spiel
     public void run() {
-        boolean running = true;
         double accumulator = 0;
         long currentTime, lastUpdate = System.currentTimeMillis();
+        nextStatTime = System.currentTimeMillis() + 1000;
 
         try {
             while(true) {
@@ -28,7 +32,7 @@ public class GameLoop implements Runnable{
                 accumulator += lastRenderTimeInSeconds;
                 lastUpdate = currentTime;
 
-                double updateRate = 1.0d / 60d;
+                double updateRate = 1.0d / UPDATES_PER_SECOND;
                 if(accumulator >= updateRate) {
                     while(accumulator >= updateRate) {
                         update();
@@ -36,6 +40,7 @@ public class GameLoop implements Runnable{
                     }
                     render();
                 }
+                printStats();
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -43,8 +48,18 @@ public class GameLoop implements Runnable{
         }
     }
 
+    private void printStats() {
+        if (System.currentTimeMillis() > nextStatTime){
+            System.out.printf("FPS: %d, UPS: %d%n", fps, ups);
+            fps = 0;
+            ups = 0;
+            nextStatTime = System.currentTimeMillis() + 1000;
+        }
+    }
+
     private void update() {
         update.runUpdate();
+        ups++;
     }
 
     private void render() {
@@ -52,5 +67,6 @@ public class GameLoop implements Runnable{
         Gui.dm.draw(Gui.gc_main);
         Gui.drawEntities.render(Gui.gc_main, game);
         Gui.drawUI.render(Gui.gc_main);
+        fps++;
     }
 }
