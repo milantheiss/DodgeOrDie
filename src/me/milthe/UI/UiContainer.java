@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UiContainer {
     public int x, y, width, height;
-    public List<ButtonUi> components = new ArrayList<>();
+    public static List<ButtonUi> components = new ArrayList<>();
     public UiContainer(){
         addComponent("start", "file:rsc/sprites/start.png");
         addComponent("steuerung", "file:rsc/sprites/steuerung.png");
@@ -25,13 +25,13 @@ public class UiContainer {
         this.x = (Gui.width-width)/2;
         this.y = (Gui.height-height)/2;
         for (ButtonUi buttonUi : components){
-            buttonUi.setY(tempY);
+            buttonUi.setYToBeSum(tempY, this.y);
             buttonUi.applyMarginTop();
             tempY += buttonUi.getHeight()+ buttonUi.getMarginTop() + buttonUi.getMarginButton();
             buttonUi.setX(this.x);
         }
     }
     public void addComponent(String componentName, String filepath){
-        components.add(new ButtonUi(componentName, filepath, this));
+        components.add(new ButtonUi(componentName, filepath));
     }
 }

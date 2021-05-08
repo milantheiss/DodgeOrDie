@@ -6,12 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import me.milthe.UI.UiContainer;
-import me.milthe.core.GameLoop;
-
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Gui {
     public static DrawEnvironment drawEnvironment;
@@ -19,10 +14,10 @@ public class Gui {
     public static DrawUI drawUI;
     public static DrawIngameUi drawIngameUi;
     public static DrawTutorial drawTutorial;
+
     public static GraphicsContext gc_main;
     public static int width, height;
     public static Scene scene;
-    public static List<UiContainer> uiComponents = new ArrayList<>();
     public static Stage stage;
 
     public Gui() {
@@ -37,8 +32,6 @@ public class Gui {
         drawUI = new DrawUI();
         drawIngameUi = new DrawIngameUi();
         drawTutorial = new DrawTutorial();
-
-        uiComponents.add(new UiContainer());
     }
 
     public void create(Stage stage) { //JavaFX Setup

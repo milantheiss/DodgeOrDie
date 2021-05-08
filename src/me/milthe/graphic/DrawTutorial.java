@@ -2,13 +2,20 @@ package me.milthe.graphic;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import me.milthe.UI.ButtonUi;
 
 public class DrawTutorial {
-    Image wasd = new Image("file:rsc/sprites/wasdcontrol.png");
-    Image pause = new Image("file:rsc/sprites/pause.png");
-    Image dashen = new Image("file:rsc/sprites/dashen.png");
+    Image keybinds = new Image("file:rsc/sprites/keybinds.png");
+    public static ButtonUi zurueckButton = new ButtonUi("zurueck", "file:rsc/sprites/zurueck.png");
+
+    public DrawTutorial() {
+        zurueckButton.setX((int) (Gui.width - zurueckButton.getWidth()) / 2);
+        zurueckButton.setYToBeSum((int) (((Gui.height - keybinds.getHeight()) / 2) + keybinds.getHeight()), 50);
+    }
+
     public void render(GraphicsContext g) {
-        g.drawImage(wasd, 956, 654, 648, 131);
-        //g.drawImage(pause, (Gui.width-wasd.getWidth())/2, 1, 1,1);
+        g.drawImage(keybinds, (Gui.width - keybinds.getWidth()) / 2, (Gui.height - keybinds.getHeight()) / 2, keybinds.getWidth(), keybinds.getHeight());
+
+        g.drawImage(zurueckButton.sprite, zurueckButton.getX(), zurueckButton.getY(), zurueckButton.getWidth(), zurueckButton.getHeight());
     }
 }

@@ -3,17 +3,15 @@ package me.milthe.UI;
 import javafx.scene.image.Image;
 
 public class ButtonUi {
-    private final UiContainer uiContainer;
     private int x, y, width, height, marginTop, marginButton, marginLeft, marginRight;
     public Image sprite;
     public String buttonName;
 
-    public ButtonUi(String name, String filepath, UiContainer uiContainer){
-         buttonName = name;
-         sprite = new Image(filepath);
-         width = (int)Math.round(sprite.getWidth());
-         height = (int)Math.round(sprite.getHeight());
-         this.uiContainer = uiContainer;
+    public ButtonUi(String name, String filepath){
+        buttonName = name;
+        sprite = new Image(filepath);
+        width = (int)Math.round(sprite.getWidth());
+        height = (int)Math.round(sprite.getHeight());
     }
 
     public void applyMarginTop(){
@@ -32,8 +30,8 @@ public class ButtonUi {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = uiContainer.y + y;
+    public void setYToBeSum(int summand1, int summand2) {
+        this.y = summand1 + summand2;
     }
 
     public int getWidth() {
