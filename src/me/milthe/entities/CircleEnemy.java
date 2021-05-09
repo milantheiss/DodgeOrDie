@@ -1,54 +1,58 @@
 package me.milthe.entities;
 
-import me.milthe.gui.Gui;
+import javafx.scene.image.Image;
+import me.milthe.core.Game;
+import me.milthe.graphic.Gui;
 
-//TODO CircleEnemy Klasse aufräumen
-
-public class CircleEnemy {
-    public int xPos, yPos, targetX, targetY, width = 100, height = 100, xVel, yVel, startingSite;
-
+public class CircleEnemy extends Entity{
+    public int targetX, targetY, startingSite, circleIndex;
 
     public CircleEnemy() {
-        //Beim erstellen eines Neuen Circle Enemies wird der Startpunkt festgelegt und der Richtung
-        startingSite = (int) (Math.random() * 4);
-        //Sucht einen Random Punkt im Screen
-        targetX = Player.xPos;
-        targetY = Player.yPos;
+        width = 100;
+        height = 100;
+        speed = 30; //Desto höher desto langsamer
+        sprite = new Image("file:rsc/sprites/enemy-circle.png");
 
-        if (startingSite == 0) {
-            //start von Oben -> Y = 0
-            xPos = (int) (Math.random() * Gui.width);
-            yPos = 0;
-            //System.out.println(xPos + " " + yPos);
-        } else if (startingSite == 1) {
-            //start von Rechts -> X = Screen width
-            xPos = Gui.width;
-            yPos = (int) (Math.random() * Gui.height);
-            //System.out.println(xPos + " " + yPos);
-        } else if (startingSite == 2) {
-            //start von Unten -> Y = Screen height
-            xPos = (int) (Math.random() * Gui.width);
-            yPos = Gui.height;
-            //System.out.println(xPos + " " + yPos);
-        } else if (startingSite == 3) {
-            //start von Links -> X = 0
-            xPos = 0;
-            yPos = (int) (Math.random() * Gui.height);
-            //System.out.println(xPos + " " + yPos);
-        }
-        int xOffset = targetX - xPos;
-        int yOffset = targetY - yPos;
-
-        xVel = xOffset / 30;
-        yVel = yOffset / 30;
+        setPath();
     }
 
-    //Umgehen von static --> getter und setter
     public void move() {
         xPos += xVel;
         yPos += yVel;
     }
 
+    public void setPath(){ //Setzt den Path auf dem der Circle sich bewegt
+        //Gibt an auf welcher Seite der Circle spawnt
+        startingSite = (int) (Math.random() * 4);
+
+        //Circle bewegt sich immer auf einem Weg, der über den Punkt läuft auf dem sich der Player befindet wenn der Circle gespawnt wird
+        targetX = Game.getPlayer().getxPos();
+        targetY = Game.getPlayer().getyPos();
+
+        if (startingSite == 0) {
+            //start von Oben -> Y = 0
+            xPos = (int) (Math.random() * Gui.width);
+            yPos = 0;
+        } else if (startingSite == 1) {
+            //start von Rechts -> X = Screen width
+            xPos = Gui.width;
+            yPos = (int) (Math.random() * Gui.height);
+        } else if (startingSite == 2) {
+            //start von Unten -> Y = Screen height
+            xPos = (int) (Math.random() * Gui.width);
+            yPos = Gui.height;
+        } else if (startingSite == 3) {
+            //start von Links -> X = 0
+            xPos = 0;
+            yPos = (int) (Math.random() * Gui.height);
+        }
+        int xOffset = targetX - xPos;
+        int yOffset = targetY - yPos;
+
+        //Je höher speed ist desto langsamer bewegt sich der Circle
+        xVel = xOffset / speed;
+        yVel = yOffset / speed;
+    }
 
     public int getxPos() {
         return xPos;
@@ -64,5 +68,9 @@ public class CircleEnemy {
 
     public int getHeight() {
         return height;
+    }
+
+    public void setCircleIndex(int index){
+        circleIndex = index;
     }
 }
