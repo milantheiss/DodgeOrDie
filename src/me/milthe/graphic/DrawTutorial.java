@@ -9,7 +9,8 @@ public class DrawTutorial {
     public static ButtonUi zurueckButton = new ButtonUi("zurueck", "file:rsc/sprites/zurueck.png");
 
     public DrawTutorial() {
-        zurueckButton.setX((int) (Gui.width - zurueckButton.getWidth()) / 2);
+        zurueckButton.setX((Gui.width - zurueckButton.getWidth()) / 2);
+        System.out.println();
         zurueckButton.setYToBeSum((int) (((Gui.height - keybinds.getHeight()) / 2) + keybinds.getHeight()), 50);
     }
 

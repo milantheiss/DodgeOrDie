@@ -12,9 +12,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CircleSpawn {
     private final Game game;
-    public List<CircleEnemy> circles = new CopyOnWriteArrayList<CircleEnemy>();
+    public List<CircleEnemy> circles = new CopyOnWriteArrayList<>();
     public static Timer timer;
-    static int spawnDelay = 5000; //SpawnDelay nach aufrufen der Methode in Millisekunden(1000ms = 1s)
+    static int spawnDelay = 0; //SpawnDelay nach aufrufen der Methode in Millisekunden(1000ms = 1s)
     static int spawnInterval = 500; //Zeit zwischen Enemyspawn in Millisekunden
 
     public CircleSpawn(Game game) {

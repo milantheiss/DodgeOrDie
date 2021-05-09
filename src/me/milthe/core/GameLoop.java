@@ -55,8 +55,12 @@ public class GameLoop implements Runnable {
             Gui.drawIngameUi.render(Gui.gc_main);
         }
 
+        if (Gamestate.state == GamestateEnum.pause){
+            Gui.drawUI.render(Gui.gc_main, Gui.pauseContainer);
+        }
+
         if (Gamestate.state == GamestateEnum.menu) {
-            Gui.drawUI.render(Gui.gc_main);
+            Gui.drawUI.render(Gui.gc_main, Gui.menuContainer);
         }
 
         if (Gamestate.state == GamestateEnum.tutorial) {
