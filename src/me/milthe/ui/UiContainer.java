@@ -1,4 +1,4 @@
-package me.milthe.UI;
+package me.milthe.ui;
 
 import me.milthe.graphic.Gui;
 

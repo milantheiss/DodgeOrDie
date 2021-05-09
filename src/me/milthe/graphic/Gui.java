@@ -4,9 +4,11 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import me.milthe.UI.UiContainer;
+import me.milthe.ui.UiContainer;
 
 import java.awt.*;
 
@@ -70,6 +72,8 @@ public class Gui {
         stage.setTitle("Dodge or Die");
         stage.setScene(scene);
         stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.show();

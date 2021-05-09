@@ -1,8 +1,7 @@
 package me.milthe.core;
 
 import javafx.scene.input.KeyCode;
-import me.milthe.UI.ButtonUi;
-import me.milthe.UI.UiContainer;
+import me.milthe.ui.ButtonUi;
 import me.milthe.events.MouseClicked;
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Entity;
@@ -10,8 +9,6 @@ import me.milthe.entities.actions.Collision;
 import me.milthe.graphic.DrawIngameUi;
 import me.milthe.graphic.DrawTutorial;
 import me.milthe.graphic.Gui;
-
-import java.security.Key;
 
 public class Update {
     private final Game game;
@@ -54,16 +51,16 @@ public class Update {
 
     public void updateGamestate() {
         if (Gamestate.state == GamestateEnum.ingame) {
-            if (Game.input.isPressed(KeyCode.P)) {
+            if (Game.input.isPressed(KeyCode.ESCAPE)) {
                 Gamestate.state = GamestateEnum.pause;
-                Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
                 System.out.println("Ingame");
             }
         }
         if (Gamestate.state == GamestateEnum.pause) {
-            if (Game.input.isPressed(KeyCode.P)) {
+            if (Game.input.isPressed(KeyCode.ESCAPE)) {
                 Gamestate.state = GamestateEnum.ingame;
-                Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
                 System.out.println("Ingame");
             }
             Gui.pauseContainer.components.forEach(buttonUi -> {
@@ -71,13 +68,13 @@ public class Update {
                     if (buttonUi.getButtonName().equals("weiter")){
                         MouseClicked.clickHandeled = true;
                         Gamestate.state = GamestateEnum.ingame;
-                        Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
+                        Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
                         System.out.println("Ingame");
                     }
                     if (buttonUi.getButtonName().equals("neustart")){
                         System.out.println("Neustart");
                         MouseClicked.clickHandeled = true;
-                        Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
+                        Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
                         game.queueInitSpawn();
                         Gamestate.state = GamestateEnum.ingame;
                         System.out.println("Ingame");
@@ -86,7 +83,7 @@ public class Update {
                         MouseClicked.clickHandeled = true;
                         Gamestate.state = GamestateEnum.menu;
                         System.out.println("Menu");
-                        Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
+                        Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
                     }
                 }
             });
@@ -113,9 +110,9 @@ public class Update {
             });
         }
         if (Gamestate.state == GamestateEnum.tutorial) {
-            if (Game.input.isPressed(KeyCode.P)) {
-                Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
-                Gui.close();
+            if (Game.input.isPressed(KeyCode.ESCAPE)) {
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
+                Gamestate.state = GamestateEnum.menu;
             }
             if (clickOnButton(DrawTutorial.zurueckButton) && !MouseClicked.clickHandeled){
                 MouseClicked.clickHandeled = true;

@@ -1,8 +1,8 @@
 package me.milthe.graphic;
 
 import javafx.scene.canvas.GraphicsContext;
-import me.milthe.UI.ButtonUi;
-import me.milthe.UI.UiContainer;
+import me.milthe.ui.ButtonUi;
+import me.milthe.ui.UiContainer;
 
 public class DrawUI {
     UiContainer uiContainer = new UiContainer();

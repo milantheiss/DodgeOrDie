@@ -1,4 +1,4 @@
-package me.milthe.UI;
+package me.milthe.ui;
 
 import javafx.scene.image.Image;
 

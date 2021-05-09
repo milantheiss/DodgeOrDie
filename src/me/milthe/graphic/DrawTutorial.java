@@ -2,7 +2,7 @@ package me.milthe.graphic;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import me.milthe.UI.ButtonUi;
+import me.milthe.ui.ButtonUi;
 
 public class DrawTutorial {
     Image keybinds = new Image("file:rsc/sprites/keybinds.png");
