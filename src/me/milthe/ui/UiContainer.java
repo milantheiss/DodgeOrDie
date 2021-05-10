@@ -8,9 +8,7 @@ import java.util.List;
 public class UiContainer {
     public int x, y, width, height;
     public List<ButtonUi> components = new ArrayList<>();
-    public UiContainer(){
 
-    }
     public void centerContainerToScreen(){
         int maxWidth = 0;
         int tempY = 0;

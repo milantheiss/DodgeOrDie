@@ -73,4 +73,9 @@ public class CircleEnemy extends Entity{
     public void setCircleIndex(int index){
         circleIndex = index;
     }
+
+    @Override
+    public Image getSprite() {
+        return sprite;
+    }
 }

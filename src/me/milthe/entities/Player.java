@@ -10,6 +10,9 @@ import me.milthe.graphic.Gui;
 public class Player extends Entity{
     public int dashCooldown = 500, dashRange = 250;
     private static long lastDash = 0;
+    public final Image SPRITE_LEFT = new Image("file:rsc/sprites/player/left.png");
+    public final Image SPRITE_CENTER = new Image("file:rsc/sprites/player/center.png");
+    public final Image SPRITE_RIGHT = new Image("file:rsc/sprites/player/right.png");
 
     public Player() {
         xPos = Gui.width / 2 - 25;
@@ -126,4 +129,13 @@ public class Player extends Entity{
         xPos = (int) xTarget;
         yPos = (int) yTarget;
     } //Dash zur Maus wird nicht genutzt und ist seit V0.0.1 nicht geupdatet --> Wahrscheinlich seit V0.0.2 nicht mehr kompatibel*/
+    public Image getSprite(){
+        if(xDirection == 1){
+            return SPRITE_RIGHT;
+        }else if (xDirection == -1){
+            return SPRITE_LEFT;
+        }else {
+            return SPRITE_CENTER;
+        }
+    }
 }

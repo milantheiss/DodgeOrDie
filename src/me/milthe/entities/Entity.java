@@ -34,9 +34,7 @@ public abstract class Entity {
         listIndex = index;
     }
 
-    public Image getSprite() {
-        return sprite;
-    }
+    public abstract Image getSprite();
 
     public void setGame(Game game) {
         this.game = game;
