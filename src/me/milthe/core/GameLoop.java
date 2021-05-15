@@ -50,21 +50,25 @@ public class GameLoop implements Runnable {
         Gui.gc_main.clearRect(0, 0, Gui.width, Gui.height);
         Gui.drawEnvironment.draw(Gui.gc_main);
 
-        if (Gamestate.state == GamestateEnum.ingame || Gamestate.state == GamestateEnum.pause) {
+        if (Gamestate.state == Gamestates.ingame || Gamestate.state == Gamestates.pause || Gamestate.state == Gamestates.endscreen) {
             Gui.drawEntities.render(Gui.gc_main, GAME);
             Gui.drawIngameUi.render(Gui.gc_main);
         }
 
-        if (Gamestate.state == GamestateEnum.pause){
+        if (Gamestate.state == Gamestates.pause){
             Gui.drawUI.render(Gui.gc_main, Gui.pauseContainer);
         }
 
-        if (Gamestate.state == GamestateEnum.menu) {
+        if (Gamestate.state == Gamestates.menu) {
             Gui.drawUI.render(Gui.gc_main, Gui.menuContainer);
         }
 
-        if (Gamestate.state == GamestateEnum.tutorial) {
+        if (Gamestate.state == Gamestates.tutorial) {
             Gui.drawTutorial.render(Gui.gc_main);
+        }
+
+        if (Gamestate.state == Gamestates.endscreen) {
+            Gui.drawEndscreen.render(Gui.gc_main);
         }
     }
 }

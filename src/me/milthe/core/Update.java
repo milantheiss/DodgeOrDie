@@ -1,6 +1,11 @@
 package me.milthe.core;
 
 import javafx.scene.input.KeyCode;
+import me.milthe.entities.Player;
+import me.milthe.gamemode.Gamemode;
+import me.milthe.gamemode.Gamemodes;
+import me.milthe.gamemode.Infinite;
+import me.milthe.graphic.DrawEndscreen;
 import me.milthe.ui.ButtonUi;
 import me.milthe.events.MouseClicked;
 import me.milthe.entities.CircleEnemy;
@@ -22,10 +27,10 @@ public class Update {
 
     public void runUpdate() {
         updateGamestate();
-        if (Gamestate.state == GamestateEnum.ingame) {
+        if (Gamestate.state == Gamestates.ingame) {
             entitiesUpdate();
             collisionPlayerCircle();
-            game.circleSpawn.getCircles().forEach(this::checkForCircleOutOfBounce);
+            game.circleEnemyList.forEach(this::checkForCircleOutOfBounce);
         }
     }
 
@@ -34,10 +39,18 @@ public class Update {
     }
 
     public void collisionPlayerCircle() {//Kollisionsdetektion für Gegner zu Spieler
-        for (int i = 0; i < game.circleSpawn.circles.size(); i++) {
-            if (col.collisionPlayerCircle(game.circleSpawn.circles.get(i))) {
-                game.removeCircleEntity(game.circleSpawn.circles.get(i).listIndex, game.circleSpawn.circles.get(i).circleIndex);
-                DrawIngameUi.score++;
+        for (int i = 0; i < game.circleEnemyList.size(); i++) {
+            if (col.collisionPlayerCircle(game.circleEnemyList.get(i))) {
+                game.removeCircleEnemy(game.circleEnemyList.get(i).listIndex, game.circleEnemyList.get(i).circleIndex);
+                if ((Player.hitpoints-1)==0){
+                    Player.hitpoints--;
+                    Scoring.totalEnemiesSpawned--;
+                    game.infinite.stopInfinite();
+                    Gamestate.state = Gamestates.endscreen;
+                }else {
+                    Player.hitpoints--;
+                    Scoring.totalEnemiesSpawned--;
+                }
             }
         }
     }
@@ -45,61 +58,74 @@ public class Update {
     public void checkForCircleOutOfBounce(CircleEnemy circleEnemy) {
         if (circleEnemy.getxPos() >= (Gui.width + 100) || circleEnemy.getxPos() <= -100 || circleEnemy.getyPos() >= (Gui
                 .height + 100) || circleEnemy.getyPos() <= -100) {
-            game.removeCircleEntity(circleEnemy.listIndex, circleEnemy.circleIndex);
+            game.removeCircleEnemy(circleEnemy.listIndex, circleEnemy.circleIndex);
         }
     }
 
     public void updateGamestate() {
-        if (Gamestate.state == GamestateEnum.ingame) {
+        if (Gamestate.state == Gamestates.ingame) {
             if (Game.input.isPressed(KeyCode.ESCAPE)) {
-                Gamestate.state = GamestateEnum.pause;
+                Gamestate.state = Gamestates.pause;
                 Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
                 System.out.println("Ingame");
             }
         }
-        if (Gamestate.state == GamestateEnum.pause) {
+        if (Gamestate.state == Gamestates.pause) {
             if (Game.input.isPressed(KeyCode.ESCAPE)) {
-                Gamestate.state = GamestateEnum.ingame;
+                Gamestate.state = Gamestates.ingame;
                 Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
                 System.out.println("Ingame");
             }
             Gui.pauseContainer.components.forEach(buttonUi -> {
-                if (clickOnButton(buttonUi) && !MouseClicked.clickHandeled){
-                    if (buttonUi.getButtonName().equals("weiter")){
+                if (clickOnButton(buttonUi) && !MouseClicked.clickHandeled) {
+                    if (buttonUi.getButtonName().equals("weiter")) {
                         MouseClicked.clickHandeled = true;
-                        Gamestate.state = GamestateEnum.ingame;
+                        Gamestate.state = Gamestates.ingame;
                         Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
                         System.out.println("Ingame");
                     }
-                    if (buttonUi.getButtonName().equals("neustart")){
+                    if (buttonUi.getButtonName().equals("neustart")) {
                         System.out.println("Neustart");
                         MouseClicked.clickHandeled = true;
                         Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
-                        game.queueInitSpawn();
-                        Gamestate.state = GamestateEnum.ingame;
+                        if (Gamemode.mode == Gamemodes.infinite) {
+                            game.infinite.stopInfinite();
+                            game.infinite.terminateInfinite();
+                            game.infinite.startInfinite();
+                        } else if (Gamemode.mode == Gamemodes.custom) {
+                            //todo Start Stop für Custom hinzufügen
+                        }
                         System.out.println("Ingame");
                     }
-                    if (buttonUi.getButtonName().equals("verlassen")){
+                    if (buttonUi.getButtonName().equals("verlassen")) {
                         MouseClicked.clickHandeled = true;
-                        Gamestate.state = GamestateEnum.menu;
+                        if (Gamemode.mode == Gamemodes.infinite) {
+                            game.infinite.stopInfinite();
+                            game.infinite.terminateInfinite();
+                        } else if (Gamemode.mode == Gamemodes.custom) {
+                            //todo Custom stoppen
+                        }
+                        Gamestate.state = Gamestates.menu;
                         System.out.println("Menu");
                         Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
                     }
                 }
             });
         }
-        if (Gamestate.state == GamestateEnum.menu) {
+        //todo menu neu ordnen so dass Spielmodi neues UI öffnet wo spieler den modus wählen können
+        if (Gamestate.state == Gamestates.menu) {
             Gui.menuContainer.components.forEach(buttonUi -> {
                 if (clickOnButton(buttonUi) && !MouseClicked.clickHandeled) {
                     if (buttonUi.getButtonName().equals("start")) {
                         MouseClicked.clickHandeled = true;
-                        game.queueInitSpawn();
-                        Gamestate.state = GamestateEnum.ingame;
+                        game.infinite.startInfinite();
+                        //todo button funktion an neue modi anpassen
+                        Gamestate.state = Gamestates.ingame;
                         System.out.println("Ingame");
                     }
                     if (buttonUi.getButtonName().equals("steuerung")) {
                         MouseClicked.clickHandeled = true;
-                        Gamestate.state = GamestateEnum.tutorial;
+                        Gamestate.state = Gamestates.tutorial;
                         System.out.println("Tutorial");
                     }
                     if (buttonUi.getButtonName().equals("verlassen")) {
@@ -108,15 +134,35 @@ public class Update {
                     }
                 }
             });
+            if (Game.input.isPressed(KeyCode.P)) {
+                //todo funktion neu definieren mit neuen spielmodus klassen
+                Gamestate.state = Gamestates.ingame;
+                Gamemode.mode = Gamemodes.custom;
+                //todo Custom start
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.P)] = false;
+                System.out.println("level");
+            }
         }
-        if (Gamestate.state == GamestateEnum.tutorial) {
+        if (Gamestate.state == Gamestates.tutorial) {
+            //todo tutorial neue tutorial erstellen
             if (Game.input.isPressed(KeyCode.ESCAPE)) {
                 Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
-                Gamestate.state = GamestateEnum.menu;
+                Gamestate.state = Gamestates.menu;
             }
-            if (clickOnButton(DrawTutorial.zurueckButton) && !MouseClicked.clickHandeled){
+            if (clickOnButton(DrawTutorial.zurueckButton) && !MouseClicked.clickHandeled) {
                 MouseClicked.clickHandeled = true;
-                Gamestate.state = GamestateEnum.menu;
+                Gamestate.state = Gamestates.menu;
+            }
+        }
+
+        if(Gamestate.state == Gamestates.endscreen){
+            if (Game.input.isPressed(KeyCode.ESCAPE) || (clickOnButton(DrawEndscreen.getZurueck()) && !MouseClicked.clickHandeled)) {
+                MouseClicked.clickHandeled = true;
+                Game.input.pressed[Game.input.getKeyCode(KeyCode.ESCAPE)] = false;
+                if (Gamemode.mode == Gamemodes.infinite){
+                    game.infinite.terminateInfinite();
+                }
+                Gamestate.state = Gamestates.menu;
             }
         }
     }

@@ -18,6 +18,7 @@ public class Gui {
     public static DrawUI drawUI;
     public static DrawIngameUi drawIngameUi;
     public static DrawTutorial drawTutorial;
+    public static DrawEndscreen drawEndscreen;
 
     public static GraphicsContext gc_main;
     public static int width, height;
@@ -39,6 +40,7 @@ public class Gui {
         drawUI = new DrawUI();
         drawIngameUi = new DrawIngameUi();
         drawTutorial = new DrawTutorial();
+        drawEndscreen = new DrawEndscreen();
 
         menuContainer.addComponent("start", "file:rsc/sprites/start.png");
         menuContainer.addComponent("steuerung", "file:rsc/sprites/steuerung.png");
@@ -89,5 +91,6 @@ public class Gui {
         System.out.println("close");
         Platform.exit();
         System.exit(0);
+        stage.close();
     }
 }

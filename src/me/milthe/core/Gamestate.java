@@ -1,5 +1,5 @@
 package me.milthe.core;
 
 public class Gamestate {
-    public static GamestateEnum state;
+    public static Gamestates state;
 }

@@ -1,26 +1,30 @@
 package me.milthe.core;
 
+import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Entity;
 import me.milthe.entities.Player;
 import me.milthe.events.*;
-import me.milthe.graphic.DrawIngameUi;
+import me.milthe.gamemode.Infinite;
 import me.milthe.graphic.Gui;
-import me.milthe.spawner.CircleSpawn;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Game {
     public static Input input;
-    public static Player player;
 
-    public CircleSpawn circleSpawn;
-    public List<Entity> entities;
+    public static Player player;
+    public static List<Entity> entities;
+    public static List<CircleEnemy> circleEnemyList;
+
+    public Infinite infinite;
+
+    public Levelloader levelloader = new Levelloader(this);
 
     public Game(){
         input = new Input();
 
-        Gamestate.state = GamestateEnum.menu;
+        Gamestate.state = Gamestates.menu;
 
         //EventListeners
         Gui.scene.setOnMouseClicked(new MouseClicked());
@@ -28,17 +32,17 @@ public class Game {
         Gui.scene.setOnKeyPressed(new KeyPressed());
         Gui.scene.setOnKeyReleased(new KeyReleased());
 
-
-        circleSpawn = new CircleSpawn(this);
         entities = new CopyOnWriteArrayList<>();
-        circleSpawn.start();
+        circleEnemyList = new CopyOnWriteArrayList<>();
+
+        infinite = new Infinite(this);
     }
 
     public List<Entity> getEntities() {
         return entities;
     }
 
-    public void setEntity(Entity entity) {
+    public void addEntity(Entity entity) {
         entities.add(entity);
         entity.setListIndex(entities.indexOf(entity));
         entity.setGame(this);
@@ -49,24 +53,21 @@ public class Game {
         entities.forEach(entity -> entity.setListIndex(entities.indexOf(entity)));
     }
 
-    public void removeCircleEntity(int index, int circleIndex){
-        circleSpawn.removeCircle(circleIndex);
-        removeEntity(index);
+    public void addCircleEnemy(CircleEnemy circleEnemy){
+        circleEnemyList.add(circleEnemy);
+        circleEnemy.setCircleIndex(circleEnemyList.indexOf(circleEnemy));
+        addEntity(circleEnemy);
+        circleEnemy.setListIndex(entities.indexOf(circleEnemy));
+        Scoring.totalEnemiesSpawned++;
     }
 
-    public void queueInitSpawn(){
-        circleSpawn.circles.clear();
-        entities.clear();
-        DrawIngameUi.score = 0;
-        player = new Player();
-        setEntity(player);
-
+    public void removeCircleEnemy(int index, int circleIndex){
+        circleEnemyList.remove(circleIndex);
+        circleEnemyList.forEach(circle -> circle.setCircleIndex(circleEnemyList.indexOf(circle)));
+        removeEntity(index);
     }
 
     public static Player getPlayer() {
         return player;
     }
-
-
-
 }

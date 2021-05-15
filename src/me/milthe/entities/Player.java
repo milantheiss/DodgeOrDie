@@ -13,8 +13,10 @@ public class Player extends Entity{
     public final Image SPRITE_LEFT = new Image("file:rsc/sprites/player/left.png");
     public final Image SPRITE_CENTER = new Image("file:rsc/sprites/player/center.png");
     public final Image SPRITE_RIGHT = new Image("file:rsc/sprites/player/right.png");
+    public static int hitpoints;
 
-    public Player() {
+    public Player(int hitpoints) {
+        this.hitpoints = hitpoints;
         xPos = Gui.width / 2 - 25;
         yPos = Gui.height / 2 - 25;
         width = 50;

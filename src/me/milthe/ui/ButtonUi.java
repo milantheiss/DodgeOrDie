@@ -7,14 +7,14 @@ public class ButtonUi {
     public Image sprite;
     public String buttonName;
 
-    public ButtonUi(String name, String filepath){
+    public ButtonUi(String name, String filepath) {
         buttonName = name;
         sprite = new Image(filepath);
-        width = (int)Math.round(sprite.getWidth());
-        height = (int)Math.round(sprite.getHeight());
+        width = (int) Math.round(sprite.getWidth());
+        height = (int) Math.round(sprite.getHeight());
     }
 
-    public void applyMarginTop(){
+    public void applyMarginTop() {
         y += marginTop;
     }
 
@@ -28,6 +28,10 @@ public class ButtonUi {
 
     public int getY() {
         return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void setYToBeSum(int summand1, int summand2) {

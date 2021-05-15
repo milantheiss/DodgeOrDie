@@ -6,7 +6,7 @@ public class Input {
     public boolean[] pressed;
 
     public Input(){
-        pressed = new boolean[7];
+        pressed = new boolean[8];
     }
 
     public int getKeyCode(KeyCode code){ //Übersetzt KeyCode in eine Zahl speziell für Taste
@@ -22,8 +22,9 @@ public class Input {
             return 5;
         }else if (code == KeyCode.ESCAPE){
             return 6;
+        }else if (code == KeyCode.P){
+            return 7;
         }else {
-            System.out.println("Fehler KeyCode Translation: KeyCode fehlerhaft oder KeyCode wird nicht berücksichtigt");
             return 0;
         }
     }
