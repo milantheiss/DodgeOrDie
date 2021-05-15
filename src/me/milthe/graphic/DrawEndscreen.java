@@ -13,7 +13,7 @@ public class DrawEndscreen {
     public DrawEndscreen() {
         zurueck = new ButtonUi("zurueck", "file:rsc/sprites/zurueck.png");
         zurueck.setX((Gui.width - zurueck.getWidth()) / 2);
-        zurueck.setY(777);
+        zurueck.setY((Gui.height - zurueck.getHeight()) / 2 + 85);
     }
 
     public void render(GraphicsContext g) {

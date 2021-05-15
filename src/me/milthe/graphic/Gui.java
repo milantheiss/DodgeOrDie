@@ -4,10 +4,10 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 import me.milthe.ui.UiContainer;
 
 import java.awt.*;
@@ -73,6 +73,7 @@ public class Gui {
         //Setzt die Window Properties
         stage.setTitle("Dodge or Die");
         stage.setScene(scene);
+        stage.getIcons().add(new Image("file:rsc/sprites/player/center.png"));
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);

@@ -28,6 +28,7 @@ public class Update {
     public void runUpdate() {
         updateGamestate();
         if (Gamestate.state == Gamestates.ingame) {
+            checkIfWindowIsFocused();
             entitiesUpdate();
             collisionPlayerCircle();
             game.circleEnemyList.forEach(this::checkForCircleOutOfBounce);
@@ -169,5 +170,11 @@ public class Update {
 
     private boolean clickOnButton(ButtonUi buttonUi) {
         return MouseClicked.x > buttonUi.getX() && MouseClicked.x < (buttonUi.getX() + buttonUi.getWidth()) && MouseClicked.y > buttonUi.getY() && MouseClicked.y < (buttonUi.getY() + buttonUi.getHeight());
+    }
+
+    private void checkIfWindowIsFocused() {
+        if (!Gui.stage.isFocused()){
+            Gamestate.state = Gamestates.pause;
+        }
     }
 }
