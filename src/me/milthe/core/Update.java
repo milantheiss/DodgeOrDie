@@ -56,9 +56,12 @@ public class Update {
         }
     }
 
+    //TODO Wenn neue Enemy --> für diese umschreiben
     public void checkForCircleOutOfBounce(CircleEnemy circleEnemy) {
         if (circleEnemy.getxPos() >= (Gui.width + 100) || circleEnemy.getxPos() <= -100 || circleEnemy.getyPos() >= (Gui
                 .height + 100) || circleEnemy.getyPos() <= -100) {
+            //circleEnemy.reset()
+            //circleEnemy.speed == Math.randpaiwjdölfjsa
             game.removeCircleEnemy(circleEnemy.listIndex, circleEnemy.circleIndex);
         }
     }

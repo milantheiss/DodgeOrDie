@@ -3,7 +3,6 @@ package me.milthe.gamemode;
 import me.milthe.core.*;
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Player;
-import me.milthe.graphic.DrawIngameUi;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,9 +11,6 @@ public class Infinite {
     private final Game game;
     private Timer timer;
     private static int spawnDelay = 2000;
-    private static int spawnInterval;
-
-    //todo add scoring system
 
     public Infinite(Game game){
         this.game = game;
