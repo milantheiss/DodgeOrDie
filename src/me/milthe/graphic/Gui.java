@@ -33,7 +33,7 @@ public class Gui {
         width = gd.getDisplayMode().getWidth(); //--> GetScreensize
         height = gd.getDisplayMode().getHeight();
     }
-    //
+
     public void init() {
         drawEnvironment = new DrawEnvironment();
         drawEntities = new DrawEntities();
