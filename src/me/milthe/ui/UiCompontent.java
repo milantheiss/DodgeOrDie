@@ -2,14 +2,16 @@ package me.milthe.ui;
 
 import javafx.scene.image.Image;
 
-public class ButtonUi {
-    private int x, y, width, height, marginTop, marginButton, marginLeft, marginRight;
-    public Image sprite;
-    public String buttonName;
+public abstract class UiCompontent {
+    protected int x, y, width, height, marginTop, marginButton, marginLeft, marginRight;
+    protected Image sprite;
+    protected String componentName;
+    protected boolean visible;
+    protected boolean overlapping;
 
-    public ButtonUi(String name, String filepath) {
-        buttonName = name;
-        sprite = new Image(filepath);
+    public UiCompontent(String name, String filepathImage){
+        componentName = name;
+        sprite = new Image(filepathImage);
         width = (int) Math.round(sprite.getWidth());
         height = (int) Math.round(sprite.getHeight());
     }
@@ -86,7 +88,27 @@ public class ButtonUi {
         this.marginRight = marginRight;
     }
 
-    public String getButtonName() {
-        return buttonName;
+    public String getComponentName() {
+        return componentName;
+    }
+
+    public Image getSprite() {
+        return sprite;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public boolean isOverlapping() {
+        return overlapping;
+    }
+
+    public void setOverlapping(boolean overlapping) {
+        this.overlapping = overlapping;
     }
 }

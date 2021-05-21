@@ -13,7 +13,7 @@ public class Time {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (Gamestate.state == Gamestates.ingame) timeInSeconds++;
+                if (Game.state == Gamestates.INGAME) timeInSeconds++;
             }
         }, 1000, 1000);
     }
