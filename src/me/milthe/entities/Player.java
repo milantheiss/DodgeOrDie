@@ -10,9 +10,9 @@ import me.milthe.graphic.Gui;
 public class Player extends Entity{
     public int dashCooldown = 500, dashRange = 250;
     private static long lastDash = 0;
-    public final Image SPRITE_LEFT = new Image("file:rsc/sprites/player/left.png");
-    public final Image SPRITE_CENTER = new Image("file:rsc/sprites/player/center.png");
-    public final Image SPRITE_RIGHT = new Image("file:rsc/sprites/player/right.png");
+    private final Image SPRITE_LEFT = new Image("file:rsc/sprites/entities/player/left.png");
+    private final Image SPRITE_CENTER = new Image("file:rsc/sprites/entities/player/center.png");
+    private final Image SPRITE_RIGHT = new Image("file:rsc/sprites/entities/player/right.png");
     public static int hitpoints;
 
     public Player(int hitpoints) {
@@ -22,7 +22,6 @@ public class Player extends Entity{
         width = 50;
         height = 50;
         speed = 16;
-        sprite = new Image("file:rsc/sprites/player.png");
     }
 
     public void move() { //Movement wird in Update.java aufgerufen

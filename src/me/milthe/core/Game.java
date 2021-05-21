@@ -4,8 +4,11 @@ import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Entity;
 import me.milthe.entities.Player;
 import me.milthe.events.*;
+import me.milthe.gamemode.Gamemodes;
 import me.milthe.gamemode.Infinite;
 import me.milthe.graphic.Gui;
+import me.milthe.graphic.Menustates;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -17,6 +20,9 @@ public class Game {
     public static List<Entity> entities;
     public static List<CircleEnemy> circleEnemyList;
 
+    public static Gamestates state;
+    public static Gamemodes mode;
+
     public Infinite infinite;
 
     public Levelloader levelloader = new Levelloader(this);
@@ -24,13 +30,8 @@ public class Game {
     public Game(){
         input = new Input();
 
-        Gamestate.state = Gamestates.menu;
-
-        //EventListeners
-        Gui.scene.setOnMouseClicked(new MouseClicked());
-        Gui.scene.setOnMouseMoved(new MouseMoved());
-        Gui.scene.setOnKeyPressed(new KeyPressed());
-        Gui.scene.setOnKeyReleased(new KeyReleased());
+        state = Gamestates.MENU;
+        Gui.menustate = Menustates.MAIN;
 
         entities = new CopyOnWriteArrayList<>();
         circleEnemyList = new CopyOnWriteArrayList<>();

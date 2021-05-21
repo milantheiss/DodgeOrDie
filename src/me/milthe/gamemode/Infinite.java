@@ -18,8 +18,8 @@ public class Infinite {
 
     public void startInfinite(){
         timer = new Timer();
-        Gamestate.state = Gamestates.ingame;
-        Gamemode.mode = Gamemodes.infinite;
+        Game.state = Gamestates.INGAME;
+        Game.mode = Gamemodes.INFINITE;
 
         Game.player = new Player(4);
 
@@ -33,7 +33,7 @@ public class Infinite {
             @Override
             public void run() {
                 //int typeNumber = (int) (Math.random() * 1);
-                if (Gamestate.state == Gamestates.ingame) {
+                if (Game.state == Gamestates.INGAME) {
                     // if (typeNumber == 0){
                     game.addCircleEnemy(new CircleEnemy());
                     // }
@@ -45,7 +45,7 @@ public class Infinite {
     public void stopInfinite(){
         Time.stopTimer();
         timer.cancel();
-        Gamestate.state = Gamestates.pause;
+        Game.state = Gamestates.PAUSE;
         System.out.println(Time.getTime());
     }
 

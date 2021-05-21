@@ -8,7 +8,11 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import me.milthe.ui.UiContainer;
+import me.milthe.events.KeyPressed;
+import me.milthe.events.KeyReleased;
+import me.milthe.events.MouseClicked;
+import me.milthe.events.MouseMoved;
+import me.milthe.ui.MenuSetup;
 
 import java.awt.*;
 
@@ -25,8 +29,8 @@ public class Gui {
     public static Scene scene;
     public static Stage stage;
 
-    public static UiContainer menuContainer = new UiContainer();
-    public static UiContainer pauseContainer = new UiContainer();
+    public static MenuSetup menuSetup;
+    public static Menustates menustate;
 
     public Gui() {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); //Setzt den Bildschirm auf dem das Programm laufen soll
@@ -42,20 +46,7 @@ public class Gui {
         drawTutorial = new DrawTutorial();
         drawEndscreen = new DrawEndscreen();
 
-        menuContainer.addComponent("start", "file:rsc/sprites/start.png");
-        menuContainer.addComponent("steuerung", "file:rsc/sprites/steuerung.png");
-        menuContainer.addComponent("verlassen", "file:rsc/sprites/verlassen.png");
-        menuContainer.components.get(1).setMarginTop(menuContainer.components.get(1).getHeight()/2);
-        menuContainer.components.get(2).setMarginTop(menuContainer.components.get(1).getHeight()/2);
-
-        menuContainer.centerContainerToScreen();
-
-        pauseContainer.addComponent("weiter", "file:rsc/sprites/weiter.png");
-        pauseContainer.addComponent("neustart", "file:rsc/sprites/neustart.png");
-        pauseContainer.addComponent("verlassen", "file:rsc/sprites/verlassen.png");
-        pauseContainer.components.get(1).setMarginTop(pauseContainer.components.get(1).getHeight()/2);
-        pauseContainer.components.get(2).setMarginTop(pauseContainer.components.get(1).getHeight()/2);
-        pauseContainer.centerContainerToScreen();
+        menuSetup = new MenuSetup();
     }
 
     public void create(Stage stage) { //JavaFX Setup
@@ -69,6 +60,12 @@ public class Gui {
 
         root.getChildren().add(canvas_main);
         scene = new Scene(root, cWidth, cHeight);
+
+        //EventListeners
+        scene.setOnMouseClicked(new MouseClicked());
+        scene.setOnMouseMoved(new MouseMoved());
+        scene.setOnKeyPressed(new KeyPressed());
+        scene.setOnKeyReleased(new KeyReleased());
 
         //Setzt die Window Properties
         stage.setTitle("Dodge or Die");
