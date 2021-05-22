@@ -2,6 +2,7 @@ package me.milthe.entities.actions;
 
 import me.milthe.core.Game;
 import me.milthe.entities.CircleEnemy;
+import me.milthe.entities.Entity;
 
 public class Collision {
     Game game;
@@ -10,29 +11,24 @@ public class Collision {
         this.game = game;
     }
 
-    public boolean collisionPlayerCircle(CircleEnemy ce) {
-        int xCenter = ce.getxPos() + 50; //Mittelpunkt von Kreis --> X
-        int yCenter = ce.getyPos() + 50; //Mittelpunkt von Kreis --> Y
-        int[] x = new int[4];
-        int[] y = new int[4];
+    public boolean collisionRectangleCircle(Entity rectangle, Entity circle) {
+        int xCenterCircle = circle.getxPos() + (circle.width/2);
+        int yCenterCircle = circle.getyPos() + (circle.height/2);
+        int[] xCornerRectangle = new int[4];
+        int[] yCornerRectangle = new int[4];
 
-        //Muss hart gecodet werden ansonsten wird Kollision zu langsam berechnet
-        x[0] = Game.getPlayer().getxPos();
-        y[0] = Game.getPlayer().getyPos();
-        x[1] = Game.getPlayer().getxPos() + 50;
-        x[2] = Game.getPlayer().getxPos();
-        x[3] = Game.getPlayer().getxPos() + 50;
-        y[1] = Game.getPlayer().getyPos() + 50;
-        y[2] = Game.getPlayer().getyPos();
-        y[3] = Game.getPlayer().getyPos() + 50;
+        for (int i = 0; i < 4; i++) {
+            xCornerRectangle[i] = (i == 0 || i == 2) ? rectangle.getxPos() : (rectangle.getxPos() + rectangle.width - 12);
+            yCornerRectangle[i] = (i == 0 || i == 1) ? rectangle.getyPos() : (rectangle.getyPos() + rectangle.height - 12);
+        }
 
         double[] a = new double[4];
         double[] b = new double[4];
         double[] c = new double[4];
 
         for (int i = 0; i < 4; i++) {
-            a[i] = x[i] - xCenter;
-            b[i] = y[i] - yCenter;
+            a[i] = xCornerRectangle[i] - xCenterCircle;
+            b[i] = yCornerRectangle[i] - yCenterCircle;
             c[i] = Math.sqrt((a[i] * a[i]) + (b[i] * b[i]));
         }
 

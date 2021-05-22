@@ -2,6 +2,7 @@ package me.milthe.gamemode;
 
 import me.milthe.core.*;
 import me.milthe.entities.CircleEnemy;
+import me.milthe.entities.Friend;
 import me.milthe.entities.Player;
 
 import java.util.Timer;
@@ -12,11 +13,11 @@ public class Infinite {
     private Timer timer;
     private static int spawnDelay = 2000;
 
-    public Infinite(Game game){
+    public Infinite(Game game) {
         this.game = game;
     }
 
-    public void startInfinite(){
+    public void startInfinite() {
         timer = new Timer();
         Game.state = Gamestates.INGAME;
         Game.mode = Gamemodes.INFINITE;
@@ -32,24 +33,27 @@ public class Infinite {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                //int typeNumber = (int) (Math.random() * 1);
+                double typeNumber = Math.random();
+                //double typeNumber = 1;
                 if (Game.state == Gamestates.INGAME) {
-                    // if (typeNumber == 0){
-                    game.addCircleEnemy(new CircleEnemy());
-                    // }
+                    if (typeNumber <= 0.2) {
+                        game.addFriend(new Friend());
+                    } else {
+                        game.addCircleEnemy(new CircleEnemy());
+                    }
                 }
             }
-        }, spawnDelay, (int)(Math.random()*1000)+500);
+        }, spawnDelay, (int) (Math.random() * 1000) + 500);
     }
 
-    public void stopInfinite(){
+    public void stopInfinite() {
         Time.stopTimer();
         timer.cancel();
         Game.state = Gamestates.PAUSE;
         System.out.println(Time.getTime());
     }
 
-    public void terminateInfinite(){
+    public void terminateInfinite() {
         Game.circleEnemyList.clear();
         Game.entities.clear();
     }

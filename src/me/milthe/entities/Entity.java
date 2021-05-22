@@ -4,9 +4,11 @@ import javafx.scene.image.Image;
 import me.milthe.core.Game;
 
 public abstract class Entity {
-    Game game;
-    public int xPos, yPos, width, height, xVel, yVel, speed, listIndex, xDirection, yDirection;
-    Image sprite;
+    protected Game game;
+    //TODO Private machen
+    public int xPos, yPos, width, height, xVel, yVel, speed;
+    protected double xDirection, yDirection;
+    protected int listIndex;
 
     public abstract void move();
 

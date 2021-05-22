@@ -5,7 +5,7 @@ import me.milthe.core.Game;
 import me.milthe.graphic.Gui;
 
 public class CircleEnemy extends Entity {
-    public int targetX, targetY, startingSite, circleIndex;
+    private int circleIndex;
     private final Image SPRITE_IDLE = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_idle.png");
     private final Image SPRITE_TOP = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_top.png");
     private final Image SPRITE_TOP_RIGHT = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_topright.png");
@@ -20,8 +20,6 @@ public class CircleEnemy extends Entity {
         width = 100;
         height = 100;
         speed = 30; //Desto höher desto langsamer
-        sprite = new Image("file:rsc/sprites/enemy-circle.png");
-
         setPath();
     }
 
@@ -32,11 +30,11 @@ public class CircleEnemy extends Entity {
 
     public void setPath() { //Setzt den Path auf dem der Circle sich bewegt
         //Gibt an auf welcher Seite der Circle spawnt
-        startingSite = (int) (Math.random() * 4);
+        int startingSite = (int) (Math.random() * 4);
 
         //Circle bewegt sich immer auf einem Weg, der über den Punkt läuft auf dem sich der Player befindet wenn der Circle gespawnt wird
-        targetX = Game.getPlayer().getxPos();
-        targetY = Game.getPlayer().getyPos();
+        int targetX = Game.getPlayer().getxPos();
+        int targetY = Game.getPlayer().getyPos();
 
         if (startingSite == 0) {
             //start von Oben -> Y = 0
@@ -61,48 +59,38 @@ public class CircleEnemy extends Entity {
         //Je höher speed ist desto langsamer bewegt sich der Circle
         xVel = xOffset / speed;
         xDirection = (xVel > 0) ? 1 : -1;
+        xDirection = (xVel == 0) ? 0 : xDirection;
         yVel = yOffset / speed;
         yDirection = (yVel > 0) ? 1 : -1;
-    }
-
-    public int getxPos() {
-        return xPos;
-    }
-
-    public int getyPos() {
-        return yPos;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+        yDirection = (xVel == 0) ? 0 : yDirection;
     }
 
     public void setCircleIndex(int index) {
         circleIndex = index;
     }
 
+    public int getCircleIndex(){
+        return circleIndex;
+    }
+
     @Override
     public Image getSprite() {
         if (xDirection == 0 && yDirection == 1) {
-            return SPRITE_TOP;
+            return SPRITE_BOTTOM;
         } else if (xDirection == 1 && yDirection == 1) {
-            return SPRITE_TOP_RIGHT;
+            return SPRITE_BOTTOM_RIGHT;
         } else if (xDirection == 1 && yDirection == 0) {
             return SPRITE_RIGHT;
         } else if (xDirection == 1 && yDirection == -1) {
-            return SPRITE_BOTTOM_RIGHT;
+            return SPRITE_TOP_RIGHT;
         } else if (xDirection == 0 && yDirection == -1) {
-            return SPRITE_BOTTOM;
+            return SPRITE_TOP;
         } else if (xDirection == -1 && yDirection == -1) {
-            return SPRITE_BOTTOM_LEFT;
+            return SPRITE_TOP_LEFT;
         } else if (xDirection == -1 && yDirection == 0) {
             return SPRITE_LEFT;
         } else if (xDirection == -1 && yDirection == 1) {
-            return SPRITE_TOP_LEFT;
+            return SPRITE_BOTTOM_LEFT;
         } else {
             return SPRITE_IDLE;
         }

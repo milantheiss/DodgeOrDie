@@ -1,6 +1,7 @@
 package me.milthe.core;
 
 import javafx.scene.input.KeyCode;
+import me.milthe.entities.Friend;
 import me.milthe.entities.Player;
 import me.milthe.gamemode.Gamemodes;
 import me.milthe.graphic.DrawEndscreen;
@@ -15,7 +16,7 @@ import me.milthe.ui.UiCompontent;
 
 public class Update {
     private final Game game;
-    Collision col;
+    private final Collision col;
 
 
     public Update(Game game) {
@@ -28,8 +29,12 @@ public class Update {
             ingameEscapeListener();
             checkIfWindowIsFocused();
             entitiesUpdate();
-            collisionPlayerCircle();
-            Game.circleEnemyList.forEach(this::checkForCircleOutOfBounce);
+            collisionAction();
+            Game.entities.forEach(entity -> {
+                if (!(entity instanceof Player)){
+                    if (checkForCircleOutOfBounce(entity)) game.removeEntity(entity);
+                }
+            });
         } else if (Game.state == Gamestates.MENU || Game.state == Gamestates.PAUSE) {
             if (Gui.menustate == Menustates.MAIN) {
                 mainMenuController();
@@ -55,28 +60,37 @@ public class Update {
         Game.entities.forEach(Entity::move);
     }
 
-    private void collisionPlayerCircle() {//Kollisionsdetektion für Gegner zu Spieler
-        for (int i = 0; i < Game.circleEnemyList.size(); i++) {
-            if (col.collisionPlayerCircle(Game.circleEnemyList.get(i))) {
-                game.removeCircleEnemy(Game.circleEnemyList.get(i).listIndex, Game.circleEnemyList.get(i).circleIndex);
-                if ((Player.hitpoints - 1) == 0) {
-                    Player.hitpoints--;
-                    Scoring.totalEnemiesSpawned--;
-                    game.infinite.stopInfinite();
-                    Game.state = Gamestates.ENDSCREEN;
-                } else {
-                    Player.hitpoints--;
-                    Scoring.totalEnemiesSpawned--;
+    private void collisionAction() {//Kollisionsdetektion für Gegner zu Spieler
+        Game.entities.forEach(entity -> {
+            if (col.collisionRectangleCircle(Game.getPlayer(), entity) && !(entity instanceof Player)){
+                if (entity instanceof CircleEnemy){
+                    game.removeEntity(entity);
+                    if ((Player.hitpoints - 1) == 0) {
+                        Player.hitpoints--;
+                        Scoring.totalEnemiesSpawned--;
+                        game.infinite.stopInfinite();
+                        Game.state = Gamestates.ENDSCREEN;
+                    } else {
+                        Player.hitpoints--;
+                        Scoring.totalEnemiesSpawned--;
+                    }
+                }else if (entity instanceof Friend){
+                    game.removeEntity(entity);
+                    if (Player.hitpoints < 4){
+                        Player.hitpoints++;
+                    }
                 }
             }
-        }
+        });
     }
 
     //TODO Wenn neue Enemy --> für diese umschreiben
-    private void checkForCircleOutOfBounce(CircleEnemy circleEnemy) {
-        if (circleEnemy.getxPos() >= (Gui.width + 100) || circleEnemy.getxPos() <= -100 || circleEnemy.getyPos() >= (Gui
-                .height + 100) || circleEnemy.getyPos() <= -100) {
-            game.removeCircleEnemy(circleEnemy.listIndex, circleEnemy.circleIndex);
+    private boolean checkForCircleOutOfBounce(Entity entity) {
+        if (entity.getxPos() >= (Gui.width + 100) || entity.getxPos() <= -100 || entity.getyPos() >= (Gui
+                .height + 100) || entity.getyPos() <= -100) {
+            return true;
+        }else {
+            return false;
         }
     }
 

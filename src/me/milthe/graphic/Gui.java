@@ -70,7 +70,7 @@ public class Gui {
         //Setzt die Window Properties
         stage.setTitle("Dodge or Die");
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:rsc/sprites/player/center.png"));
+        stage.getIcons().add(new Image("file:rsc/sprites/app_icon.png"));
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
