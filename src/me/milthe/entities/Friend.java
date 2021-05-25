@@ -4,22 +4,20 @@ import javafx.scene.image.Image;
 import me.milthe.graphic.Gui;
 
 public class Friend extends Entity {
-    private int friendIndex;
     private final Image SPRITE_IDLE = new Image("file:rsc/sprites/entities/enemies/friend/friend_idle.png");
-    private double directionX, directionY;
 
     public Friend() {
         width = 100;
         height = 100;
-        speed = 30; //Desto höher desto langsamer
         setPath();
-        //speed = (int) (Math.random() * 10) + 1;
+        speed = (int) (Math.random() * 15) + 10
+        ;
     }
 
     @Override
     public void move() {
-        xPos += (int) Math.round(directionX * speed);
-        yPos += (int) Math.round(directionY * speed);
+        xPos += (int) Math.round(xDirection * speed);
+        yPos += (int) Math.round(yDirection * speed);
     }
 
     @Override
@@ -27,7 +25,6 @@ public class Friend extends Entity {
         return SPRITE_IDLE;
     }
 
-    //TODO Pathing von Friends vereinfachen siehe Blatt
     public void setPath() { //Setzt den Path auf dem der Circle sich bewegt
         //Gibt an auf welcher Seite der Circle spawnt
         int startingSite = (int) (Math.random() * 4);
@@ -51,24 +48,20 @@ public class Friend extends Entity {
         }
 
         if ((Gui.width - xPos) < xPos) {
-            directionX = Math.random()*(-1);
+            xDirection = Math.random()*(-1);
         } else{
-            directionX = Math.random();
+            xDirection = Math.random();
         }
 
         if ((Gui.height - yPos) < yPos){
-            directionY = Math.random()*(-1);
+            yDirection = Math.random()*(-1);
         }else {
-            directionY = Math.random();
+            yDirection = Math.random();
         }
 
     }
 
-    public void setFriendIndex(int index) {
-        friendIndex = index;
-    }
-
-    public int getFriendIndex() {
-        return friendIndex;
+    public Friend getObject(){
+        return this;
     }
 }

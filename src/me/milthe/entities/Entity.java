@@ -6,9 +6,9 @@ import me.milthe.core.Game;
 public abstract class Entity {
     protected Game game;
     //TODO Private machen
-    public int xPos, yPos, width, height, xVel, yVel, speed;
+    public int xPos, yPos, width, height, speed;
     protected double xDirection, yDirection;
-    protected int listIndex;
+    private int listIndex;
 
     public abstract void move();
 
@@ -41,4 +41,6 @@ public abstract class Entity {
     public void setGame(Game game) {
         this.game = game;
     }
+
+
 }

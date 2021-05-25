@@ -6,7 +6,7 @@ import me.milthe.entities.Friend;
 import me.milthe.entities.Player;
 import me.milthe.events.*;
 import me.milthe.gamemode.Gamemodes;
-import me.milthe.gamemode.Infinite;
+import me.milthe.gamemode.Endless;
 import me.milthe.graphic.Gui;
 import me.milthe.graphic.Menustates;
 
@@ -19,13 +19,10 @@ public class Game {
 
     public static Player player;
     public static List<Entity> entities;
-    public static List<CircleEnemy> circleEnemyList;
-    public static List<Friend> friendList;
-
     public static Gamestates state;
     public static Gamemodes mode;
 
-    public Infinite infinite;
+    public Endless endless;
 
     public Levelloader levelloader = new Levelloader(this);
 
@@ -36,10 +33,8 @@ public class Game {
         Gui.menustate = Menustates.MAIN;
 
         entities = new CopyOnWriteArrayList<>();
-        circleEnemyList = new CopyOnWriteArrayList<>();
-        friendList = new CopyOnWriteArrayList<>();
 
-        infinite = new Infinite(this);
+        endless = new Endless(this);
     }
 
     public List<Entity> getEntities() {
@@ -58,28 +53,12 @@ public class Game {
     }
 
     public void addCircleEnemy(CircleEnemy circleEnemy){
-        circleEnemyList.add(circleEnemy);
-        circleEnemy.setCircleIndex(circleEnemyList.indexOf(circleEnemy));
         addEntity(circleEnemy);
-        Scoring.totalEnemiesSpawned++;
-    }
-
-    public void removeCircleEnemy(CircleEnemy circleEnemy){
-        circleEnemyList.remove(circleEnemy.getCircleIndex());
-        circleEnemyList.forEach(circle -> circle.setCircleIndex(circleEnemyList.indexOf(circle)));
-        removeEntity(circleEnemy);
+        Endless.totalEnemiesSpawned++;
     }
 
     public void addFriend(Friend friend){
-        friendList.add(friend);
-        friend.setFriendIndex(friendList.indexOf(friend));
         addEntity(friend);
-    }
-
-    public void removeFriend(Friend friend){
-        friendList.remove(friend.getFriendIndex());
-        friendList.forEach(friend1 -> friend1.setFriendIndex(friendList.indexOf(friend1)));
-        removeEntity(friend);
     }
 
     public static Player getPlayer() {

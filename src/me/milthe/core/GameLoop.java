@@ -8,10 +8,10 @@ public class GameLoop implements Runnable {
     public static final int UPDATES_PER_SECOND = 60;
 
     private final Game GAME;
-    private final Update UPDATE;
+    private final UpdateController UPDATEController;
 
     public GameLoop(Game game) {
-        this.UPDATE = new Update(game);
+        this.UPDATEController = new UpdateController(game);
         this.GAME = game;
     }
 
@@ -44,7 +44,7 @@ public class GameLoop implements Runnable {
     }
 
     private void update() {
-        UPDATE.runUpdate();
+        UPDATEController.runUpdate();
     }
 
     private void render() {
@@ -61,7 +61,7 @@ public class GameLoop implements Runnable {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.MAIN_MENU_CONTAINER);
             }else if (Gui.menustate == Menustates.SPIELMODI){
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_MENU_CONTAINER);
-            }else if (Gui.menustate == Menustates.SPIELMODI_INFINITE){
+            }else if (Gui.menustate == Menustates.SPIELMODI_ENDLESS){
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_INFINITE_MENU_CONTAINER);
             }else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM){
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_CUSTOM_MENU_CONTAINER);
@@ -77,7 +77,7 @@ public class GameLoop implements Runnable {
         }
 
         if (Game.state == Gamestates.ENDSCREEN) {
-            Gui.drawEndscreen.render(Gui.gc_main);
+            Gui.drawEndscreenEndless.render(Gui.gc_main);
         }
     }
 }

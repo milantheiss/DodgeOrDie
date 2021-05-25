@@ -1,111 +1,41 @@
-package me.milthe.core;
+package me.milthe.core.updates;
 
 import javafx.scene.input.KeyCode;
-import me.milthe.entities.Friend;
-import me.milthe.entities.Player;
-import me.milthe.gamemode.Gamemodes;
-import me.milthe.graphic.DrawEndscreen;
-import me.milthe.graphic.Menustates;
+import me.milthe.core.Game;
+import me.milthe.core.Gamestates;
+import me.milthe.core.UpdateController;
 import me.milthe.events.MouseClicked;
-import me.milthe.entities.CircleEnemy;
-import me.milthe.entities.Entity;
-import me.milthe.entities.actions.Collision;
-import me.milthe.graphic.DrawTutorial;
+import me.milthe.gamemode.Gamemodes;
 import me.milthe.graphic.Gui;
-import me.milthe.ui.UiCompontent;
+import me.milthe.graphic.Menustates;
 
-public class Update {
+public class UpdateMenu {
+    private final UpdateController updateController;
     private final Game game;
-    private final Collision col;
-
-
-    public Update(Game game) {
+    public UpdateMenu(UpdateController updateController, Game game){
+        this.updateController = updateController;
         this.game = game;
-        col = new Collision(game);
     }
 
-    public void runUpdate() {
-        if (Game.state == Gamestates.INGAME) {
-            ingameEscapeListener();
-            checkIfWindowIsFocused();
-            entitiesUpdate();
-            collisionAction();
-            Game.entities.forEach(entity -> {
-                if (!(entity instanceof Player)){
-                    if (checkForCircleOutOfBounce(entity)) game.removeEntity(entity);
-                }
-            });
-        } else if (Game.state == Gamestates.MENU || Game.state == Gamestates.PAUSE) {
-            if (Gui.menustate == Menustates.MAIN) {
-                mainMenuController();
-            } else if (Gui.menustate == Menustates.SPIELMODI) {
-                spielmodiMenuController();
-            } else if (Gui.menustate == Menustates.SPIELMODI_INFINITE) {
-                spielmodiInfiniteMenuController();
-            } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM) {
-                spielmodiCustomMenuController();
-            } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM_SELECT) {
-                spielmodiCustomSelectMenuController();
-            } else if (Gui.menustate == Menustates.PAUSE) {
-                pauseMenuController();
-            }
-        } else if (Game.state == Gamestates.ENDSCREEN) {
-            endscreenController();
-        } else if (Game.state == Gamestates.TUTORIAL) {
-            tutorialController();
-        }
-    }
-
-    private void entitiesUpdate() { //Updatet alle Methoden von Entities die wiederholt geupdatet werden müssen --> Hauptsächlich bewegung
-        Game.entities.forEach(Entity::move);
-    }
-
-    private void collisionAction() {//Kollisionsdetektion für Gegner zu Spieler
-        Game.entities.forEach(entity -> {
-            if (col.collisionRectangleCircle(Game.getPlayer(), entity) && !(entity instanceof Player)){
-                if (entity instanceof CircleEnemy){
-                    game.removeEntity(entity);
-                    if ((Player.hitpoints - 1) == 0) {
-                        Player.hitpoints--;
-                        Scoring.totalEnemiesSpawned--;
-                        game.infinite.stopInfinite();
-                        Game.state = Gamestates.ENDSCREEN;
-                    } else {
-                        Player.hitpoints--;
-                        Scoring.totalEnemiesSpawned--;
-                    }
-                }else if (entity instanceof Friend){
-                    game.removeEntity(entity);
-                    if (Player.hitpoints < 4){
-                        Player.hitpoints++;
-                    }
-                }
-            }
-        });
-    }
-
-    //TODO Wenn neue Enemy --> für diese umschreiben
-    private boolean checkForCircleOutOfBounce(Entity entity) {
-        if (entity.getxPos() >= (Gui.width + 100) || entity.getxPos() <= -100 || entity.getyPos() >= (Gui
-                .height + 100) || entity.getyPos() <= -100) {
-            return true;
-        }else {
-            return false;
-        }
-    }
-
-    private void ingameEscapeListener() {
-        if (Game.input.isPressed(KeyCode.ESCAPE)) {
-            Game.state = Gamestates.PAUSE;
-            Gui.menustate = Menustates.PAUSE;
-            Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            System.out.println("Ingame");
+    public void runUpdate(){
+        if (Gui.menustate == Menustates.MAIN) {
+            mainMenuController();
+        } else if (Gui.menustate == Menustates.SPIELMODI) {
+            spielmodiMenuController();
+        } else if (Gui.menustate == Menustates.SPIELMODI_ENDLESS) {
+            spielmodiInfiniteMenuController();
+        } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM) {
+            spielmodiCustomMenuController();
+        } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM_SELECT) {
+            spielmodiCustomSelectMenuController();
+        } else if (Gui.menustate == Menustates.PAUSE) {
+            pauseMenuController();
         }
     }
 
     private void mainMenuController() {
         Gui.menuSetup.MAIN_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
-            if (isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
+            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("spielmodi")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.SPIELMODI;
@@ -127,11 +57,11 @@ public class Update {
 
     private void spielmodiMenuController() {
         Gui.menuSetup.SPIELMODI_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
-            if (isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
-                if (buttonUi.getComponentName().equals("infinite")) {
+            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
+                if (buttonUi.getComponentName().equals("endless")) {
                     MouseClicked.clickHandeled = true;
-                    Gui.menustate = Menustates.SPIELMODI_INFINITE;
-                    System.out.println("Infinite");
+                    Gui.menustate = Menustates.SPIELMODI_ENDLESS;
+                    System.out.println("Endless");
                 }
                 if (buttonUi.getComponentName().equals("custom")) {
                     MouseClicked.clickHandeled = true;
@@ -149,12 +79,12 @@ public class Update {
 
     private void spielmodiInfiniteMenuController() {
         Gui.menuSetup.SPIELMODI_INFINITE_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
-            if (isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
+            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("start")) {
                     MouseClicked.clickHandeled = true;
-                    game.infinite.startInfinite();
+                    game.endless.startEndless();
                     Game.state = Gamestates.INGAME;
-                    System.out.println("Ingame Infinite");
+                    System.out.println("Ingame Endless");
                 }
                 if (buttonUi.getComponentName().equals("highscore")) {
                     MouseClicked.clickHandeled = true;
@@ -172,7 +102,7 @@ public class Update {
 
     private void spielmodiCustomMenuController() {
         Gui.menuSetup.SPIELMODI_CUSTOM_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
-            if (isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
+            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("auswaehlen")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.SPIELMODI_CUSTOM_SELECT;
@@ -195,7 +125,7 @@ public class Update {
 
     private void spielmodiCustomSelectMenuController() {
         Gui.menuSetup.SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER.components.forEach(uiCompontent -> {
-            if (isComponentClicked(uiCompontent) && !MouseClicked.clickHandeled) {
+            if (updateController.isComponentClicked(uiCompontent) && !MouseClicked.clickHandeled) {
                 if (uiCompontent.getComponentName().equals("lvlname")) {
                     //TODO Textfield funktion mit aufnahme von Text einfügen
                     MouseClicked.clickHandeled = true;
@@ -229,7 +159,7 @@ public class Update {
             System.out.println("Ingame");
         }
         Gui.menuSetup.PAUSE_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
-            if (isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
+            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("weiter")) {
                     MouseClicked.clickHandeled = true;
                     Game.state = Gamestates.INGAME;
@@ -240,10 +170,10 @@ public class Update {
                     System.out.println("Neustart");
                     MouseClicked.clickHandeled = true;
                     Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-                    if (Game.mode == Gamemodes.INFINITE) {
-                        game.infinite.stopInfinite();
-                        game.infinite.terminateInfinite();
-                        game.infinite.startInfinite();
+                    if (Game.mode == Gamemodes.ENDLESS) {
+                        game.endless.stopEndless();
+                        game.endless.terminateEndless();
+                        game.endless.startEndless();
                     } else if (Game.mode == Gamemodes.CUSTOM) {
                         //todo Start Stop für Custom hinzufügen
                     }
@@ -251,9 +181,9 @@ public class Update {
                 }
                 if (buttonUi.getComponentName().equals("verlassen")) {
                     MouseClicked.clickHandeled = true;
-                    if (Game.mode == Gamemodes.INFINITE) {
-                        game.infinite.stopInfinite();
-                        game.infinite.terminateInfinite();
+                    if (Game.mode == Gamemodes.ENDLESS) {
+                        game.endless.stopEndless();
+                        game.endless.terminateEndless();
                     } else if (Game.mode == Gamemodes.CUSTOM) {
                         //todo Custom stoppen
                     }
@@ -265,38 +195,5 @@ public class Update {
             }
         });
 
-    }
-
-    private void endscreenController() {
-        if (Game.input.isPressed(KeyCode.ESCAPE) || (isComponentClicked(DrawEndscreen.getZurueck()) && !MouseClicked.clickHandeled)) {
-            MouseClicked.clickHandeled = true;
-            Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            if (Game.mode == Gamemodes.INFINITE) {
-                game.infinite.terminateInfinite();
-            }
-            Game.state = Gamestates.MENU;
-        }
-    }
-
-    private void tutorialController() {
-        //todo tutorial neue tutorial erstellen
-        if (Game.input.isPressed(KeyCode.ESCAPE)) {
-            Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            Game.state = Gamestates.MENU;
-        }
-        if (isComponentClicked(DrawTutorial.zurueckButton) && !MouseClicked.clickHandeled) {
-            MouseClicked.clickHandeled = true;
-            Game.state = Gamestates.MENU;
-        }
-    }
-
-    private boolean isComponentClicked(UiCompontent uiCompontent) {
-        return MouseClicked.x > uiCompontent.getX() && MouseClicked.x < (uiCompontent.getX() + uiCompontent.getWidth()) && MouseClicked.y > uiCompontent.getY() && MouseClicked.y < (uiCompontent.getY() + uiCompontent.getHeight());
-    }
-
-    private void checkIfWindowIsFocused() {
-        if (!Gui.stage.isFocused()) {
-            Game.state = Gamestates.PAUSE;
-        }
     }
 }

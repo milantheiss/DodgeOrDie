@@ -22,7 +22,7 @@ public class Gui {
     public static DrawUI drawUI;
     public static DrawIngameUi drawIngameUi;
     public static DrawTutorial drawTutorial;
-    public static DrawEndscreen drawEndscreen;
+    public static DrawEndscreenEndless drawEndscreenEndless;
 
     public static GraphicsContext gc_main;
     public static int width, height;
@@ -44,7 +44,7 @@ public class Gui {
         drawUI = new DrawUI();
         drawIngameUi = new DrawIngameUi();
         drawTutorial = new DrawTutorial();
-        drawEndscreen = new DrawEndscreen();
+        drawEndscreenEndless = new DrawEndscreenEndless();
 
         menuSetup = new MenuSetup();
     }

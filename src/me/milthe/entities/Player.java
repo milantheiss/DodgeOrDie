@@ -24,7 +24,7 @@ public class Player extends Entity{
         speed = 16;
     }
 
-    public void move() { //Movement wird in Update.java aufgerufen
+    public void move() { //Movement wird in UpdateController.java aufgerufen
         xDirection = 0;
         yDirection = 0;
 
@@ -130,6 +130,7 @@ public class Player extends Entity{
         xPos = (int) xTarget;
         yPos = (int) yTarget;
     } //Dash zur Maus wird nicht genutzt und ist seit V0.0.1 nicht geupdatet --> Wahrscheinlich seit V0.0.2 nicht mehr kompatibel*/
+
     public Image getSprite(){
         if(xDirection == 1){
             return SPRITE_RIGHT;
@@ -139,4 +140,6 @@ public class Player extends Entity{
             return SPRITE_CENTER;
         }
     }
+
+
 }

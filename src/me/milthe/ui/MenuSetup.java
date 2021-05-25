@@ -23,7 +23,7 @@ public class MenuSetup {
         PAUSE_MENU_CONTAINER.components.get(2).setMarginTop(MAIN_MENU_CONTAINER.components.get(1).getHeight()/2);
         PAUSE_MENU_CONTAINER.centerContainerToScreen();
 
-        SPIELMODI_MENU_CONTAINER.addButton("infinite", "file:rsc/sprites/buttons/infinite.png");
+        SPIELMODI_MENU_CONTAINER.addButton("endless", "file:rsc/sprites/buttons/endlos.png");
         SPIELMODI_MENU_CONTAINER.addButton("custom", "file:rsc/sprites/buttons/custom.png");
         SPIELMODI_MENU_CONTAINER.addButton("zurueck", "file:rsc/sprites/buttons/zurueck.png");
         SPIELMODI_MENU_CONTAINER.components.get(1).setMarginTop(MAIN_MENU_CONTAINER.components.get(1).getHeight()/2);
@@ -45,7 +45,7 @@ public class MenuSetup {
         SPIELMODI_CUSTOM_MENU_CONTAINER.centerContainerToScreen();
 
         //TODO Sprite von Blanko zu "Level Name hier ändern"
-        //TODO In Update nach visibility fragen wenn TextField bearbeitet wird
+        //TODO In UpdateController nach visibility fragen wenn TextField bearbeitet wird
         SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER.addButton("lvlname", "file:rsc/sprites/buttons/levelname.png");
         SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER.components.get(0).setOverlapping(true);
         SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER.addTextField("lvlnameTextField", "file:rsc/sprites/buttons/textfield.png");
