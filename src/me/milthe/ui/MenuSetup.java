@@ -23,7 +23,7 @@ public class MenuSetup {
         PAUSE_MENU_CONTAINER.components.get(2).setMarginTop(MAIN_MENU_CONTAINER.components.get(1).getHeight()/2);
         PAUSE_MENU_CONTAINER.centerContainerToScreen();
 
-        SPIELMODI_MENU_CONTAINER.addButton("endless", "file:rsc/sprites/buttons/endlos.png");
+        SPIELMODI_MENU_CONTAINER.addButton("endless", "file:rsc/sprites/buttons/infinite.png");
         SPIELMODI_MENU_CONTAINER.addButton("custom", "file:rsc/sprites/buttons/custom.png");
         SPIELMODI_MENU_CONTAINER.addButton("zurueck", "file:rsc/sprites/buttons/zurueck.png");
         SPIELMODI_MENU_CONTAINER.components.get(1).setMarginTop(MAIN_MENU_CONTAINER.components.get(1).getHeight()/2);

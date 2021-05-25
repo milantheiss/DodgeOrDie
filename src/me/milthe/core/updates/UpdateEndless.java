@@ -26,6 +26,7 @@ public class UpdateEndless extends UpdateIngame{
         collisionAction();
         Game.entities.forEach(entity -> {
             if (!(entity instanceof Player)){
+
                 if (checkForCircleOutOfBounce(entity)) game.removeEntity(entity);
             }
         });
