@@ -1,11 +1,14 @@
 package me.milthe.core;
 
+import javafx.animation.AnimationTimer;
 import me.milthe.graphic.Gui;
 import me.milthe.graphic.Menustates;
 
 
 public class GameLoop implements Runnable {
-    public static final int UPDATES_PER_SECOND = 60;
+    private static final int UPDATES_PER_SECOND = 60;
+    private double accumulator = 0;
+    private long currentTime, lastUpdate = System.currentTimeMillis();
 
     private final Game GAME;
     private final UpdateController UPDATEController;
@@ -18,25 +21,27 @@ public class GameLoop implements Runnable {
 
     @Override //Main Loop fürs Spiel
     public void run() {
-        double accumulator = 0;
-        long currentTime, lastUpdate = System.currentTimeMillis();
+
 
         try {
-            while (true) {
-                currentTime = System.currentTimeMillis();
-                double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
-                accumulator += lastRenderTimeInSeconds;
-                lastUpdate = currentTime;
+            new AnimationTimer() {
+                @Override
+                public void handle(long l) {
+                    currentTime = System.currentTimeMillis();
+                    double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
+                    accumulator += lastRenderTimeInSeconds;
+                    lastUpdate = currentTime;
 
-                double updateRate = 1.0d / UPDATES_PER_SECOND;
-                if (accumulator >= updateRate) {
-                    while (accumulator >= updateRate) {
-                        update();
-                        accumulator -= updateRate;
+                    double updateRate = 1.0d / UPDATES_PER_SECOND;
+                    if (accumulator >= updateRate) {
+                        while (accumulator >= updateRate) {
+                            update();
+                            accumulator -= updateRate;
+                        }
+                        render();
                     }
-                    render();
                 }
-            }
+            }.start();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Fehler in Gameloop - while schleife");
@@ -56,18 +61,18 @@ public class GameLoop implements Runnable {
             Gui.drawIngameUi.render(Gui.gc_main);
         }
 
-        if (Game.state == Gamestates.PAUSE || Game.state == Gamestates.MENU){
-            if (Gui.menustate == Menustates.MAIN){
+        if (Game.state == Gamestates.PAUSE || Game.state == Gamestates.MENU) {
+            if (Gui.menustate == Menustates.MAIN) {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.MAIN_MENU_CONTAINER);
-            }else if (Gui.menustate == Menustates.SPIELMODI){
+            } else if (Gui.menustate == Menustates.SPIELMODI) {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_MENU_CONTAINER);
-            }else if (Gui.menustate == Menustates.SPIELMODI_ENDLESS){
+            } else if (Gui.menustate == Menustates.SPIELMODI_ENDLESS) {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_INFINITE_MENU_CONTAINER);
-            }else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM){
+            } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM) {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_CUSTOM_MENU_CONTAINER);
-            }else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM_SELECT){
+            } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM_SELECT) {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER);
-            }else if (Gui.menustate == Menustates.PAUSE){
+            } else if (Gui.menustate == Menustates.PAUSE) {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.PAUSE_MENU_CONTAINER);
             }
         }

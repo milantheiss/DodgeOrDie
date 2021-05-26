@@ -6,7 +6,7 @@ import me.milthe.core.Game;
 import me.milthe.core.GameLoop;
 import me.milthe.graphic.Gui;
 
-public class Main extends Application {
+public class App extends Application {
     Gui g = new Gui();
 
     //Launcht Application
