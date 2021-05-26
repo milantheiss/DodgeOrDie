@@ -2,6 +2,8 @@ package me.milthe.ui;
 
 import javafx.scene.image.Image;
 
+import java.io.InputStream;
+
 public abstract class UiCompontent {
     protected int x, y, width, height, marginTop, marginButton, marginLeft, marginRight;
     protected Image sprite;
@@ -9,7 +11,7 @@ public abstract class UiCompontent {
     protected boolean visible;
     protected boolean overlapping;
 
-    public UiCompontent(String name, String filepathImage){
+    public UiCompontent(String name, InputStream filepathImage){
         componentName = name;
         sprite = new Image(filepathImage);
         width = (int) Math.round(sprite.getWidth());

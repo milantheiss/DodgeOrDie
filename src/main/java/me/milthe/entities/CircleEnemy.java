@@ -4,16 +4,18 @@ import javafx.scene.image.Image;
 import me.milthe.core.Game;
 import me.milthe.graphic.Gui;
 
+import java.util.Objects;
+
 public class CircleEnemy extends Entity {
-    private final Image SPRITE_IDLE = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_idle.png");
-    private final Image SPRITE_TOP = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_top.png");
-    private final Image SPRITE_TOP_RIGHT = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_topright.png");
-    private final Image SPRITE_RIGHT = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_right.png");
-    private final Image SPRITE_BOTTOM_RIGHT = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_bottomright.png");
-    private final Image SPRITE_BOTTOM = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_bottom.png");
-    private final Image SPRITE_BOTTOM_LEFT = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_bottomleft.png");
-    private final Image SPRITE_LEFT = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_left.png");
-    private final Image SPRITE_TOP_LEFT = new Image("file:rsc/sprites/entities/enemies/circleEnemy/circle_enemy_topleft.png");
+    private final Image SPRITE_IDLE = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_idle.png")));
+    private final Image SPRITE_TOP = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_top.png")));
+    private final Image SPRITE_TOP_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_topright.png")));
+    private final Image SPRITE_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_right.png")));
+    private final Image SPRITE_BOTTOM_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_bottomright.png")));
+    private final Image SPRITE_BOTTOM = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_bottom.png")));
+    private final Image SPRITE_BOTTOM_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_bottomleft.png")));
+    private final Image SPRITE_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_left.png")));
+    private final Image SPRITE_TOP_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_topleft.png")));
 
     public CircleEnemy() {
         width = 100;

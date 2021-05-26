@@ -1,5 +1,6 @@
 package me.milthe.ui;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -16,7 +17,7 @@ public class UiTextField extends UiCompontent{
     //ArrayList in String konvertieren !!Fehlermeldung!!
     //TODO Groß Klein Schreibung in input beachten und nur buchstaben, zahlen ohne extra zeichen annehmen
 
-    public UiTextField(String name, String filepathImage) {
+    public UiTextField(String name, InputStream filepathImage) {
         super(name, filepathImage);
         requestingInput = false;
         visible = true;

@@ -6,7 +6,7 @@ import me.milthe.ui.UiButton;
 
 public class DrawTutorial {
     Image keybinds = new Image("file:rsc/sprites/keybinds.png");
-    public static UiButton zurueckButton = new UiButton("zurueck", "file:rsc/sprites/buttons/zurueck.png");
+    public static UiButton zurueckButton = new UiButton("zurueck", DrawTutorial.class.getResourceAsStream("/sprites/buttons/zurueck.png"));
 
     public DrawTutorial() {
         zurueckButton.setX((Gui.width - zurueckButton.getWidth()) / 2);

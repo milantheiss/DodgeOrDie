@@ -3,8 +3,10 @@ package me.milthe.entities;
 import javafx.scene.image.Image;
 import me.milthe.graphic.Gui;
 
+import java.util.Objects;
+
 public class Friend extends Entity {
-    private final Image SPRITE_IDLE = new Image("file:rsc/sprites/entities/enemies/friend/friend_idle.png");
+    private final Image SPRITE_IDLE = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_idle.png")));
 
     public Friend() {
         width = 100;

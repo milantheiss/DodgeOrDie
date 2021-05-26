@@ -2,6 +2,7 @@ package me.milthe.ui;
 
 import me.milthe.graphic.Gui;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +30,13 @@ public class UiContainer {
         }
     }
 
-    public void addButton(String componentName, String filepath){
+    public void addButton(String componentName, InputStream filepath){
         UiButton button = new UiButton(componentName, filepath);
         components.add(button);
         uiButtons.add(button);
     }
 
-    public void addTextField(String componentName, String filepath){
+    public void addTextField(String componentName, InputStream filepath){
         UiTextField uiTextField = new UiTextField(componentName, filepath);
         components.add(uiTextField);
         uiTextFields.add(uiTextField);

@@ -6,6 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import me.milthe.events.KeyPressed;
@@ -14,7 +15,7 @@ import me.milthe.events.MouseClicked;
 import me.milthe.events.MouseMoved;
 import me.milthe.ui.MenuSetup;
 
-import java.awt.*;
+import java.util.Objects;
 
 public class Gui {
     public static DrawEnvironment drawEnvironment;
@@ -33,16 +34,15 @@ public class Gui {
     public static Menustates menustate;
 
     public Gui() {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); //Setzt den Bildschirm auf dem das Programm laufen soll
-        width = gd.getDisplayMode().getWidth(); //--> GetScreensize
-        height = gd.getDisplayMode().getHeight();
+        width = (int) Screen.getPrimary().getBounds().getWidth();
+        height = (int) Screen.getPrimary().getBounds().getHeight();
     }
 
     public void init() {
         drawEnvironment = new DrawEnvironment();
         drawEntities = new DrawEntities();
         drawUI = new DrawUI();
-        drawIngameUi = new DrawIngameUi();
+
         drawTutorial = new DrawTutorial();
         drawEndscreenEndless = new DrawEndscreenEndless();
 
@@ -58,6 +58,8 @@ public class Gui {
         canvas_main = new Canvas(width, height);
         gc_main = canvas_main.getGraphicsContext2D();
 
+        drawIngameUi = new DrawIngameUi(Gui.gc_main);
+
         root.getChildren().add(canvas_main);
         scene = new Scene(root, cWidth, cHeight);
 
@@ -70,7 +72,7 @@ public class Gui {
         //Setzt die Window Properties
         stage.setTitle("Dodge or Die");
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:rsc/sprites/app_icon.png"));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/app_icon.png"))));
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
