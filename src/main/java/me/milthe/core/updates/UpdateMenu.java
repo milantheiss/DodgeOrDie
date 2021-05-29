@@ -9,15 +9,18 @@ import me.milthe.gamemode.Gamemodes;
 import me.milthe.graphic.Gui;
 import me.milthe.graphic.Menustates;
 
+import java.io.IOException;
+
 public class UpdateMenu {
     private final UpdateController updateController;
     private final Game game;
-    public UpdateMenu(UpdateController updateController, Game game){
+
+    public UpdateMenu(UpdateController updateController, Game game) {
         this.updateController = updateController;
         this.game = game;
     }
 
-    public void runUpdate(){
+    public void runUpdate() {
         if (Gui.menustate == Menustates.MAIN) {
             mainMenuController();
         } else if (Gui.menustate == Menustates.SPIELMODI) {
@@ -88,7 +91,7 @@ public class UpdateMenu {
                 }
                 if (buttonUi.getComponentName().equals("highscore")) {
                     MouseClicked.clickHandeled = true;
-                    //TODO Add Highscore Page
+                    Game.state = Gamestates.HIGHSCORE;
                     System.out.println("Highscore");
                 }
                 if (buttonUi.getComponentName().equals("zurueck")) {
@@ -171,7 +174,11 @@ public class UpdateMenu {
                     MouseClicked.clickHandeled = true;
                     Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
                     if (Game.mode == Gamemodes.ENDLESS) {
-                        game.endless.stopEndless();
+                        try {
+                            game.endless.stopEndless();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         game.endless.terminateEndless();
                         game.endless.startEndless();
                     } else if (Game.mode == Gamemodes.CUSTOM) {
@@ -182,7 +189,11 @@ public class UpdateMenu {
                 if (buttonUi.getComponentName().equals("verlassen")) {
                     MouseClicked.clickHandeled = true;
                     if (Game.mode == Gamemodes.ENDLESS) {
-                        game.endless.stopEndless();
+                        try {
+                            game.endless.stopEndless();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         game.endless.terminateEndless();
                     } else if (Game.mode == Gamemodes.CUSTOM) {
                         //todo Custom stoppen

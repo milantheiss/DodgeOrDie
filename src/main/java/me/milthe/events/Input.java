@@ -5,7 +5,7 @@ import javafx.scene.input.KeyCode;
 public class Input {
     public boolean[] pressed;
 
-    public Input(){
+    public Input() {
         pressed = new boolean[KeyCode.values().length];
     }
 

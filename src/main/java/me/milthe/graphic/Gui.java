@@ -13,8 +13,10 @@ import me.milthe.events.KeyPressed;
 import me.milthe.events.KeyReleased;
 import me.milthe.events.MouseClicked;
 import me.milthe.events.MouseMoved;
+import me.milthe.scoring.Highscore;
 import me.milthe.ui.MenuSetup;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class Gui {
@@ -24,6 +26,7 @@ public class Gui {
     public static DrawIngameUi drawIngameUi;
     public static DrawTutorial drawTutorial;
     public static DrawEndscreenEndless drawEndscreenEndless;
+    public static DrawHighscore drawHighscore;
 
     public static GraphicsContext gc_main;
     public static int width, height;
@@ -42,9 +45,9 @@ public class Gui {
         drawEnvironment = new DrawEnvironment();
         drawEntities = new DrawEntities();
         drawUI = new DrawUI();
-
         drawTutorial = new DrawTutorial();
         drawEndscreenEndless = new DrawEndscreenEndless();
+        drawHighscore = new DrawHighscore();
 
         menuSetup = new MenuSetup();
     }
@@ -87,7 +90,7 @@ public class Gui {
         });
     }
 
-    public static void close(){
+    public static void close() {
         System.out.println("close");
         Platform.exit();
         System.exit(0);

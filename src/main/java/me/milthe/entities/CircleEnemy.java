@@ -2,6 +2,7 @@ package me.milthe.entities;
 
 import javafx.scene.image.Image;
 import me.milthe.core.Game;
+import me.milthe.gamemode.Endless;
 import me.milthe.graphic.Gui;
 
 import java.util.Objects;
@@ -21,19 +22,25 @@ public class CircleEnemy extends Entity {
         width = 100;
         height = 100;
         speed = (int) (Math.random() * 30) + 20; //Desto höher desto langsamer
+        Endless.totalEnemiesSpawned++;
         setPath();
     }
 
+    @Override
+    public void update() {
+        move();
+        if (isObjectOutOfBounce(this)) {
+            game.removeEntity(this);
+        }
+    }
+
     public void move() {
-//        xPos += Math.round(xDirection * speed);
-//        yPos += Math.round(yDirection * speed);
         xPos += xDirection * speed;
         yPos += yDirection * speed;
     }
 
     //Setzt den Path auf dem der Circle sich bewegt
     public void setPath() {
-
         //Gibt an welcher Bildschirmkante der Circle spawnt
         int startedge = (int) (Math.random() * 4);
 
@@ -94,7 +101,13 @@ public class CircleEnemy extends Entity {
         }
     }
 
-    public CircleEnemy getObject() {
-        return this;
+    @Override
+    public int getSpriteWidth() {
+        return (int) getSprite().getWidth();
+    }
+
+    @Override
+    public int getSpriteHeight() {
+        return (int) getSprite().getHeight();
     }
 }

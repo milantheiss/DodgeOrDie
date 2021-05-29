@@ -12,8 +12,15 @@ public class Friend extends Entity {
         width = 100;
         height = 100;
         setPath();
-        speed = (int) (Math.random() * 15) + 10
-        ;
+        speed = (int) (Math.random() * 15) + 10;
+    }
+
+    @Override
+    public void update() {
+        move();
+        if (isObjectOutOfBounce(this)) {
+            game.removeEntity(this);
+        }
     }
 
     @Override
@@ -28,7 +35,7 @@ public class Friend extends Entity {
     }
 
     public void setPath() { //Setzt den Path auf dem der Circle sich bewegt
-        //Gibt an auf welcher Seite der Circle spawnt
+        //Gibt an auf welcher Seite der Friend spawnt
         int startingSite = (int) (Math.random() * 4);
 
         if (startingSite == 0) {
@@ -50,20 +57,25 @@ public class Friend extends Entity {
         }
 
         if ((Gui.width - xPos) < xPos) {
-            xDirection = Math.random()*(-1);
-        } else{
+            xDirection = Math.random() * (-1);
+        } else {
             xDirection = Math.random();
         }
 
-        if ((Gui.height - yPos) < yPos){
-            yDirection = Math.random()*(-1);
-        }else {
+        if ((Gui.height - yPos) < yPos) {
+            yDirection = Math.random() * (-1);
+        } else {
             yDirection = Math.random();
         }
-
     }
 
-    public Friend getObject(){
-        return this;
+    @Override
+    public int getSpriteWidth() {
+        return (int) getSprite().getWidth();
+    }
+
+    @Override
+    public int getSpriteHeight() {
+        return (int) getSprite().getHeight();
     }
 }

@@ -1,10 +1,13 @@
 package me.milthe.gamemode;
 
 import me.milthe.core.*;
+import me.milthe.entities.Bouncy;
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Friend;
 import me.milthe.entities.Player;
+import me.milthe.scoring.Highscore;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,7 +17,6 @@ public class Endless {
     private Timer timer;
     private static int spawnDelay = 2000;
     public static int highestAmountOfHealth;
-
 
     public Endless(Game game) {
         this.game = game;
@@ -37,24 +39,38 @@ public class Endless {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                double typeNumber = Math.random();
-                //double typeNumber = 1;
                 if (Game.state == Gamestates.INGAME) {
-                    if (typeNumber <= 0.2) {
-                        game.addFriend(new Friend());
-                    } else {
-                        game.addCircleEnemy(new CircleEnemy());
+                    double secondtotal = 0;
+                    double treshold = Math.random() * 1.1;
+                    while (secondtotal < treshold) {
+                        secondtotal += 0.1;
+                        if (secondtotal > treshold) {
+                            game.addEntity(new Friend());
+                            break;
+                        }
+                        secondtotal += 0.2;
+                        if (secondtotal > treshold) {
+                            game.addEntity(new Bouncy());
+                            break;
+                        }
+                        secondtotal += 0.4;
+                        if (secondtotal > treshold) {
+                            game.addEntity(new CircleEnemy());
+                            break;
+                        }
                     }
                 }
             }
-        }, spawnDelay, (int) (Math.random() * 1000) + 500);
+            // }, spawnDelay, (int) (Math.random() * 1000-(Time.getTimeInSeconds()/10)) + 500);
+        }, spawnDelay, 700);
     }
 
-    public void stopEndless() {
+    public void stopEndless() throws IOException {
         Time.stopTimer();
+        Highscore.isHighscoreBigger(Time.getTimeInSeconds(), totalEnemiesSpawned, highestAmountOfHealth);
         timer.cancel();
         Game.state = Gamestates.PAUSE;
-        System.out.println(Time.getTime());
+        System.out.println(Time.getTimeString(Time.getTimeInSeconds()));
     }
 
     public void terminateEndless() {

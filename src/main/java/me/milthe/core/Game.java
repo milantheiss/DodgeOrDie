@@ -1,40 +1,49 @@
 package me.milthe.core;
 
-import me.milthe.entities.CircleEnemy;
-import me.milthe.entities.Entity;
-import me.milthe.entities.Friend;
-import me.milthe.entities.Player;
+import me.milthe.entities.*;
 import me.milthe.events.*;
 import me.milthe.gamemode.Gamemodes;
 import me.milthe.gamemode.Endless;
 import me.milthe.graphic.Gui;
 import me.milthe.graphic.Menustates;
+import me.milthe.scoring.Highscore;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Game {
+    public Highscore highscore;
+    public Endless endless;
+
+    public static Gamestates state;
+    public static Gamemodes mode;
+
+    public static File GAMEDATA_DIRECTORY;
+
     public static Input input;
 
     public static Player player;
     public static List<Entity> entities;
-    public static Gamestates state;
-    public static Gamemodes mode;
-
-    public Endless endless;
 
     public Levelloader levelloader = new Levelloader(this);
 
-    public Game(){
+    public Game() throws IOException, URISyntaxException {
+        GAMEDATA_DIRECTORY = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator + "dodgeordie");
+        GAMEDATA_DIRECTORY.mkdir();
+
         input = new Input();
 
         state = Gamestates.MENU;
         Gui.menustate = Menustates.MAIN;
 
-        entities = new CopyOnWriteArrayList<>();
-
+        highscore = new Highscore();
         endless = new Endless(this);
+
+        entities = new CopyOnWriteArrayList<>();
     }
 
     public List<Entity> getEntities() {
@@ -43,22 +52,11 @@ public class Game {
 
     public void addEntity(Entity entity) {
         entities.add(entity);
-        entity.setListIndex(entities.indexOf(entity));
         entity.setGame(this);
     }
 
-    public void removeEntity(Entity entity){
+    public void removeEntity(Entity entity) {
         entities.remove(entity);
-        entities.forEach(entity1 -> entity1.setListIndex(entities.indexOf(entity1)));
-    }
-
-    public void addCircleEnemy(CircleEnemy circleEnemy){
-        addEntity(circleEnemy);
-        Endless.totalEnemiesSpawned++;
-    }
-
-    public void addFriend(Friend friend){
-        addEntity(friend);
     }
 
     public static Player getPlayer() {

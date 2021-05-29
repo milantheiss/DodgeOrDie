@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class UiTextField extends UiCompontent{
+public class UiTextField extends UiCompontent {
     //ButtonUI mit "LVL Name here" wenn klicked --> wechsel auf UiTextField mit Blanko TextField Image
 
     //
@@ -31,7 +31,7 @@ public class UiTextField extends UiCompontent{
         this.requestingInput = requestingInput;
     }
 
-    public void setUserinputString(String input){
+    public void setUserinputString(String input) {
         userInputString += input;
     }
 }

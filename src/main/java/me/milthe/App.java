@@ -6,6 +6,9 @@ import me.milthe.core.Game;
 import me.milthe.core.GameLoop;
 import me.milthe.graphic.Gui;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public class App extends Application {
     Gui g = new Gui();
 
@@ -15,7 +18,7 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) throws IOException, URISyntaxException {
         g.init();
         g.create(stage);
 

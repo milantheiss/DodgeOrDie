@@ -2,13 +2,15 @@ package me.milthe.entities;
 
 import javafx.scene.image.Image;
 import me.milthe.core.Game;
+import me.milthe.graphic.Gui;
 
 public abstract class Entity {
     protected Game game;
     //TODO Private machen
-    public int xPos, yPos, width, height, speed;
+    public int xPos, yPos, width, height, speed, spriteWidth, spriteHeight;
     protected double xDirection, yDirection;
-    private int listIndex;
+
+    public abstract void update();
 
     public abstract void move();
 
@@ -28,19 +30,27 @@ public abstract class Entity {
         return height;
     }
 
-    public int getListIndex() {
-        return listIndex;
-    }
-
-    public void setListIndex(int index){
-        listIndex = index;
-    }
-
     public abstract Image getSprite();
 
     public void setGame(Game game) {
         this.game = game;
     }
 
+    public int getSpriteWidth() {
+        return spriteWidth;
+    }
 
+    public int getSpriteHeight() {
+        return spriteHeight;
+    }
+
+    //+200px Margin of Error danach wir Objekt gelöscht
+    protected boolean isObjectOutOfBounce(Entity entity) {
+        if (entity.getxPos() >= (Gui.width + 200) || entity.getxPos() <= -200 || entity.getyPos() >= (Gui
+                .height + 200) || entity.getyPos() <= -200) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

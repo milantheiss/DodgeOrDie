@@ -56,7 +56,7 @@ public class Levelloader {
         //Modifier kann für Gegner angepasste werden. Z.B Anzahl an zu spawnenden Gegnern oder Farbe, Untertype etc.
         if (type.equals("circle")) {
             //for (int i = 0; i < Integer.parseInt(modifier); i++) {
-                game.addCircleEnemy(new CircleEnemy());
+                game.addEntity(new CircleEnemy());
             //}
         } else {
             System.out.println("Unbekannter Gegener");

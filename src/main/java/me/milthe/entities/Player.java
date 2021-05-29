@@ -9,7 +9,7 @@ import me.milthe.graphic.Gui;
 import java.util.Objects;
 
 
-public class Player extends Entity{
+public class Player extends Entity {
     public int dashCooldown = 500, dashRange = 250;
     private static long lastDash = 0;
     private final Image SPRITE_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/left.png")));
@@ -18,12 +18,17 @@ public class Player extends Entity{
     public static int hitpoints;
 
     public Player(int hitpoints) {
-        this.hitpoints = hitpoints;
+        Player.hitpoints = hitpoints;
         xPos = Gui.width / 2 - 25;
         yPos = Gui.height / 2 - 25;
-        width = 50;
+        width = 53;
         height = 50;
         speed = 16;
+    }
+
+    @Override
+    public void update() {
+        move();
     }
 
     public void move() { //Movement wird in UpdateController.java aufgerufen
@@ -133,15 +138,23 @@ public class Player extends Entity{
         yPos = (int) yTarget;
     } //Dash zur Maus wird nicht genutzt und ist seit V0.0.1 nicht geupdatet --> Wahrscheinlich seit V0.0.2 nicht mehr kompatibel*/
 
-    public Image getSprite(){
-        if(xDirection == 1){
+    public Image getSprite() {
+        if (xDirection == 1) {
             return SPRITE_RIGHT;
-        }else if (xDirection == -1){
+        } else if (xDirection == -1) {
             return SPRITE_LEFT;
-        }else {
+        } else {
             return SPRITE_CENTER;
         }
     }
 
+    @Override
+    public int getSpriteWidth() {
+        return 53;
+    }
 
+    @Override
+    public int getSpriteHeight() {
+        return 50;
+    }
 }

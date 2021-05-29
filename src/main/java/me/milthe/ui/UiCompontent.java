@@ -9,9 +9,9 @@ public abstract class UiCompontent {
     protected Image sprite;
     protected String componentName;
     protected boolean visible;
-    protected boolean overlapping;
+    private boolean overlapping;
 
-    public UiCompontent(String name, InputStream filepathImage){
+    public UiCompontent(String name, InputStream filepathImage) {
         componentName = name;
         sprite = new Image(filepathImage);
         width = (int) Math.round(sprite.getWidth());
@@ -70,24 +70,12 @@ public abstract class UiCompontent {
         return marginButton;
     }
 
-    public void setMarginButton(int marginButton) {
-        this.marginButton = marginButton;
-    }
-
     public int getMarginLeft() {
         return marginLeft;
     }
 
-    public void setMarginLeft(int marginLeft) {
-        this.marginLeft = marginLeft;
-    }
-
     public int getMarginRight() {
         return marginRight;
-    }
-
-    public void setMarginRight(int marginRight) {
-        this.marginRight = marginRight;
     }
 
     public String getComponentName() {

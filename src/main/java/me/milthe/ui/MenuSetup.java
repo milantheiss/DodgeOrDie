@@ -44,7 +44,6 @@ public class MenuSetup {
         SPIELMODI_CUSTOM_MENU_CONTAINER.components.get(2).setMarginTop(MAIN_MENU_CONTAINER.components.get(1).getHeight()/2);
         SPIELMODI_CUSTOM_MENU_CONTAINER.centerContainerToScreen();
 
-        //TODO Sprite von Blanko zu "Level Name hier ändern"
         //TODO In UpdateController nach visibility fragen wenn TextField bearbeitet wird
         SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER.addButton("lvlname", getClass().getResourceAsStream("/sprites/buttons/levelname.png"));
         SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER.components.get(0).setOverlapping(true);

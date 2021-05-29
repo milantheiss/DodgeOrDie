@@ -13,7 +13,7 @@ import java.util.Objects;
 public class DrawIngameUi {
     private Image heart;
 
-    public DrawIngameUi (GraphicsContext g){
+    public DrawIngameUi(GraphicsContext g) {
         heart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/heart.png")));
 
     }
@@ -22,9 +22,9 @@ public class DrawIngameUi {
         g.setFill(Color.WHITE);
         g.setFont(Font.loadFont(getClass().getResourceAsStream("/font/DodgeFont.ttf"), 40));
 
-        g.fillText(Time.getTime(), Gui.width-140-(30*(Time.getTime().length()-3)), 57);
+        g.fillText(Time.getTimeString(Time.getTimeInSeconds()), Gui.width - 140 - (30 * (Time.getTimeString(Time.getTimeInSeconds()).length() - 3)), 57);
 
-        g.drawImage(heart,30, 25, heart.getWidth(), heart.getHeight());
+        g.drawImage(heart, 30, 25, heart.getWidth(), heart.getHeight());
         g.fillText(String.valueOf(Player.hitpoints), 109, 57);
     }
 }

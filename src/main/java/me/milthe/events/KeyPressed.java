@@ -33,7 +33,7 @@ public class KeyPressed implements EventHandler<KeyEvent> {//Wenn Taste gedrück
                         }
                     }
                 }
-            }else {
+            } else {
                 try {
                     Game.input.pressed[keyEvent.getCode().getCode()] = true;
                 } catch (Exception e) {

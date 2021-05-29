@@ -6,23 +6,20 @@ import me.milthe.graphic.Menustates;
 
 
 public class GameLoop implements Runnable {
+    private final Game GAME;
+    private final UpdateController UPDATEController;
+
     private static final int UPDATES_PER_SECOND = 60;
     private double accumulator = 0;
     private long currentTime, lastUpdate = System.currentTimeMillis();
-
-    private final Game GAME;
-    private final UpdateController UPDATEController;
 
     public GameLoop(Game game) {
         this.UPDATEController = new UpdateController(game);
         this.GAME = game;
     }
 
-
-    @Override //Main Loop fürs Spiel
+    @Override
     public void run() {
-
-
         try {
             new AnimationTimer() {
                 @Override
@@ -44,7 +41,6 @@ public class GameLoop implements Runnable {
             }.start();
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Fehler in Gameloop - while schleife");
         }
     }
 
@@ -57,7 +53,7 @@ public class GameLoop implements Runnable {
         Gui.drawEnvironment.draw(Gui.gc_main);
 
         if (Game.state == Gamestates.INGAME || Game.state == Gamestates.PAUSE || Game.state == Gamestates.ENDSCREEN) {
-            Gui.drawEntities.render(Gui.gc_main, GAME);
+            Gui.drawEntities.render(Gui.gc_main);
             Gui.drawIngameUi.render(Gui.gc_main);
         }
 
@@ -75,6 +71,10 @@ public class GameLoop implements Runnable {
             } else if (Gui.menustate == Menustates.PAUSE) {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.PAUSE_MENU_CONTAINER);
             }
+        }
+
+        if (Game.state == Gamestates.HIGHSCORE) {
+            Gui.drawHighscore.render(Gui.gc_main);
         }
 
         if (Game.state == Gamestates.TUTORIAL) {

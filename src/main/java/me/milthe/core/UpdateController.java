@@ -19,7 +19,7 @@ public class UpdateController {
         this.game = game;
 
         updateMenu = new UpdateMenu(this, game);
-        updateEndless = new UpdateEndless(this, game);
+        updateEndless = new UpdateEndless(game);
     }
 
     public void runUpdate() {
@@ -27,15 +27,14 @@ public class UpdateController {
             updateEndless.runUpdate();
         } else if (Game.state == Gamestates.MENU || Game.state == Gamestates.PAUSE) {
             updateMenu.runUpdate();
-        } else if (Game.state == Gamestates.ENDSCREEN) {
-            endscreenEndlessController();
+        } else if (Game.state == Gamestates.ENDSCREEN || Game.state == Gamestates.HIGHSCORE) {
+            simpleController();
         } else if (Game.state == Gamestates.TUTORIAL) {
             tutorialController();
         }
     }
 
-    //TODO Muss noch ausgebettet werden
-    private void endscreenEndlessController() {
+    private void simpleController() {
         if (Game.input.isPressed(KeyCode.ESCAPE) || (isComponentClicked(DrawEndscreenEndless.getZurueck()) && !MouseClicked.clickHandeled)) {
             MouseClicked.clickHandeled = true;
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
@@ -47,7 +46,7 @@ public class UpdateController {
     }
 
     private void tutorialController() {
-        //todo tutorial neue tutorial erstellen
+        //todo an neues tutorial anpassen
         if (Game.input.isPressed(KeyCode.ESCAPE)) {
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
             Game.state = Gamestates.MENU;
