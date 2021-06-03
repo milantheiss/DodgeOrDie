@@ -36,6 +36,8 @@ public class Endless {
 
         Time.startTimer();
 
+        Game.jukebox.playInGameMusic();
+
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -67,6 +69,7 @@ public class Endless {
 
     public void stopEndless() throws IOException {
         Time.stopTimer();
+        Game.jukebox.stopInGameMusic();
         Highscore.isHighscoreBigger(Time.getTimeInSeconds(), totalEnemiesSpawned, highestAmountOfHealth);
         timer.cancel();
         Game.state = Gamestates.PAUSE;

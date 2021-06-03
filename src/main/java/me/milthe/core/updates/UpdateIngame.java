@@ -26,13 +26,15 @@ public abstract class UpdateIngame {
             Game.state = Gamestates.PAUSE;
             Gui.menustate = Menustates.PAUSE;
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            System.out.println("Ingame");
+            Game.jukebox.pauseInGameMusic();
         }
     }
 
     protected void checkIfWindowIsFocused() {
         if (!Gui.stage.isFocused()) {
             Game.state = Gamestates.PAUSE;
+            Gui.menustate = Menustates.PAUSE;
+            Game.jukebox.pauseInGameMusic();
         }
     }
 }
