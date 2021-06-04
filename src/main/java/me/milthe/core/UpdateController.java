@@ -6,8 +6,8 @@ import me.milthe.core.updates.UpdateMenu;
 import me.milthe.gamemode.Gamemodes;
 import me.milthe.graphic.DrawEndscreenEndless;
 import me.milthe.events.MouseClicked;
+import me.milthe.graphic.DrawHighscore;
 import me.milthe.graphic.DrawTutorial;
-import me.milthe.sounds.Jukebox;
 import me.milthe.ui.UiCompontent;
 
 public class UpdateController {
@@ -33,14 +33,13 @@ public class UpdateController {
         } else if (Game.state == Gamestates.TUTORIAL) {
             tutorialController();
         }
-        checkForThomasMode();
     }
 
     private void simpleController() {
-        if (Game.input.isPressed(KeyCode.ESCAPE) || (isComponentClicked(DrawEndscreenEndless.getZurueck()) && !MouseClicked.clickHandeled)) {
+        if (Game.input.isPressed(KeyCode.ESCAPE) || ((isComponentClicked(DrawEndscreenEndless.getZurueck()) || isComponentClicked(DrawHighscore.getZurueck())) && !MouseClicked.clickHandeled)) {
             MouseClicked.clickHandeled = true;
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            if (Game.mode == Gamemodes.ENDLESS) {
+            if (Game.mode == Gamemodes.ENDLESS && Game.state == Gamestates.ENDSCREEN) {
                 game.endless.terminateEndless();
             }
             Game.state = Gamestates.MENU;
@@ -48,7 +47,6 @@ public class UpdateController {
     }
 
     private void tutorialController() {
-        //todo an neues tutorial anpassen
         if (Game.input.isPressed(KeyCode.ESCAPE)) {
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
             Game.state = Gamestates.MENU;
@@ -73,12 +71,6 @@ public class UpdateController {
             return true;
         }else {
             return false;
-        }
-    }
-
-    public void checkForThomasMode(){
-        if (Game.input.isPressed(KeyCode.T) && Game.input.isPressed(KeyCode.M)){
-            Jukebox.activateThomasMode();
         }
     }
 }

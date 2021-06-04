@@ -5,7 +5,6 @@ import javafx.stage.Stage;
 import me.milthe.core.Game;
 import me.milthe.core.GameLoop;
 import me.milthe.graphic.Gui;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 

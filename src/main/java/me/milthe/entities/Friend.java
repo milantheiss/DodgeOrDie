@@ -34,7 +34,7 @@ public class Friend extends Entity {
         return SPRITE_IDLE;
     }
 
-    public void setPath() { //Setzt den Path auf dem der Circle sich bewegt
+    public void setPath() {
         //Gibt an auf welcher Seite der Friend spawnt
         int startingSite = (int) (Math.random() * 4);
 

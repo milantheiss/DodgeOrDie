@@ -4,7 +4,6 @@ import me.milthe.core.Game;
 import me.milthe.core.Gamestates;
 import me.milthe.entities.*;
 import me.milthe.gamemode.Endless;
-
 import java.io.IOException;
 
 public class UpdateEndless extends UpdateIngame {

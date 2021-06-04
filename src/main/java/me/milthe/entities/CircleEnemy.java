@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import me.milthe.core.Game;
 import me.milthe.gamemode.Endless;
 import me.milthe.graphic.Gui;
-
 import java.util.Objects;
 
 public class CircleEnemy extends Entity {

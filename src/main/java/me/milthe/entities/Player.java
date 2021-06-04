@@ -5,7 +5,6 @@ import javafx.scene.input.KeyCode;
 import me.milthe.calculations.DiagonalSpeedNormalizer;
 import me.milthe.core.Game;
 import me.milthe.graphic.Gui;
-
 import java.util.Objects;
 
 
@@ -103,40 +102,6 @@ public class Player extends Entity {
             }
         }
     }
-
-    /*public void mouseDash() {
-        System.out.println("xPos " + xPos);
-        System.out.println("yPos " + yPos);
-        double xMouse = MouseMoved.x;
-        System.out.println("xMouse " + xMouse);
-        double yMouse = MouseMoved.y;
-        System.out.println("yMouse " + yMouse);
-        double m = (yMouse - yPos) / (xMouse - xPos);
-        System.out.println("M " + m);
-
-        double yTemp = m * xPos;
-        System.out.println("yTemp " + yTemp);
-
-        double n = yPos - yTemp;
-        System.out.println("N " + n);
-
-        double a = 250 * (Math.sin(Math.atan(m)));
-        System.out.println("A " + a);
-        double yTarget;
-        double offset = (xMouse - xPos);
-        System.out.println("Offset " + offset);
-        if (offset < 0) {
-            yTarget = yPos - a;
-            System.out.println("Hier");
-        } else {
-            yTarget = yPos + a;
-        }
-        System.out.println("yTarget " + yTarget);
-        double xTarget = (yTarget - n) / m;
-        System.out.println("xTarget " + xTarget);
-        xPos = (int) xTarget;
-        yPos = (int) yTarget;
-    } //Dash zur Maus wird nicht genutzt und ist seit V0.0.1 nicht geupdatet --> Wahrscheinlich seit V0.0.2 nicht mehr kompatibel*/
 
     public Image getSprite() {
         if (xDirection == 1) {

@@ -1,20 +1,12 @@
 package me.milthe.ui;
 
 import java.io.InputStream;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class UiTextField extends UiCompontent {
-    //ButtonUI mit "LVL Name here" wenn klicked --> wechsel auf UiTextField mit Blanko TextField Image
 
-    //
-    //Text
-    //KeyPressed/KeyReleased & Imput extra für UiTextField
-    //Char Array für Input
     public String userInputString = "";
     private boolean requestingInput;
 
-    //ArrayList in String konvertieren !!Fehlermeldung!!
     //TODO Groß Klein Schreibung in input beachten und nur buchstaben, zahlen ohne extra zeichen annehmen
 
     public UiTextField(String name, InputStream filepathImage) {

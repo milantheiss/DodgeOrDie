@@ -3,8 +3,6 @@ package me.milthe.graphic;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import me.milthe.core.Time;
-import me.milthe.ui.UiButton;
 import me.milthe.ui.UiCompontent;
 import me.milthe.ui.UiContainer;
 

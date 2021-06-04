@@ -4,7 +4,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,8 +16,6 @@ public class Jukebox {
     Clip soundeffect;
     Clip ingamemusic;
 
-    private static boolean thomasMode;
-
     private final List<String> titles = new ArrayList<>();
     private int lastTitle;
 
@@ -27,7 +24,7 @@ public class Jukebox {
     public Jukebox() throws IOException {
         playMusic = false;
         String tempString = "";
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/sound/music/music.txt")))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/sound/music/music.txt"))))) {
             while ((tempString = bufferedReader.readLine()) != null) {
                 titles.add(tempString);
             }
@@ -55,12 +52,7 @@ public class Jukebox {
         lastTitle = randomTitle;
         try {
             ingamemusic = AudioSystem.getClip();
-            AudioInputStream inputStream;
-            if (thomasMode){
-                inputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/sound/music/thomasoMC.wav")));
-            }else {
-                inputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/sound/music/" + titles.get(randomTitle) + ".wav")));
-            }
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/sound/music/" + titles.get(randomTitle) + ".wav")));
             ingamemusic.open(inputStream);
             ingamemusic.loop(0);
             ingamemusic.start();
@@ -99,9 +91,5 @@ public class Jukebox {
             e.printStackTrace();
         }
 
-    }
-
-    public static void activateThomasMode() {
-        thomasMode = true;
     }
 }

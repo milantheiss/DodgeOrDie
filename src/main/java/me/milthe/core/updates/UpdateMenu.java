@@ -45,7 +45,6 @@ public class UpdateMenu {
                 }
                 if (buttonUi.getComponentName().equals("tutorial")) {
                     MouseClicked.clickHandeled = true;
-                    //TODO Mit neuem Tutorial verbinden
                     Game.state = Gamestates.TUTORIAL;
                 }
                 if (buttonUi.getComponentName().equals("verlassen")) {

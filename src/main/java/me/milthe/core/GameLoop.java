@@ -4,7 +4,6 @@ import javafx.animation.AnimationTimer;
 import me.milthe.graphic.Gui;
 import me.milthe.graphic.Menustates;
 
-
 public class GameLoop implements Runnable {
     private final UpdateController UPDATEController;
 

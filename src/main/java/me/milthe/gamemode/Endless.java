@@ -5,8 +5,7 @@ import me.milthe.entities.Bouncy;
 import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Friend;
 import me.milthe.entities.Player;
-import me.milthe.extras.Highscore;
-
+import me.milthe.scoring.Highscore;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;

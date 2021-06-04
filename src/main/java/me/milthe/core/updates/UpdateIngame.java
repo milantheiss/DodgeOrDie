@@ -3,7 +3,6 @@ package me.milthe.core.updates;
 import javafx.scene.input.KeyCode;
 import me.milthe.core.Game;
 import me.milthe.core.Gamestates;
-import me.milthe.entities.Entity;
 import me.milthe.entities.actions.Collision;
 import me.milthe.graphic.Gui;
 import me.milthe.graphic.Menustates;
