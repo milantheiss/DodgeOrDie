@@ -57,6 +57,14 @@ public class UpdateController {
             MouseClicked.clickHandeled = true;
             Game.state = Gamestates.MENU;
         }
+        if (isComponentClicked(DrawTutorial.leftButton) && !MouseClicked.clickHandeled){
+            MouseClicked.clickHandeled =true;
+            DrawTutorial.setIndex(-1);
+        }
+        if (isComponentClicked(DrawTutorial.rightButton) && !MouseClicked.clickHandeled){
+            MouseClicked.clickHandeled = true;
+            DrawTutorial.setIndex(1);
+        }
     }
 
     public boolean isComponentClicked(UiCompontent uiCompontent) {

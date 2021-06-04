@@ -6,7 +6,7 @@ import me.milthe.gamemode.Gamemodes;
 import me.milthe.gamemode.Endless;
 import me.milthe.graphic.Gui;
 import me.milthe.graphic.Menustates;
-import me.milthe.scoring.Highscore;
+import me.milthe.extras.Highscore;
 import me.milthe.sounds.Jukebox;
 
 import java.io.File;

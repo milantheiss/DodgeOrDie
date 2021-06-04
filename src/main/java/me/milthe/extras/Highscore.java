@@ -1,6 +1,5 @@
-package me.milthe.scoring;
+package me.milthe.extras;
 
-import javafx.scene.image.Image;
 import me.milthe.core.Game;
 import me.milthe.core.Gamestates;
 

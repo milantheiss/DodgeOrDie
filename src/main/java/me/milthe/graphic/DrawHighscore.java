@@ -3,7 +3,7 @@ package me.milthe.graphic;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import me.milthe.scoring.Highscore;
+import me.milthe.extras.Highscore;
 import me.milthe.ui.UiButton;
 
 public class DrawHighscore {
