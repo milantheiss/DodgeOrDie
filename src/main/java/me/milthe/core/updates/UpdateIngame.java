@@ -3,7 +3,6 @@ package me.milthe.core.updates;
 import javafx.scene.input.KeyCode;
 import me.milthe.core.Game;
 import me.milthe.core.Gamestates;
-import me.milthe.entities.Entity;
 import me.milthe.entities.actions.Collision;
 import me.milthe.graphic.Gui;
 import me.milthe.graphic.Menustates;
@@ -26,13 +25,15 @@ public abstract class UpdateIngame {
             Game.state = Gamestates.PAUSE;
             Gui.menustate = Menustates.PAUSE;
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            System.out.println("Ingame");
+            Game.jukebox.pauseInGameMusic();
         }
     }
 
     protected void checkIfWindowIsFocused() {
         if (!Gui.stage.isFocused()) {
             Game.state = Gamestates.PAUSE;
+            Gui.menustate = Menustates.PAUSE;
+            Game.jukebox.pauseInGameMusic();
         }
     }
 }

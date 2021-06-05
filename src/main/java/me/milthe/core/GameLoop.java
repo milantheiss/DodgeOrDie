@@ -4,9 +4,7 @@ import javafx.animation.AnimationTimer;
 import me.milthe.graphic.Gui;
 import me.milthe.graphic.Menustates;
 
-
 public class GameLoop implements Runnable {
-    private final Game GAME;
     private final UpdateController UPDATEController;
 
     private static final int UPDATES_PER_SECOND = 60;
@@ -15,7 +13,6 @@ public class GameLoop implements Runnable {
 
     public GameLoop(Game game) {
         this.UPDATEController = new UpdateController(game);
-        this.GAME = game;
     }
 
     @Override

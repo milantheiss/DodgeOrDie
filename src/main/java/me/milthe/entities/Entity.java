@@ -6,8 +6,7 @@ import me.milthe.graphic.Gui;
 
 public abstract class Entity {
     protected Game game;
-    //TODO Private machen
-    public int xPos, yPos, width, height, speed, spriteWidth, spriteHeight;
+    protected int xPos, yPos, width, height, speed, spriteWidth, spriteHeight;
     protected double xDirection, yDirection;
 
     public abstract void update();

@@ -6,6 +6,7 @@ import me.milthe.core.updates.UpdateMenu;
 import me.milthe.gamemode.Gamemodes;
 import me.milthe.graphic.DrawEndscreenEndless;
 import me.milthe.events.MouseClicked;
+import me.milthe.graphic.DrawHighscore;
 import me.milthe.graphic.DrawTutorial;
 import me.milthe.ui.UiCompontent;
 
@@ -35,10 +36,10 @@ public class UpdateController {
     }
 
     private void simpleController() {
-        if (Game.input.isPressed(KeyCode.ESCAPE) || (isComponentClicked(DrawEndscreenEndless.getZurueck()) && !MouseClicked.clickHandeled)) {
+        if (Game.input.isPressed(KeyCode.ESCAPE) || ((isComponentClicked(DrawEndscreenEndless.getZurueck()) || isComponentClicked(DrawHighscore.getZurueck())) && !MouseClicked.clickHandeled)) {
             MouseClicked.clickHandeled = true;
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            if (Game.mode == Gamemodes.ENDLESS) {
+            if (Game.mode == Gamemodes.ENDLESS && Game.state == Gamestates.ENDSCREEN) {
                 game.endless.terminateEndless();
             }
             Game.state = Gamestates.MENU;
@@ -46,7 +47,6 @@ public class UpdateController {
     }
 
     private void tutorialController() {
-        //todo an neues tutorial anpassen
         if (Game.input.isPressed(KeyCode.ESCAPE)) {
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
             Game.state = Gamestates.MENU;
@@ -55,11 +55,22 @@ public class UpdateController {
             MouseClicked.clickHandeled = true;
             Game.state = Gamestates.MENU;
         }
+        if (isComponentClicked(DrawTutorial.leftButton) && !MouseClicked.clickHandeled){
+            MouseClicked.clickHandeled =true;
+            DrawTutorial.setIndex(-1);
+        }
+        if (isComponentClicked(DrawTutorial.rightButton) && !MouseClicked.clickHandeled){
+            MouseClicked.clickHandeled = true;
+            DrawTutorial.setIndex(1);
+        }
     }
 
     public boolean isComponentClicked(UiCompontent uiCompontent) {
-        return MouseClicked.x > uiCompontent.getX() && MouseClicked.x < (uiCompontent.getX() + uiCompontent.getWidth()) && MouseClicked.y > uiCompontent.getY() && MouseClicked.y < (uiCompontent.getY() + uiCompontent.getHeight());
+        if(MouseClicked.x > uiCompontent.getX() && MouseClicked.x < (uiCompontent.getX() + uiCompontent.getWidth()) && MouseClicked.y > uiCompontent.getY() && MouseClicked.y < (uiCompontent.getY() + uiCompontent.getHeight())){
+            if (!MouseClicked.clickHandeled) Game.jukebox.playSoundEffect("sfx_click");
+            return true;
+        }else {
+            return false;
+        }
     }
-
-
 }

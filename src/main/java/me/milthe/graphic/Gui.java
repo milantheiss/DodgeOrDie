@@ -12,11 +12,7 @@ import javafx.scene.image.Image;
 import me.milthe.events.KeyPressed;
 import me.milthe.events.KeyReleased;
 import me.milthe.events.MouseClicked;
-import me.milthe.events.MouseMoved;
-import me.milthe.scoring.Highscore;
 import me.milthe.ui.MenuSetup;
-
-import java.io.IOException;
 import java.util.Objects;
 
 public class Gui {
@@ -68,7 +64,6 @@ public class Gui {
 
         //EventListeners
         scene.setOnMouseClicked(new MouseClicked());
-        scene.setOnMouseMoved(new MouseMoved());
         scene.setOnKeyPressed(new KeyPressed());
         scene.setOnKeyReleased(new KeyReleased());
 

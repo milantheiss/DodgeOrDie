@@ -42,13 +42,10 @@ public class UpdateMenu {
                 if (buttonUi.getComponentName().equals("spielmodi")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.SPIELMODI;
-                    System.out.println("Spielmodi");
                 }
                 if (buttonUi.getComponentName().equals("tutorial")) {
                     MouseClicked.clickHandeled = true;
-                    //TODO Mit neuem Tutorial verbinden
                     Game.state = Gamestates.TUTORIAL;
-                    System.out.println("Tutorial");
                 }
                 if (buttonUi.getComponentName().equals("verlassen")) {
                     MouseClicked.clickHandeled = true;
@@ -64,17 +61,14 @@ public class UpdateMenu {
                 if (buttonUi.getComponentName().equals("endless")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.SPIELMODI_ENDLESS;
-                    System.out.println("Endless");
                 }
                 if (buttonUi.getComponentName().equals("custom")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.SPIELMODI_CUSTOM;
-                    System.out.println("Custom");
                 }
                 if (buttonUi.getComponentName().equals("zurueck")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.MAIN;
-                    System.out.println("Main Menu");
                 }
             }
         });
@@ -87,17 +81,14 @@ public class UpdateMenu {
                     MouseClicked.clickHandeled = true;
                     game.endless.startEndless();
                     Game.state = Gamestates.INGAME;
-                    System.out.println("Ingame Endless");
                 }
                 if (buttonUi.getComponentName().equals("highscore")) {
                     MouseClicked.clickHandeled = true;
                     Game.state = Gamestates.HIGHSCORE;
-                    System.out.println("Highscore");
                 }
                 if (buttonUi.getComponentName().equals("zurueck")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.SPIELMODI;
-                    System.out.println("Spielmodi");
                 }
             }
         });
@@ -109,18 +100,15 @@ public class UpdateMenu {
                 if (buttonUi.getComponentName().equals("auswaehlen")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.SPIELMODI_CUSTOM_SELECT;
-                    System.out.println("Select");
                 }
                 if (buttonUi.getComponentName().equals("tutorial")) {
                     MouseClicked.clickHandeled = true;
                     //TODO Mit neuem Tutorial verbinden --> für Spielmodus Custom
                     Game.state = Gamestates.TUTORIAL;
-                    System.out.println("Tutorial");
                 }
                 if (buttonUi.getComponentName().equals("zurueck")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.SPIELMODI;
-                    System.out.println("Spielmodi");
                 }
             }
         });
@@ -139,17 +127,14 @@ public class UpdateMenu {
                             uiTextField.setRequestingInput(true);
                         }
                     });
-                    System.out.println("Type");
                 }
                 if (uiCompontent.getComponentName().equals("start")) {
                     MouseClicked.clickHandeled = true;
                     //TODO Custom starten
-                    System.out.println("Custom start");
                 }
                 if (uiCompontent.getComponentName().equals("zurueck")) {
                     MouseClicked.clickHandeled = true;
                     Gui.menustate = Menustates.SPIELMODI_CUSTOM;
-                    System.out.println("Spielmodi");
                 }
             }
         });
@@ -159,7 +144,7 @@ public class UpdateMenu {
         if (Game.input.isPressed(KeyCode.ESCAPE)) {
             Game.state = Gamestates.INGAME;
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            System.out.println("Ingame");
+            Game.jukebox.resumeInGameMusic();
         }
         Gui.menuSetup.PAUSE_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
@@ -167,10 +152,9 @@ public class UpdateMenu {
                     MouseClicked.clickHandeled = true;
                     Game.state = Gamestates.INGAME;
                     Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-                    System.out.println("Ingame");
+                    Game.jukebox.resumeInGameMusic();
                 }
                 if (buttonUi.getComponentName().equals("neustart")) {
-                    System.out.println("Neustart");
                     MouseClicked.clickHandeled = true;
                     Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
                     if (Game.mode == Gamemodes.ENDLESS) {
@@ -184,7 +168,6 @@ public class UpdateMenu {
                     } else if (Game.mode == Gamemodes.CUSTOM) {
                         //todo Start Stop für Custom hinzufügen
                     }
-                    System.out.println("Ingame");
                 }
                 if (buttonUi.getComponentName().equals("verlassen")) {
                     MouseClicked.clickHandeled = true;
@@ -200,7 +183,6 @@ public class UpdateMenu {
                     }
                     Game.state = Gamestates.MENU;
                     Gui.menustate = Menustates.MAIN;
-                    System.out.println("Menu");
                     Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
                 }
             }

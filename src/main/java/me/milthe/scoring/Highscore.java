@@ -1,7 +1,7 @@
 package me.milthe.scoring;
 
 import me.milthe.core.Game;
-
+import me.milthe.core.Gamestates;
 import java.io.*;
 
 public class Highscore {
@@ -12,6 +12,8 @@ public class Highscore {
     private File directory;
 
     private static File highscorelist;
+
+    private static boolean highscoreVisible;
 
     public Highscore() throws IOException {
         directory = new File(Game.GAMEDATA_DIRECTORY.getPath() + File.separator + "scoring");
@@ -58,14 +60,16 @@ public class Highscore {
 
     public static void isHighscoreBigger(long newHighscore, int surviedenemies, int highestnumberhealth) throws IOException {
         if (surviedtime < newHighscore) {
-            System.out.println("New Highscore");
+            if (Game.state == Gamestates.ENDSCREEN) Game.jukebox.playSoundEffect("sfx_highscore");
             setSurviedtime(newHighscore);
             setSurviedenemies(surviedenemies);
             setHighestnumberhealth(highestnumberhealth);
             System.out.println(newHighscore);
             writeHighscore();
+            highscoreVisible = true;
         } else {
-            System.out.println("No new Highscore");
+            if (Game.state == Gamestates.ENDSCREEN) Game.jukebox.playSoundEffect("sfx_gameover");
+            highscoreVisible = false;
         }
     }
 
@@ -77,5 +81,9 @@ public class Highscore {
         bufferedWriter.newLine();
         bufferedWriter.write("" + highestnumberhealth);
         bufferedWriter.close();
+    }
+
+    public static boolean isHighscoreVisible() {
+        return highscoreVisible;
     }
 }

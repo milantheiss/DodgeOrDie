@@ -2,7 +2,6 @@ package me.milthe.entities.actions;
 
 import me.milthe.core.Game;
 import me.milthe.entities.Bouncy;
-import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Entity;
 
 public class Collision {
@@ -13,20 +12,20 @@ public class Collision {
     }
 
     public boolean collisionRectangleCircle(Entity rectangle, Entity circle) {
-        int xCenterCircle = circle.getxPos() + (circle.width / 2);
+        int xCenterCircle = circle.getxPos() + (circle.getWidth() / 2);
         int yCenterCircle;
         if (circle instanceof Bouncy) {
-            yCenterCircle = circle.getyPos() + (circle.width / 2) + 13;
+            yCenterCircle = circle.getyPos() + (circle.getWidth() / 2) + 13;
         } else {
-            yCenterCircle = circle.getyPos() + (circle.width / 2);
+            yCenterCircle = circle.getyPos() + (circle.getWidth() / 2);
         }
 
         int[] xCornerRectangle = new int[4];
         int[] yCornerRectangle = new int[4];
 
         for (int i = 0; i < 4; i++) {
-            xCornerRectangle[i] = (i == 0 || i == 2) ? rectangle.getxPos() : (rectangle.getxPos() + rectangle.width - 12);
-            yCornerRectangle[i] = (i == 0 || i == 1) ? rectangle.getyPos() : (rectangle.getyPos() + rectangle.height - 12);
+            xCornerRectangle[i] = (i == 0 || i == 2) ? rectangle.getxPos() : (rectangle.getxPos() + rectangle.getWidth() - 12);
+            yCornerRectangle[i] = (i == 0 || i == 1) ? rectangle.getyPos() : (rectangle.getyPos() + rectangle.getWidth() - 12);
         }
 
         double[] a = new double[4];
@@ -39,6 +38,6 @@ public class Collision {
             c[i] = Math.sqrt((a[i] * a[i]) + (b[i] * b[i]));
         }
 
-        return !(c[0] > (circle.width / 2)) || !(c[1] > (circle.width / 2)) || !(c[2] > (circle.width / 2)) || !(c[3] > (circle.width / 2));
+        return !(c[0] > (circle.getWidth() / 2)) || !(c[1] > (circle.getWidth() / 2)) || !(c[2] > (circle.getWidth() / 2)) || !(c[3] > (circle.getWidth() / 2));
     }
 }

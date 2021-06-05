@@ -6,7 +6,6 @@ import me.milthe.entities.CircleEnemy;
 import me.milthe.entities.Friend;
 import me.milthe.entities.Player;
 import me.milthe.scoring.Highscore;
-
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,6 +34,8 @@ public class Endless {
         game.addEntity(Game.player);
 
         Time.startTimer();
+
+        Game.jukebox.playInGameMusic();
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -67,6 +68,7 @@ public class Endless {
 
     public void stopEndless() throws IOException {
         Time.stopTimer();
+        Game.jukebox.stopInGameMusic();
         Highscore.isHighscoreBigger(Time.getTimeInSeconds(), totalEnemiesSpawned, highestAmountOfHealth);
         timer.cancel();
         Game.state = Gamestates.PAUSE;
