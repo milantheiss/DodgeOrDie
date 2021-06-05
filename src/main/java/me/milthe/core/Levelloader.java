@@ -33,7 +33,7 @@ public class Levelloader {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                    } else {
+                    } else {//
                         System.out.println("Unbekannter Befehl");
                     }
                 }
