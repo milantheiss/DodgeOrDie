@@ -23,14 +23,8 @@ public class UpdateMenu {
     public void runUpdate() {
         if (Gui.menustate == Menustates.MAIN) {
             mainMenuController();
-        } else if (Gui.menustate == Menustates.SPIELMODI) {
-            spielmodiMenuController();
-        } else if (Gui.menustate == Menustates.SPIELMODI_ENDLESS) {
-            spielmodiInfiniteMenuController();
-        } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM) {
-            spielmodiCustomMenuController();
-        } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM_SELECT) {
-            spielmodiCustomSelectMenuController();
+        } else if (Gui.menustate == Menustates.ENDLESS) {
+            EndlessMenuController();
         } else if (Gui.menustate == Menustates.PAUSE) {
             pauseMenuController();
         }
@@ -39,9 +33,9 @@ public class UpdateMenu {
     private void mainMenuController() {
         Gui.menuSetup.MAIN_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
-                if (buttonUi.getComponentName().equals("spielmodi")) {
+                if (buttonUi.getComponentName().equals("spielen")) {
                     MouseClicked.clickHandeled = true;
-                    Gui.menustate = Menustates.SPIELMODI;
+                    Gui.menustate = Menustates.ENDLESS;
                 }
                 if (buttonUi.getComponentName().equals("tutorial")) {
                     MouseClicked.clickHandeled = true;
@@ -55,27 +49,8 @@ public class UpdateMenu {
         });
     }
 
-    private void spielmodiMenuController() {
-        Gui.menuSetup.SPIELMODI_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
-            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
-                if (buttonUi.getComponentName().equals("endless")) {
-                    MouseClicked.clickHandeled = true;
-                    Gui.menustate = Menustates.SPIELMODI_ENDLESS;
-                }
-                if (buttonUi.getComponentName().equals("custom")) {
-                    MouseClicked.clickHandeled = true;
-                    Gui.menustate = Menustates.SPIELMODI_CUSTOM;
-                }
-                if (buttonUi.getComponentName().equals("zurueck")) {
-                    MouseClicked.clickHandeled = true;
-                    Gui.menustate = Menustates.MAIN;
-                }
-            }
-        });
-    }
-
-    private void spielmodiInfiniteMenuController() {
-        Gui.menuSetup.SPIELMODI_INFINITE_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
+    private void EndlessMenuController() {
+        Gui.menuSetup.ENDLESS_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("start")) {
                     MouseClicked.clickHandeled = true;
@@ -88,53 +63,7 @@ public class UpdateMenu {
                 }
                 if (buttonUi.getComponentName().equals("zurueck")) {
                     MouseClicked.clickHandeled = true;
-                    Gui.menustate = Menustates.SPIELMODI;
-                }
-            }
-        });
-    }
-
-    private void spielmodiCustomMenuController() {
-        Gui.menuSetup.SPIELMODI_CUSTOM_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
-            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
-                if (buttonUi.getComponentName().equals("auswaehlen")) {
-                    MouseClicked.clickHandeled = true;
-                    Gui.menustate = Menustates.SPIELMODI_CUSTOM_SELECT;
-                }
-                if (buttonUi.getComponentName().equals("tutorial")) {
-                    MouseClicked.clickHandeled = true;
-                    //TODO Mit neuem Tutorial verbinden --> für Spielmodus Custom
-                    Game.state = Gamestates.TUTORIAL;
-                }
-                if (buttonUi.getComponentName().equals("zurueck")) {
-                    MouseClicked.clickHandeled = true;
-                    Gui.menustate = Menustates.SPIELMODI;
-                }
-            }
-        });
-    }
-
-    private void spielmodiCustomSelectMenuController() {
-        Gui.menuSetup.SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER.components.forEach(uiCompontent -> {
-            if (updateController.isComponentClicked(uiCompontent) && !MouseClicked.clickHandeled) {
-                if (uiCompontent.getComponentName().equals("lvlname")) {
-                    //TODO Textfield funktion mit aufnahme von Text einfügen
-                    MouseClicked.clickHandeled = true;
-                    uiCompontent.setVisible(false);
-                    Gui.menuSetup.SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER.uiTextFields.forEach(uiTextField -> {
-                        if (uiTextField.getComponentName().equals("lvlnameTextField")) {
-                            uiTextField.setVisible(true);
-                            uiTextField.setRequestingInput(true);
-                        }
-                    });
-                }
-                if (uiCompontent.getComponentName().equals("start")) {
-                    MouseClicked.clickHandeled = true;
-                    //TODO Custom starten
-                }
-                if (uiCompontent.getComponentName().equals("zurueck")) {
-                    MouseClicked.clickHandeled = true;
-                    Gui.menustate = Menustates.SPIELMODI_CUSTOM;
+                    Gui.menustate = Menustates.MAIN;
                 }
             }
         });
@@ -165,8 +94,6 @@ public class UpdateMenu {
                         }
                         game.endless.terminateEndless();
                         game.endless.startEndless();
-                    } else if (Game.mode == Gamemodes.CUSTOM) {
-                        //todo Start Stop für Custom hinzufügen
                     }
                 }
                 if (buttonUi.getComponentName().equals("verlassen")) {
@@ -178,8 +105,6 @@ public class UpdateMenu {
                             e.printStackTrace();
                         }
                         game.endless.terminateEndless();
-                    } else if (Game.mode == Gamemodes.CUSTOM) {
-                        //todo Custom stoppen
                     }
                     Game.state = Gamestates.MENU;
                     Gui.menustate = Menustates.MAIN;

@@ -9,14 +9,10 @@ public class KeyReleased implements EventHandler<KeyEvent> {//Wenn Taste losgela
 
     @Override
     public void handle(KeyEvent keyEvent) {
-        Gui.menuSetup.SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER.uiTextFields.forEach(uiTextField -> {
-            if (!uiTextField.isRequestingInput()) {
-                try {
-                    Game.input.pressed[keyEvent.getCode().getCode()] = false;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        try {
+            Game.input.pressed[keyEvent.getCode().getCode()] = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

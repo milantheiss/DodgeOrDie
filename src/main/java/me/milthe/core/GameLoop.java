@@ -57,14 +57,8 @@ public class GameLoop implements Runnable {
         if (Game.state == Gamestates.PAUSE || Game.state == Gamestates.MENU) {
             if (Gui.menustate == Menustates.MAIN) {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.MAIN_MENU_CONTAINER);
-            } else if (Gui.menustate == Menustates.SPIELMODI) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_MENU_CONTAINER);
-            } else if (Gui.menustate == Menustates.SPIELMODI_ENDLESS) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_INFINITE_MENU_CONTAINER);
-            } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_CUSTOM_MENU_CONTAINER);
-            } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM_SELECT) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER);
+            } else if (Gui.menustate == Menustates.ENDLESS) {
+                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.ENDLESS_MENU_CONTAINER);
             } else if (Gui.menustate == Menustates.PAUSE) {
                 Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.PAUSE_MENU_CONTAINER);
             }

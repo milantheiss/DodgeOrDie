@@ -9,15 +9,13 @@ public class UiContainer {
     public int x, y, width, height;
     public List<UiCompontent> components = new ArrayList<>();
     public List<UiButton> uiButtons = new ArrayList<>();
-    public List<UiTextField> uiTextFields = new ArrayList<>();
 
     public void centerContainerToScreen() {
         int maxWidth = 0;
         int tempY = 0;
         for (UiCompontent uiCompontent : components) {
             maxWidth = Math.max((uiCompontent.getWidth() + uiCompontent.getMarginLeft() + uiCompontent.getMarginRight()), maxWidth);
-            if (!uiCompontent.isOverlapping())
-                this.height += uiCompontent.getHeight() + uiCompontent.getMarginButton() + uiCompontent.getMarginTop();
+            this.height += uiCompontent.getHeight() + uiCompontent.getMarginButton() + uiCompontent.getMarginTop();
         }
         this.width = maxWidth;
         this.x = (Gui.width - width) / 2;
@@ -25,8 +23,7 @@ public class UiContainer {
         for (UiCompontent uiCompontent : components) {
             uiCompontent.setYToBeSum(tempY, this.y);
             uiCompontent.applyMarginTop();
-            if (!uiCompontent.isOverlapping())
-                tempY += uiCompontent.getHeight() + uiCompontent.getMarginTop() + uiCompontent.getMarginButton();
+            tempY += uiCompontent.getHeight() + uiCompontent.getMarginTop() + uiCompontent.getMarginButton();
             uiCompontent.setX(this.x);
         }
     }
@@ -35,11 +32,5 @@ public class UiContainer {
         UiButton button = new UiButton(componentName, filepath);
         components.add(button);
         uiButtons.add(button);
-    }
-
-    public void addTextField(String componentName, InputStream filepath) {
-        UiTextField uiTextField = new UiTextField(componentName, filepath);
-        components.add(uiTextField);
-        uiTextFields.add(uiTextField);
     }
 }

@@ -8,8 +8,6 @@ public abstract class UiCompontent {
     protected int x, y, width, height, marginTop, marginButton, marginLeft, marginRight;
     protected Image sprite;
     protected String componentName;
-    protected boolean visible;
-    private boolean overlapping;
 
     public UiCompontent(String name, InputStream filepathImage) {
         componentName = name;
@@ -84,21 +82,5 @@ public abstract class UiCompontent {
 
     public Image getSprite() {
         return sprite;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
-    public boolean isOverlapping() {
-        return overlapping;
-    }
-
-    public void setOverlapping(boolean overlapping) {
-        this.overlapping = overlapping;
     }
 }

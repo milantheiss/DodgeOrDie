@@ -30,8 +30,6 @@ public class Game {
     public static Player player;
     public static List<Entity> entities;
 
-    public Levelloader levelloader = new Levelloader(this);
-
     public Game() throws IOException, URISyntaxException {
         GAMEDATA_DIRECTORY = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator + "dodgeordie");
         GAMEDATA_DIRECTORY.mkdir();
