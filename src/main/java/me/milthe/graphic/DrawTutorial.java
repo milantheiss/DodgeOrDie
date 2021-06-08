@@ -2,6 +2,7 @@ package me.milthe.graphic;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import me.milthe.ui.Gui;
 import me.milthe.ui.UiButton;
 
 public class DrawTutorial {

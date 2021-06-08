@@ -6,8 +6,8 @@ import me.milthe.core.Gamestates;
 import me.milthe.core.UpdateController;
 import me.milthe.events.MouseClicked;
 import me.milthe.gamemode.Gamemodes;
-import me.milthe.graphic.Gui;
-import me.milthe.graphic.Menustates;
+import me.milthe.ui.Gui;
+import me.milthe.ui.Menustates;
 
 import java.io.IOException;
 

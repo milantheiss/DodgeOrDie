@@ -4,8 +4,8 @@ import javafx.scene.input.KeyCode;
 import me.milthe.core.Game;
 import me.milthe.core.Gamestates;
 import me.milthe.entities.actions.Collision;
-import me.milthe.graphic.Gui;
-import me.milthe.graphic.Menustates;
+import me.milthe.ui.Gui;
+import me.milthe.ui.Menustates;
 
 public abstract class UpdateIngame {
     protected final Collision col;

@@ -4,7 +4,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import me.milthe.calculations.DiagonalSpeedNormalizer;
 import me.milthe.core.Game;
-import me.milthe.graphic.Gui;
+import me.milthe.ui.GIF;
+import me.milthe.ui.Gui;
 import java.util.Objects;
 
 
@@ -15,6 +16,7 @@ public class Player extends Entity {
     private final Image SPRITE_CENTER = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/center.png")));
     private final Image SPRITE_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/right.png")));
     public static int hitpoints;
+    public static GIF dashanimation;
 
     public Player(int hitpoints) {
         Player.hitpoints = hitpoints;
@@ -23,6 +25,8 @@ public class Player extends Entity {
         width = 53;
         height = 50;
         speed = 16;
+        dashanimation = new GIF(5, "/sprites/entities/player/dashanimation/", 45);
+
     }
 
     @Override
@@ -37,7 +41,9 @@ public class Player extends Entity {
         if (Game.input.isPressed(KeyCode.W)) {
             if ((yPos - speed) >= 0) {
                 yDirection--;
+
                 if (Game.input.isPressed(KeyCode.SPACE)) {
+
                     dash();
                 }
             }
@@ -73,6 +79,7 @@ public class Player extends Entity {
 
     public void dash() { //Dash in Richtung in die sich der Spieler bewegt (
         if ((System.currentTimeMillis() - dashCooldown) > lastDash) {
+            dashanimation.playGIF(System.currentTimeMillis(), xPos-(dashanimation.getWidth()/2-width/2), yPos-(dashanimation.getHeight()/2-height/2));
             if (xDirection == 1) {
                 int tempX = xPos + dashRange;
                 if (tempX >= 0 && tempX <= Gui.width - width) {

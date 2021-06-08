@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import me.milthe.core.Time;
 import me.milthe.entities.Player;
+import me.milthe.ui.Gui;
+
 import java.util.Objects;
 
 

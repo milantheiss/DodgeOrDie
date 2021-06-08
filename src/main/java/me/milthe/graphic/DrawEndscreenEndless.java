@@ -7,6 +7,7 @@ import javafx.scene.text.Font;
 import me.milthe.core.Time;
 import me.milthe.gamemode.Endless;
 import me.milthe.scoring.Highscore;
+import me.milthe.ui.Gui;
 import me.milthe.ui.UiButton;
 
 import java.util.Objects;

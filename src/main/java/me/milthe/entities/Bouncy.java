@@ -2,7 +2,8 @@ package me.milthe.entities;
 
 import javafx.scene.image.Image;
 import me.milthe.gamemode.Endless;
-import me.milthe.graphic.Gui;
+import me.milthe.ui.Gui;
+
 import java.util.Objects;
 
 public class Bouncy extends Entity {
@@ -52,24 +53,32 @@ public class Bouncy extends Entity {
             xPos = (int) (Math.random() * Gui.width);
             yPos = 0;
             xDirection = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
-            yDirection = Math.random();
+            do {
+                yDirection = Math.random();
+            } while (xDirection == 0 && yDirection == 0);
         } else if (startedge == 1) {
             //start von Rechts -> X = Screen width
             xPos = Gui.width;
             yPos = (int) (Math.random() * Gui.height);
-            xDirection = Math.random() * -1;
+            do {
+                xDirection = Math.random() * -1;
+            } while (xDirection == 0 && yDirection == 0);
             yDirection = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
         } else if (startedge == 2) {
             //start von Unten -> Y = Screen height
             xPos = (int) (Math.random() * Gui.width);
             yPos = Gui.height;
             xDirection = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
-            yDirection = Math.random() * -1;
+            do {
+                yDirection = Math.random() * -1;
+            } while (xDirection == 0 && yDirection == 0);
         } else if (startedge == 3) {
             //start von Links -> X = 0
             xPos = 0;
             yPos = (int) (Math.random() * Gui.height);
-            xDirection = Math.random();
+            do {
+                xDirection = Math.random();
+            } while (xDirection == 0 && yDirection == 0);
             yDirection = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
         }
     }

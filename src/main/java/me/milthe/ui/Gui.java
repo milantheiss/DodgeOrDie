@@ -1,4 +1,4 @@
-package me.milthe.graphic;
+package me.milthe.ui;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -12,7 +12,8 @@ import javafx.scene.image.Image;
 import me.milthe.events.KeyPressed;
 import me.milthe.events.KeyReleased;
 import me.milthe.events.MouseClicked;
-import me.milthe.ui.MenuSetup;
+import me.milthe.graphic.*;
+
 import java.util.Objects;
 
 public class Gui {

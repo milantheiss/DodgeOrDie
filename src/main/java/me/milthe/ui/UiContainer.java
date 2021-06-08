@@ -1,6 +1,5 @@
 package me.milthe.ui;
 
-import me.milthe.graphic.Gui;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;

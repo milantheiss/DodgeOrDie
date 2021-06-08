@@ -1,8 +1,8 @@
 package me.milthe.core;
 
 import javafx.animation.AnimationTimer;
-import me.milthe.graphic.Gui;
-import me.milthe.graphic.Menustates;
+import me.milthe.ui.Gui;
+import me.milthe.ui.Menustates;
 
 public class GameLoop implements Runnable {
     private final UpdateController UPDATEController;

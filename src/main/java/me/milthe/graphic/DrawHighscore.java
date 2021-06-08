@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import me.milthe.scoring.Highscore;
+import me.milthe.ui.Gui;
 import me.milthe.ui.UiButton;
 
 public class DrawHighscore {

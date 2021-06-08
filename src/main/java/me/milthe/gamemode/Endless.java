@@ -26,7 +26,7 @@ public class Endless {
         Game.state = Gamestates.INGAME;
         Game.mode = Gamemodes.ENDLESS;
 
-        Game.player = new Player(4);
+        Game.player = new Player(20000000);
 
         totalEnemiesSpawned = 0;
         highestAmountOfHealth = 4;
