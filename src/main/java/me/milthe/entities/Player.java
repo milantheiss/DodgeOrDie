@@ -2,7 +2,7 @@ package me.milthe.entities;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import me.milthe.calculations.DiagonalSpeedNormalizer;
+import me.milthe.calculations.SpeedNormalizer;
 import me.milthe.core.Game;
 import me.milthe.ui.GIF;
 import me.milthe.ui.Gui;
@@ -35,12 +35,12 @@ public class Player extends Entity {
     }
 
     public void move() { //Movement wird in UpdateController.java aufgerufen
-        xDirection = 0;
-        yDirection = 0;
+        xVelocity = 0;
+        yVelocity = 0;
 
         if (Game.input.isPressed(KeyCode.W)) {
             if ((yPos - speed) >= 0) {
-                yDirection--;
+                yVelocity--;
 
                 if (Game.input.isPressed(KeyCode.SPACE)) {
 
@@ -50,7 +50,7 @@ public class Player extends Entity {
         }
         if (Game.input.isPressed(KeyCode.S)) {
             if ((yPos + speed) <= Gui.height - height) {
-                yDirection++;
+                yVelocity++;
                 if (Game.input.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
@@ -58,7 +58,7 @@ public class Player extends Entity {
         }
         if (Game.input.isPressed(KeyCode.A)) {
             if ((xPos - speed) >= 0) {
-                xDirection--;
+                xVelocity--;
                 if (Game.input.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
@@ -66,27 +66,27 @@ public class Player extends Entity {
         }
         if (Game.input.isPressed(KeyCode.D)) {
             if ((xPos + speed) <= Gui.width - width) {
-                xDirection++;
+                xVelocity++;
                 if (Game.input.isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
         }
 
-        xPos += DiagonalSpeedNormalizer.applySpeed(speed, DiagonalSpeedNormalizer.normalizeX(xDirection, yDirection));
-        yPos += DiagonalSpeedNormalizer.applySpeed(speed, DiagonalSpeedNormalizer.normalizeY(xDirection, yDirection));
+        xPos += SpeedNormalizer.calculateNormalizedSpeed(speed, SpeedNormalizer.normalizeXVelocity(xVelocity, yVelocity));
+        yPos += SpeedNormalizer.calculateNormalizedSpeed(speed, SpeedNormalizer.normalizeYVelocity(xVelocity, yVelocity));
     }
 
     public void dash() { //Dash in Richtung in die sich der Spieler bewegt (
         if ((System.currentTimeMillis() - dashCooldown) > lastDash) {
             dashanimation.playGIF(System.currentTimeMillis(), xPos-(dashanimation.getWidth()/2-width/2), yPos-(dashanimation.getHeight()/2-height/2));
-            if (xDirection == 1) {
+            if (xVelocity == 1) {
                 int tempX = xPos + dashRange;
                 if (tempX >= 0 && tempX <= Gui.width - width) {
                     xPos = tempX;
                 }
                 lastDash = System.currentTimeMillis();
-            } else if (xDirection == -1) {
+            } else if (xVelocity == -1) {
                 int tempX = xPos - dashRange;
                 if (tempX >= 0 && tempX <= Gui.width - width) {
                     xPos = tempX;
@@ -94,13 +94,13 @@ public class Player extends Entity {
                 lastDash = System.currentTimeMillis();
             }
 
-            if (yDirection == 1) {
+            if (yVelocity == 1) {
                 int tempY = yPos + dashRange;
                 if (tempY >= 0 && tempY <= Gui.height - height) {
                     yPos = tempY;
                 }
                 lastDash = System.currentTimeMillis();
-            } else if (yDirection == -1) {
+            } else if (yVelocity == -1) {
                 int tempY = yPos - dashRange;
                 if (tempY >= 0 && tempY <= Gui.height - height) {
                     yPos = tempY;
@@ -110,10 +110,14 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Gibt den Spieler Sprite relative zur momentanen Bewegungsrichtung zurück
+     * @return Sprite für + oder - X Richtung
+     */
     public Image getSprite() {
-        if (xDirection == 1) {
+        if (xVelocity == 1) {
             return SPRITE_RIGHT;
-        } else if (xDirection == -1) {
+        } else if (xVelocity == -1) {
             return SPRITE_LEFT;
         } else {
             return SPRITE_CENTER;

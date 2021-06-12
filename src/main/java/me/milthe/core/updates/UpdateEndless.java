@@ -6,14 +6,21 @@ import me.milthe.entities.*;
 import me.milthe.gamemode.Endless;
 import java.io.IOException;
 
-public class UpdateEndless extends UpdateIngame {
-    private final Game game;
-
+/**
+ * Wickelt Ereignisse und Aktionen für den Endlos Modus ab
+ */
+public class UpdateEndless extends UpdateGamemodes {
+    /**
+     * Erstellt ein neues UpdateEndless mit dem spezifizierten Game
+     * @param game Das Hauptobjekt von Game.java des Spiels
+     */
     public UpdateEndless(Game game) {
         super(game);
-        this.game = game;
     }
 
+    /**
+     * Führt Updates aus
+     */
     @Override
     public void runUpdate() {
         Game.entities.forEach(Entity::update);
@@ -22,6 +29,9 @@ public class UpdateEndless extends UpdateIngame {
         collisionAction();
     }
 
+    /**
+     * Definiert, was bei einer Kollision zwischen dem Spieler und einer anderen Entity passiert.
+     */
     @Override
     protected void collisionAction() {
         Game.entities.forEach(entity -> {

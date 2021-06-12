@@ -23,14 +23,14 @@ public class Bouncy extends Entity {
         move();
         if (isBouncyHittingWall() && bounces > 0) {
             if ((getxPos() <= 0 || getxPos() >= Gui.width) && !(getyPos() <= 0 || getyPos() >= Gui.height)) {
-                xDirection *= -1;
+                xVelocity *= -1;
                 bounces--;
             } else if (!(getxPos() <= 0 || getxPos() >= Gui.width) && (getyPos() <= 0 || getyPos() >= Gui.height)) {
-                yDirection *= -1;
+                yVelocity *= -1;
                 bounces--;
             } else {
-                xDirection *= -1;
-                yDirection *= -1;
+                xVelocity *= -1;
+                yVelocity *= -1;
                 bounces--;
             }
         }
@@ -41,8 +41,8 @@ public class Bouncy extends Entity {
 
     @Override
     public void move() {
-        xPos += (int) Math.round(xDirection * speed);
-        yPos += (int) Math.round(yDirection * speed);
+        xPos += (int) Math.round(xVelocity * speed);
+        yPos += (int) Math.round(yVelocity * speed);
     }
 
     public void generateStartingPoint() {
@@ -52,34 +52,34 @@ public class Bouncy extends Entity {
             //start von Oben -> Y = 0
             xPos = (int) (Math.random() * Gui.width);
             yPos = 0;
-            xDirection = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
+            xVelocity = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
             do {
-                yDirection = Math.random();
-            } while (xDirection == 0 && yDirection == 0);
+                yVelocity = Math.random();
+            } while (xVelocity == 0 && yVelocity == 0);
         } else if (startedge == 1) {
             //start von Rechts -> X = Screen width
             xPos = Gui.width;
             yPos = (int) (Math.random() * Gui.height);
             do {
-                xDirection = Math.random() * -1;
-            } while (xDirection == 0 && yDirection == 0);
-            yDirection = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
+                xVelocity = Math.random() * -1;
+            } while (xVelocity == 0 && yVelocity == 0);
+            yVelocity = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
         } else if (startedge == 2) {
             //start von Unten -> Y = Screen height
             xPos = (int) (Math.random() * Gui.width);
             yPos = Gui.height;
-            xDirection = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
+            xVelocity = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
             do {
-                yDirection = Math.random() * -1;
-            } while (xDirection == 0 && yDirection == 0);
+                yVelocity = Math.random() * -1;
+            } while (xVelocity == 0 && yVelocity == 0);
         } else if (startedge == 3) {
             //start von Links -> X = 0
             xPos = 0;
             yPos = (int) (Math.random() * Gui.height);
             do {
-                xDirection = Math.random();
-            } while (xDirection == 0 && yDirection == 0);
-            yDirection = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
+                xVelocity = Math.random();
+            } while (xVelocity == 0 && yVelocity == 0);
+            yVelocity = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
         }
     }
 

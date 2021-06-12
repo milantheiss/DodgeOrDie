@@ -4,20 +4,31 @@ import javafx.animation.AnimationTimer;
 import me.milthe.ui.Gui;
 import me.milthe.ui.Menustates;
 
+/**
+ * Sobald gestartet, ruft GameLoop kontinuierliche integralen Bestandteile des Spiels ab. GameLoop implements Runnable
+ */
 public class GameLoop implements Runnable {
-    private final UpdateController UPDATEController;
+    private final UpdateController UPDATE_CONTROLLER;
 
     private static final int UPDATES_PER_SECOND = 60;
     private double accumulator = 0;
     private long currentTime, lastUpdate = System.currentTimeMillis();
 
+    /**
+     * Erstellt neuen GameLoop
+     * @param game Das Hauptobjekt von Game.java des Projekts
+     */
     public GameLoop(Game game) {
-        this.UPDATEController = new UpdateController(game);
+        this.UPDATE_CONTROLLER = new UpdateController(game);
     }
 
+    /**
+     * Startet Gameloop. Der Gameloop wird erst wenn das Programm geschlossen wird beendet.
+     */
     @Override
     public void run() {
         try {
+            //AnimationTimer --> Gameloop führt alles aus, das pro Tick ausgeführt werden muss
             new AnimationTimer() {
                 @Override
                 public void handle(long l) {
@@ -41,10 +52,16 @@ public class GameLoop implements Runnable {
         }
     }
 
+    /**
+     * Ruft UPDATE_CONTROLLER auf und führt Updates aus
+     */
     private void update() {
-        UPDATEController.runUpdate();
+        UPDATE_CONTROLLER.runUpdate();
     }
 
+    /**
+     * Ruf je nach Gamestate verschiedene Draw Klassen auf. DrawEnvironment wird immer aufgerufen
+     */
     private void render() {
         Gui.gc_main.clearRect(0, 0, Gui.width, Gui.height);
         Gui.drawEnvironment.draw(Gui.gc_main);

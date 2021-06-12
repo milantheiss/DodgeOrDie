@@ -7,7 +7,7 @@ import me.milthe.ui.Gui;
 public abstract class Entity {
     protected Game game;
     protected int xPos, yPos, width, height, speed, spriteWidth, spriteHeight;
-    protected double xDirection, yDirection;
+    protected double xVelocity, yVelocity;
 
     public abstract void update();
 

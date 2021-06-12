@@ -11,15 +11,25 @@ import me.milthe.ui.Menustates;
 
 import java.io.IOException;
 
+/**
+ * Wickelt Ereignisse und Aktionen für alle Menüs ab
+ */
 public class UpdateMenu {
     private final UpdateController updateController;
     private final Game game;
 
+    /**
+     * @param updateController Steuert alle Updates die während des Spiels und im Menü ausgeführt werden müssen
+     * @param game Das Hauptobjekt von Game.java des Spiels
+     */
     public UpdateMenu(UpdateController updateController, Game game) {
         this.updateController = updateController;
         this.game = game;
     }
 
+    /**
+     * Führt Updates aus
+     */
     public void runUpdate() {
         if (Gui.menustate == Menustates.MAIN) {
             mainMenuController();
@@ -30,6 +40,9 @@ public class UpdateMenu {
         }
     }
 
+    /**
+     * Wickelt Benutzereingaben im Hauptmenü ab und definiert Events, die auf Benutzereingaben folgen
+     */
     private void mainMenuController() {
         Gui.menuSetup.MAIN_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
@@ -49,6 +62,9 @@ public class UpdateMenu {
         });
     }
 
+    /**
+     * Wickelt Benutzereingaben im Endlos Modus Menü ab und definiert Events, die auf Benutzereingaben folgen
+     */
     private void EndlessMenuController() {
         Gui.menuSetup.ENDLESS_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
@@ -69,12 +85,17 @@ public class UpdateMenu {
         });
     }
 
+    /**
+     * Wickelt Benutzereingaben im Pausenmenü ab und definiert Events, die auf Benutzereingaben folgen
+     */
     private void pauseMenuController() {
+        //Beendet das Menü wenn Escape gedrückt wird
         if (Game.input.isPressed(KeyCode.ESCAPE)) {
             Game.state = Gamestates.INGAME;
             Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
             Game.jukebox.resumeInGameMusic();
         }
+        //Handlet die Buttons im Menü
         Gui.menuSetup.PAUSE_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("weiter")) {
@@ -112,6 +133,5 @@ public class UpdateMenu {
                 }
             }
         });
-
     }
 }

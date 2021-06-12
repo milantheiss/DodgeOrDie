@@ -34,8 +34,8 @@ public class CircleEnemy extends Entity {
     }
 
     public void move() {
-        xPos += xDirection * speed;
-        yPos += yDirection * speed;
+        xPos += xVelocity * speed;
+        yPos += yVelocity * speed;
     }
 
     //Setzt den Path auf dem der Circle sich bewegt
@@ -69,31 +69,31 @@ public class CircleEnemy extends Entity {
         double m = ((double) targetY - (double) yPos) / ((double) targetX - (double) xPos);
 
         if (m < 1 && m > -1) {
-            xDirection = xPos < targetX ? 1 : -1;
-            yDirection = yPos < targetY ? Math.abs(m) : (Math.abs(m)) * -1;
+            xVelocity = xPos < targetX ? 1 : -1;
+            yVelocity = yPos < targetY ? Math.abs(m) : (Math.abs(m)) * -1;
         } else {
-            xDirection = xPos < targetX ? Math.abs(1 / m) : (Math.abs(1 / m)) * -1;
-            yDirection = yPos < targetY ? 1 : -1;
+            xVelocity = xPos < targetX ? Math.abs(1 / m) : (Math.abs(1 / m)) * -1;
+            yVelocity = yPos < targetY ? 1 : -1;
         }
     }
 
     @Override
     public Image getSprite() {
-        if (xDirection > -0.5 && xDirection < 0.5 && yDirection == 1) {
+        if (xVelocity > -0.5 && xVelocity < 0.5 && yVelocity == 1) {
             return SPRITE_BOTTOM;
-        } else if ((xDirection < 1 && xDirection >= 0.5 && yDirection == 1) || (xDirection == 1 && yDirection < 1 && yDirection >= 0.5)) {
+        } else if ((xVelocity < 1 && xVelocity >= 0.5 && yVelocity == 1) || (xVelocity == 1 && yVelocity < 1 && yVelocity >= 0.5)) {
             return SPRITE_BOTTOM_RIGHT;
-        } else if (xDirection == 1 && yDirection > -0.5 && yDirection < 0.5) {
+        } else if (xVelocity == 1 && yVelocity > -0.5 && yVelocity < 0.5) {
             return SPRITE_RIGHT;
-        } else if ((xDirection < 1 && xDirection >= 0.5 && yDirection == -1) || (xDirection == 1 && yDirection > -1 && yDirection <= -0.5)) {
+        } else if ((xVelocity < 1 && xVelocity >= 0.5 && yVelocity == -1) || (xVelocity == 1 && yVelocity > -1 && yVelocity <= -0.5)) {
             return SPRITE_TOP_RIGHT;
-        } else if (xDirection > -0.5 && xDirection < 0.5 && yDirection == -1) {
+        } else if (xVelocity > -0.5 && xVelocity < 0.5 && yVelocity == -1) {
             return SPRITE_TOP;
-        } else if ((xDirection > -1 && xDirection <= -0.5 && yDirection == -1) || (xDirection == -1 && yDirection > -1 && yDirection <= -0.5)) {
+        } else if ((xVelocity > -1 && xVelocity <= -0.5 && yVelocity == -1) || (xVelocity == -1 && yVelocity > -1 && yVelocity <= -0.5)) {
             return SPRITE_TOP_LEFT;
-        } else if (xDirection == -1 && yDirection > -0.5 && yDirection < 0.5) {
+        } else if (xVelocity == -1 && yVelocity > -0.5 && yVelocity < 0.5) {
             return SPRITE_LEFT;
-        } else if ((xDirection > -1 && xDirection <= -0.5 && yDirection == 1) || (xDirection == -1 && yDirection < 1 && yDirection >= 0.5)) {
+        } else if ((xVelocity > -1 && xVelocity <= -0.5 && yVelocity == 1) || (xVelocity == -1 && yVelocity < 1 && yVelocity >= 0.5)) {
             return SPRITE_BOTTOM_LEFT;
         } else {
             return SPRITE_IDLE;

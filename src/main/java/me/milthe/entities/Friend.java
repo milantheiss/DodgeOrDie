@@ -25,8 +25,8 @@ public class Friend extends Entity {
 
     @Override
     public void move() {
-        xPos += (int) Math.round(xDirection * speed);
-        yPos += (int) Math.round(yDirection * speed);
+        xPos += (int) Math.round(xVelocity * speed);
+        yPos += (int) Math.round(yVelocity * speed);
     }
 
     @Override
@@ -57,15 +57,15 @@ public class Friend extends Entity {
         }
 
         if ((Gui.width - xPos) < xPos) {
-            xDirection = Math.random() * (-1);
+            xVelocity = Math.random() * (-1);
         } else {
-            xDirection = Math.random();
+            xVelocity = Math.random();
         }
 
         if ((Gui.height - yPos) < yPos) {
-            yDirection = Math.random() * (-1);
+            yVelocity = Math.random() * (-1);
         } else {
-            yDirection = Math.random();
+            yVelocity = Math.random();
         }
     }
 
