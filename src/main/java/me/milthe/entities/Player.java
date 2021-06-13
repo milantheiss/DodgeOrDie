@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import me.milthe.calculations.SpeedNormalizer;
 import me.milthe.core.Game;
+import me.milthe.sounds.Jukebox;
 import me.milthe.ui.GIF;
 import me.milthe.ui.Gui;
 import java.util.Objects;
@@ -94,6 +95,7 @@ public class Player extends Entity {
         int dashCooldown = 500;
         if ((System.currentTimeMillis() - dashCooldown) > lastDash) {
             dashanimation.playGIF(xPos-(dashanimation.getWidth()/2-width/2), yPos-(dashanimation.getHeight()/2-height/2));
+            Game.getJukebox().playSoundEffect("sfx_dash");
             int dashRange = 250;
             if (xVelocity == 1) {
                 int tempX = xPos + dashRange;
