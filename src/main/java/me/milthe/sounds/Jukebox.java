@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * Ermöglicht es Ton wie Soundeffekte oder Musik abzuspielen. Die Sounddatei muss vom Type .wav sein
+ */
 public class Jukebox {
     Clip soundeffect;
     Clip ingamemusic;
@@ -21,16 +23,26 @@ public class Jukebox {
 
     private boolean playMusic;
 
+    /**
+     * Erstellt beim Erstellen einer neuen Jukebox einen BufferedReader, welcher aus playlist.txt die Ingame Music Playlist ausliest
+     *
+     * @throws IOException
+     */
     public Jukebox() throws IOException {
         playMusic = false;
         String tempString = "";
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/sound/music/music.txt"))))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/sound/music/playlist.txt"))))) {
             while ((tempString = bufferedReader.readLine()) != null) {
                 titles.add(tempString);
             }
         }
     }
 
+    /**
+     * Spielt definierten .wav Soundclip ab. Muss sich in sound/effects/ befinden
+     *
+     * @param filename Name des Soundeffekts
+     */
     public void playSoundEffect(String filename) {
         try {
             soundeffect = AudioSystem.getClip();
@@ -43,11 +55,14 @@ public class Jukebox {
 
     }
 
+    /**
+     * Spielt aus vordefinierter Playlist (playlist.txt) einen zufälligen Soundclip ab. Wenn Soundclip zu Ende ist ruft die Methode sich selbst auf
+     */
     public void playInGameMusic() {
         playMusic = true;
         int randomTitle;
         do {
-            randomTitle = (int) Math.round(Math.random() * titles.size());
+            randomTitle = (int) (Math.random() * titles.size());
         } while (randomTitle == lastTitle);
         lastTitle = randomTitle;
         try {
@@ -66,15 +81,9 @@ public class Jukebox {
         }
     }
 
-    public void pauseInGameMusic() {
-        try {
-            ingamemusic.stop();
-            playMusic = false;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Startet Ingame Musik wieder nachdem sie gestoppt wurde wurde
+     */
     public void resumeInGameMusic() {
         try {
             ingamemusic.start();
@@ -83,6 +92,9 @@ public class Jukebox {
         }
     }
 
+    /**
+     * Stopt Ingame Musik
+     */
     public void stopInGameMusic() {
         try {
             ingamemusic.stop();
@@ -90,6 +102,5 @@ public class Jukebox {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -1,16 +1,19 @@
 package me.milthe.entities.actions;
 
-import me.milthe.core.Game;
 import me.milthe.entities.Bouncy;
 import me.milthe.entities.Entity;
 
+/**
+ * Berechnet Kollisionen zwischen Entities
+ */
 public class Collision {
-    Game game;
 
-    public Collision(Game game) {
-        this.game = game;
-    }
-
+    /**
+     * Berechnet die Kollision zwischen einem Rechteck und einem Kreis und gibt zurück ob sie kollidieren
+     * @param rectangle Erste Entity. Gedacht für Player
+     * @param circle Zweite Entity. Gedacht für Gegner wie CircleEnemy
+     * @return true wenn das Rechteck mit dem Kreis kollidiert
+     */
     public boolean collisionRectangleCircle(Entity rectangle, Entity circle) {
         int xCenterCircle = circle.getxPos() + (circle.getWidth() / 2);
         int yCenterCircle;

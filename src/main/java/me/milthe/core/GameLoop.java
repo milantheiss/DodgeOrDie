@@ -1,23 +1,30 @@
 package me.milthe.core;
 
 import javafx.animation.AnimationTimer;
-import me.milthe.graphic.Gui;
-import me.milthe.graphic.Menustates;
+import me.milthe.ui.Gui;
+import me.milthe.ui.Menustates;
 
+/**
+ * Sobald gestartet, ruft GameLoop kontinuierliche integralen Bestandteile des Spiels ab. GameLoop implements Runnable
+ */
 public class GameLoop implements Runnable {
-    private final UpdateController UPDATEController;
+    private final UpdateController UPDATE_CONTROLLER;
 
     private static final int UPDATES_PER_SECOND = 60;
     private double accumulator = 0;
     private long currentTime, lastUpdate = System.currentTimeMillis();
 
-    public GameLoop(Game game) {
-        this.UPDATEController = new UpdateController(game);
+    public GameLoop() {
+        this.UPDATE_CONTROLLER = new UpdateController();
     }
 
+    /**
+     * Startet Gameloop. Der Gameloop wird erst wenn das Programm geschlossen wird beendet.
+     */
     @Override
     public void run() {
         try {
+            //AnimationTimer --> Gameloop führt alles aus, das pro Tick ausgeführt werden muss
             new AnimationTimer() {
                 @Override
                 public void handle(long l) {
@@ -41,44 +48,44 @@ public class GameLoop implements Runnable {
         }
     }
 
+    /**
+     * Ruft UPDATE_CONTROLLER auf und führt Updates aus
+     */
     private void update() {
-        UPDATEController.runUpdate();
+        UPDATE_CONTROLLER.runUpdate();
     }
 
+    /**
+     * Ruf je nach Gamestate verschiedene Draw Klassen auf. DrawEnvironment wird immer aufgerufen
+     */
     private void render() {
-        Gui.gc_main.clearRect(0, 0, Gui.width, Gui.height);
-        Gui.drawEnvironment.draw(Gui.gc_main);
+        Gui.gc_main.clearRect(0, 0, Gui.WIDTH, Gui.HEIGHT);
+        Gui.drawEnvironment.render(Gui.gc_main);
 
-        if (Game.state == Gamestates.INGAME || Game.state == Gamestates.PAUSE || Game.state == Gamestates.ENDSCREEN) {
+        if (Game.getGamestate() == Gamestates.INGAME || Game.getGamestate() == Gamestates.PAUSE || Game.getGamestate() == Gamestates.ENDSCREEN) {
             Gui.drawEntities.render(Gui.gc_main);
             Gui.drawIngameUi.render(Gui.gc_main);
         }
 
-        if (Game.state == Gamestates.PAUSE || Game.state == Gamestates.MENU) {
+        if (Game.getGamestate() == Gamestates.PAUSE || Game.getGamestate() == Gamestates.MENU) {
             if (Gui.menustate == Menustates.MAIN) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.MAIN_MENU_CONTAINER);
-            } else if (Gui.menustate == Menustates.SPIELMODI) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_MENU_CONTAINER);
-            } else if (Gui.menustate == Menustates.SPIELMODI_ENDLESS) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_INFINITE_MENU_CONTAINER);
-            } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_CUSTOM_MENU_CONTAINER);
-            } else if (Gui.menustate == Menustates.SPIELMODI_CUSTOM_SELECT) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.SPIELMODI_CUSTOM_SELECT_MENU_CONTAINER);
+                Gui.drawUI.render(Gui.gc_main, Gui.menus.MAIN_MENU_CONTAINER);
+            } else if (Gui.menustate == Menustates.ENDLESS) {
+                Gui.drawUI.render(Gui.gc_main, Gui.menus.ENDLESS_MENU_CONTAINER);
             } else if (Gui.menustate == Menustates.PAUSE) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.PAUSE_MENU_CONTAINER);
+                Gui.drawUI.render(Gui.gc_main, Gui.menus.PAUSE_MENU_CONTAINER);
             }
         }
 
-        if (Game.state == Gamestates.HIGHSCORE) {
+        if (Game.getGamestate() == Gamestates.HIGHSCORE) {
             Gui.drawHighscore.render(Gui.gc_main);
         }
 
-        if (Game.state == Gamestates.TUTORIAL) {
+        if (Game.getGamestate() == Gamestates.TUTORIAL) {
             Gui.drawTutorial.render(Gui.gc_main);
         }
 
-        if (Game.state == Gamestates.ENDSCREEN) {
+        if (Game.getGamestate() == Gamestates.ENDSCREEN) {
             Gui.drawEndscreenEndless.render(Gui.gc_main);
         }
     }

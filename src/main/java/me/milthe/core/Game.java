@@ -4,8 +4,8 @@ import me.milthe.entities.*;
 import me.milthe.events.*;
 import me.milthe.gamemode.Gamemodes;
 import me.milthe.gamemode.Endless;
-import me.milthe.graphic.Gui;
-import me.milthe.graphic.Menustates;
+import me.milthe.ui.Gui;
+import me.milthe.ui.Menustates;
 import me.milthe.scoring.Highscore;
 import me.milthe.sounds.Jukebox;
 import java.io.File;
@@ -14,27 +14,31 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
+/**
+ * Zentrale Game Klasse. Ruft integrale Klassen auf
+ */
 public class Game {
-    public Highscore highscore;
-    public Endless endless;
+    private static Endless endless;
 
-    public static Gamestates state;
-    public static Gamemodes mode;
+    private static Gamestates state;
+    private static Gamemodes mode;
 
-    public static File GAMEDATA_DIRECTORY;
+    private static File GAME_DIRECTORY;
 
-    public static Input input;
-    public static Jukebox jukebox;
+    private static Input input;
+    private static Jukebox jukebox;
 
-    public static Player player;
-    public static List<Entity> entities;
+    private static Player player;
+    private static List<Entity> entities;
 
-    public Levelloader levelloader = new Levelloader(this);
-
+    /**
+     * Erstellt, falls nicht vorhanden, beim erstellen eines neuen Game Objektes ein lokales Game Directory
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public Game() throws IOException, URISyntaxException {
-        GAMEDATA_DIRECTORY = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator + "dodgeordie");
-        GAMEDATA_DIRECTORY.mkdir();
+        GAME_DIRECTORY = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator + "dodgeordie");
+        GAME_DIRECTORY.mkdir();
 
         input = new Input();
         jukebox = new Jukebox();
@@ -42,26 +46,113 @@ public class Game {
         state = Gamestates.MENU;
         Gui.menustate = Menustates.MAIN;
 
-        highscore = new Highscore();
-        endless = new Endless(this);
+        new Highscore();
+        endless = new Endless();
 
         entities = new CopyOnWriteArrayList<>();
     }
 
-    public List<Entity> getEntities() {
+    /**
+     * Gibt entities Liste zurück
+     * @return entitie List
+     */
+    public static List<Entity> getEntities() {
         return entities;
     }
 
-    public void addEntity(Entity entity) {
+    /**
+     * Fügt gegebene Entity zu entities Liste hinzu
+     * @param entity Objekt, das in entities Liste hinzugefügt werden soll
+     */
+    public static void addEntity(Entity entity) {
         entities.add(entity);
-        entity.setGame(this);
     }
 
-    public void removeEntity(Entity entity) {
+    /**
+     * Entfernt gegebene Entity von entities Liste
+     * @param entity Objekt, das aus entities Liste entfernt werden soll
+     */
+    public static void removeEntity(Entity entity) {
         entities.remove(entity);
     }
 
+    /**
+     * Gibt Spieler zurück
+     * @return Haupt Player Objekt
+     */
     public static Player getPlayer() {
         return player;
+    }
+
+    /**
+     * Setzt Player
+     * @param player Das Player Objekt, das das neue haupt Player Objekt sein soll
+     */
+    public static void setPlayer(Player player) {
+        Game.player = player;
+    }
+
+    /**
+     * Gibt Input zurück, der die Benutzereingaben sammelt
+     * @return Haupt Input des Projektes
+     */
+    public static Input getInput() {
+        return input;
+    }
+
+    /**
+     * Gibt Jukebox zurück, die für die Audioausgabe Ingame verantwortlich ist
+     * @return Haupt Jukebox des Projektes
+     */
+    public static Jukebox getJukebox() {
+        return jukebox;
+    }
+
+    /**
+     * Gibt Game Directory assoziiert mit dem Spiel zurück
+     * @return Game Directory, das beim Erstellen eines neuen Game.java Objekts erstellt wird
+     */
+    public static File getGameDirectory() {
+        return GAME_DIRECTORY;
+    }
+
+    /**
+     * Gibt momentanen Gamestate zurück
+     * @return momentaner Gamestate
+     */
+    public static Gamestates getGamestate() {
+        return state;
+    }
+
+    /**
+     * Setzt momentanen Gamestate
+     * @param state Neuer momentanen Gamestate
+     */
+    public static void setGamestate(Gamestates state) {
+        Game.state = state;
+    }
+
+    /**
+     * Gibt das Endless.java Objekt des Projekt zurück
+     * @return Haupt Endless Objekt des Projektes
+     */
+    public static Endless getEndless() {
+        return endless;
+    }
+
+    /**
+     * Gibt momentanen Gamemode zurück
+     * @return momentaner Gamemode
+     */
+    public static Gamemodes getGamemode() {
+        return mode;
+    }
+
+    /**
+     * Setzt momentanen Gamemode
+     * @param mode Neuer momentanen Gamemode
+     */
+    public static void setGamemode(Gamemodes mode) {
+        Game.mode = mode;
     }
 }

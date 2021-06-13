@@ -1,45 +1,62 @@
 package me.milthe.ui;
 
-import me.milthe.graphic.Gui;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Behälter um UiComponent zuhalten
+ */
 public class UiContainer {
-    public int x, y, width, height;
-    public List<UiCompontent> components = new ArrayList<>();
-    public List<UiButton> uiButtons = new ArrayList<>();
-    public List<UiTextField> uiTextFields = new ArrayList<>();
+    private int x, y, width, height;
+    private List<UiComponent> components = new ArrayList<>();
+    private List<UiButton> uiButtons = new ArrayList<>();
 
+    /**
+     * Zentriert den Container zum Screen
+     */
     public void centerContainerToScreen() {
         int maxWidth = 0;
         int tempY = 0;
-        for (UiCompontent uiCompontent : components) {
-            maxWidth = Math.max((uiCompontent.getWidth() + uiCompontent.getMarginLeft() + uiCompontent.getMarginRight()), maxWidth);
-            if (!uiCompontent.isOverlapping())
-                this.height += uiCompontent.getHeight() + uiCompontent.getMarginButton() + uiCompontent.getMarginTop();
+        for (UiComponent uiComponent : getComponents()) {
+            maxWidth = Math.max((uiComponent.getWidth() + uiComponent.getMarginLeft() + uiComponent.getMarginRight()), maxWidth);
+            this.height += uiComponent.getHeight() + uiComponent.getMarginButtom() + uiComponent.getMarginTop();
         }
         this.width = maxWidth;
-        this.x = (Gui.width - width) / 2;
-        this.y = (Gui.height - height) / 2;
-        for (UiCompontent uiCompontent : components) {
-            uiCompontent.setYToBeSum(tempY, this.y);
-            uiCompontent.applyMarginTop();
-            if (!uiCompontent.isOverlapping())
-                tempY += uiCompontent.getHeight() + uiCompontent.getMarginTop() + uiCompontent.getMarginButton();
-            uiCompontent.setX(this.x);
+        this.x = (Gui.WIDTH - width) / 2;
+        this.y = (Gui.HEIGHT - height) / 2;
+        for (UiComponent uiComponent : getComponents()) {
+            uiComponent.setYToBeSum(tempY, this.y);
+            uiComponent.applyMarginTop();
+            tempY += uiComponent.getHeight() + uiComponent.getMarginTop() + uiComponent.getMarginButtom();
+            uiComponent.setX(this.x);
         }
     }
 
+    /**
+     * Fügt neuen Button zur Container hinzu
+     * @param componentName Klarname des UiComponent
+     * @param filepath Pfad zur Bilddatei des UiComponent
+     */
     public void addButton(String componentName, InputStream filepath) {
         UiButton button = new UiButton(componentName, filepath);
-        components.add(button);
-        uiButtons.add(button);
+        getComponents().add(button);
+        getUiButtons().add(button);
     }
 
-    public void addTextField(String componentName, InputStream filepath) {
-        UiTextField uiTextField = new UiTextField(componentName, filepath);
-        components.add(uiTextField);
-        uiTextFields.add(uiTextField);
+    /**
+     * Gibt Components Liste zurück
+     * @return Components Liste
+     */
+    public List<UiComponent> getComponents() {
+        return components;
+    }
+
+    /**
+     * Gibt UiButtons Liste zurück
+     * @return UiButton Liste
+     */
+    public List<UiButton> getUiButtons() {
+        return uiButtons;
     }
 }
