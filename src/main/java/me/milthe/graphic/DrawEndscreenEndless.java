@@ -12,10 +12,16 @@ import me.milthe.ui.UiButton;
 
 import java.util.Objects;
 
+/**
+ * Draw Klasse für den Endscreen des Endlos Modus
+ */
 public class DrawEndscreenEndless {
     private static UiButton zurueck;
     private final Image highscoreImage;
 
+    /**
+     * Erstellt zurueck UiButton, setzt X und Y von zurueck UiButton und inizalisiert highscoreImage
+     */
     public DrawEndscreenEndless() {
         zurueck = new UiButton("zurueck", getClass().getResourceAsStream("/sprites/buttons/zurueck.png"));
         zurueck.setX((Gui.width - zurueck.getWidth()) / 2);
@@ -23,10 +29,14 @@ public class DrawEndscreenEndless {
         highscoreImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/newhighscore.png")));
     }
 
+    /**
+     * Redert alle Komponenten des Endscreens
+     * @param g Grafische Oberfläche auf, die das Bild gemalt werden soll
+     */
     public void render(GraphicsContext g) {
         g.setFill(new Color(45. / 255., 45. / 255., 45. / 255., 0.5));
         g.fillRect(0, 0, Gui.width, Gui.height);
-        if (Highscore.isHighscoreVisible()) g.drawImage(highscoreImage, (Gui.width - highscoreImage.getWidth()) / 2, (Gui.height - 450) / 2, highscoreImage.getWidth(), highscoreImage.getHeight());
+        if (Highscore.isNewHighscore()) g.drawImage(highscoreImage, (Gui.width - highscoreImage.getWidth()) / 2, (Gui.height - 450) / 2, highscoreImage.getWidth(), highscoreImage.getHeight());
         g.setFill(Color.WHITE);
         g.setFont(Font.loadFont(getClass().getResourceAsStream("/font/DodgeFont.ttf"), 40));
         g.fillText("Zeit  überlebt:  " + Time.getTimeString(Time.getTimeInSeconds()), (Gui.width - 590) / 2, (Gui.height - 182) / 2);
@@ -35,6 +45,10 @@ public class DrawEndscreenEndless {
         g.drawImage(zurueck.getSprite(), zurueck.getX(), zurueck.getY(), zurueck.getWidth(), zurueck.getHeight());
     }
 
+    /**
+     * Gibt zurueck UiButton zurück
+     * @return zurueck UiButton. Wir in Konstruktor erstellt
+     */
     public static UiButton getZurueck() {
         return zurueck;
     }

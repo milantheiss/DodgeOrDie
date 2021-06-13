@@ -18,6 +18,10 @@ public class Player extends Entity {
     public static int hitpoints;
     public static GIF dashanimation;
 
+    /**
+     * Erstellt neuen Player und setzt Parameter für xPos, yPos, width = 53, height = 50, speed = 16
+     * @param hitpoints Lebenspunkte des Spielers
+     */
     public Player(int hitpoints) {
         Player.hitpoints = hitpoints;
         xPos = Gui.width / 2 - 25;
@@ -29,45 +33,52 @@ public class Player extends Entity {
 
     }
 
+    /**
+     * Überschreibt update() aus superclass und führt Aktionen aus, die pro Tick für Player ausgeführt werden müssen. Wie zum Beispiel move()
+     */
     @Override
     public void update() {
         move();
     }
 
-    public void move() { //Movement wird in UpdateController.java aufgerufen
+    /**
+     *  Überschreibt move() aus superclass und verändert xPosition und yPosition um die berechnete Geschwindigkeit
+     */
+    @Override
+    public void move() {
         xVelocity = 0;
         yVelocity = 0;
 
-        if (Game.input.isPressed(KeyCode.W)) {
+        if (Game.getInput().isPressed(KeyCode.W)) {
             if ((yPos - speed) >= 0) {
                 yVelocity--;
 
-                if (Game.input.isPressed(KeyCode.SPACE)) {
+                if (Game.getInput().isPressed(KeyCode.SPACE)) {
 
                     dash();
                 }
             }
         }
-        if (Game.input.isPressed(KeyCode.S)) {
+        if (Game.getInput().isPressed(KeyCode.S)) {
             if ((yPos + speed) <= Gui.height - height) {
                 yVelocity++;
-                if (Game.input.isPressed(KeyCode.SPACE)) {
+                if (Game.getInput().isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
         }
-        if (Game.input.isPressed(KeyCode.A)) {
+        if (Game.getInput().isPressed(KeyCode.A)) {
             if ((xPos - speed) >= 0) {
                 xVelocity--;
-                if (Game.input.isPressed(KeyCode.SPACE)) {
+                if (Game.getInput().isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
         }
-        if (Game.input.isPressed(KeyCode.D)) {
+        if (Game.getInput().isPressed(KeyCode.D)) {
             if ((xPos + speed) <= Gui.width - width) {
                 xVelocity++;
-                if (Game.input.isPressed(KeyCode.SPACE)) {
+                if (Game.getInput().isPressed(KeyCode.SPACE)) {
                     dash();
                 }
             }
@@ -77,9 +88,12 @@ public class Player extends Entity {
         yPos += SpeedNormalizer.calculateNormalizedSpeed(speed, SpeedNormalizer.normalizeYVelocity(xVelocity, yVelocity));
     }
 
+    /**
+     * Ermöglicht es dem Spieler zu dash um die Dashrange
+     */
     public void dash() { //Dash in Richtung in die sich der Spieler bewegt (
         if ((System.currentTimeMillis() - dashCooldown) > lastDash) {
-            dashanimation.playGIF(System.currentTimeMillis(), xPos-(dashanimation.getWidth()/2-width/2), yPos-(dashanimation.getHeight()/2-height/2));
+            dashanimation.playGIF(xPos-(dashanimation.getWidth()/2-width/2), yPos-(dashanimation.getHeight()/2-height/2));
             if (xVelocity == 1) {
                 int tempX = xPos + dashRange;
                 if (tempX >= 0 && tempX <= Gui.width - width) {
@@ -124,11 +138,19 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Überschreibt getSpriteWidth und setzt 53 als festen Wert
+     * @return 53
+     */
     @Override
     public int getSpriteWidth() {
         return 53;
     }
 
+    /**
+     * Überschreibt getSpriteHeight und setzt 50 als festen Wert
+     * @return 50
+     */
     @Override
     public int getSpriteHeight() {
         return 50;

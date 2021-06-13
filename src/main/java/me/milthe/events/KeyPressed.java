@@ -4,12 +4,19 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import me.milthe.core.Game;
 
-public class KeyPressed implements EventHandler<KeyEvent> {//Wenn Taste gedrückt wird, wird die Taste an Input.java geschickt in Zahl umgewandelt und assoziierter Array Spot auf true gesetzt
+/**
+ * Registiert wenn eine Taste auf der Tastatur gedrückt wurde
+ */
+public class KeyPressed implements EventHandler<KeyEvent> {
 
+    /**
+     * Setzt boolean assoziiert mit Taste auf true
+     * @param keyEvent Benötigtes KeyEvent wird von EventHandler erstellt
+     */
     @Override
     public void handle(KeyEvent keyEvent) {
         try {
-            Game.input.pressed[keyEvent.getCode().getCode()] = true;
+            Game.getInput().pressed[keyEvent.getCode().getCode()] = true;
         } catch (Exception e) {
             e.printStackTrace();
         }

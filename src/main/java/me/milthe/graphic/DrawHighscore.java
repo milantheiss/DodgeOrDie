@@ -7,6 +7,9 @@ import me.milthe.scoring.Highscore;
 import me.milthe.ui.Gui;
 import me.milthe.ui.UiButton;
 
+/**
+ * Draw Klasse für den Highscore Screen
+ */
 public class DrawHighscore {
     private static UiButton zurueck;
 
@@ -16,6 +19,10 @@ public class DrawHighscore {
         zurueck.setY((Gui.height - zurueck.getHeight()) / 2 + 140);
     }
 
+    /**
+     * Redert alle Komponenten des Highscore Screens
+     * @param g Grafische Oberfläche auf, die das Bild gemalt werden soll
+     */
     public void render(GraphicsContext g) {
         g.setFill(Color.WHITE);
         g.setFont(Font.loadFont(getClass().getResourceAsStream("/font/DodgeFont.ttf"), 50));

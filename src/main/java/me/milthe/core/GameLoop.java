@@ -14,12 +14,8 @@ public class GameLoop implements Runnable {
     private double accumulator = 0;
     private long currentTime, lastUpdate = System.currentTimeMillis();
 
-    /**
-     * Erstellt neuen GameLoop
-     * @param game Das Hauptobjekt von Game.java des Projekts
-     */
-    public GameLoop(Game game) {
-        this.UPDATE_CONTROLLER = new UpdateController(game);
+    public GameLoop() {
+        this.UPDATE_CONTROLLER = new UpdateController();
     }
 
     /**
@@ -64,32 +60,32 @@ public class GameLoop implements Runnable {
      */
     private void render() {
         Gui.gc_main.clearRect(0, 0, Gui.width, Gui.height);
-        Gui.drawEnvironment.draw(Gui.gc_main);
+        Gui.drawEnvironment.render(Gui.gc_main);
 
-        if (Game.state == Gamestates.INGAME || Game.state == Gamestates.PAUSE || Game.state == Gamestates.ENDSCREEN) {
+        if (Game.getGamestate() == Gamestates.INGAME || Game.getGamestate() == Gamestates.PAUSE || Game.getGamestate() == Gamestates.ENDSCREEN) {
             Gui.drawEntities.render(Gui.gc_main);
             Gui.drawIngameUi.render(Gui.gc_main);
         }
 
-        if (Game.state == Gamestates.PAUSE || Game.state == Gamestates.MENU) {
+        if (Game.getGamestate() == Gamestates.PAUSE || Game.getGamestate() == Gamestates.MENU) {
             if (Gui.menustate == Menustates.MAIN) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.MAIN_MENU_CONTAINER);
+                Gui.drawUI.render(Gui.gc_main, Gui.menus.MAIN_MENU_CONTAINER);
             } else if (Gui.menustate == Menustates.ENDLESS) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.ENDLESS_MENU_CONTAINER);
+                Gui.drawUI.render(Gui.gc_main, Gui.menus.ENDLESS_MENU_CONTAINER);
             } else if (Gui.menustate == Menustates.PAUSE) {
-                Gui.drawUI.render(Gui.gc_main, Gui.menuSetup.PAUSE_MENU_CONTAINER);
+                Gui.drawUI.render(Gui.gc_main, Gui.menus.PAUSE_MENU_CONTAINER);
             }
         }
 
-        if (Game.state == Gamestates.HIGHSCORE) {
+        if (Game.getGamestate() == Gamestates.HIGHSCORE) {
             Gui.drawHighscore.render(Gui.gc_main);
         }
 
-        if (Game.state == Gamestates.TUTORIAL) {
+        if (Game.getGamestate() == Gamestates.TUTORIAL) {
             Gui.drawTutorial.render(Gui.gc_main);
         }
 
-        if (Game.state == Gamestates.ENDSCREEN) {
+        if (Game.getGamestate() == Gamestates.ENDSCREEN) {
             Gui.drawEndscreenEndless.render(Gui.gc_main);
         }
     }

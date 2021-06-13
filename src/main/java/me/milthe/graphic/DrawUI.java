@@ -1,15 +1,20 @@
 package me.milthe.graphic;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import me.milthe.ui.UiCompontent;
+import me.milthe.ui.UiComponent;
 import me.milthe.ui.UiContainer;
 
+/**
+ * Draw Klasse für das UI
+ */
 public class DrawUI {
+    /**
+     * Redert alle Komponenten des Ui
+     * @param g Grafische Oberfläche auf, die das Bild gemalt werden soll
+     */
     public void render(GraphicsContext g, UiContainer container) {
-        for (UiCompontent uiCompontent : container.components) {
-            g.drawImage(uiCompontent.getSprite(), uiCompontent.getX(), uiCompontent.getY(), uiCompontent.getWidth(), uiCompontent.getHeight());
+        for (UiComponent uiComponent : container.components) {
+            g.drawImage(uiComponent.getSprite(), uiComponent.getX(), uiComponent.getY(), uiComponent.getWidth(), uiComponent.getHeight());
         }
     }
 }

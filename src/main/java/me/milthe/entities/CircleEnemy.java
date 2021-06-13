@@ -6,6 +6,9 @@ import me.milthe.gamemode.Endless;
 import me.milthe.ui.Gui;
 import java.util.Objects;
 
+/**
+ * Gegnerklasse CircleEnemy: Suchen sich beim spawnen die Position des Spielers und fliegen über diesen Punkt Out of Bounce und despawnen
+ */
 public class CircleEnemy extends Entity {
     private final Image SPRITE_IDLE = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_idle.png")));
     private final Image SPRITE_TOP = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_top.png")));
@@ -17,6 +20,9 @@ public class CircleEnemy extends Entity {
     private final Image SPRITE_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_left.png")));
     private final Image SPRITE_TOP_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/circleEnemy/circle_enemy_topleft.png")));
 
+    /**
+     * Erstellt neuen CircleEnemy und setzt Parameter für width = 100, height = 100, speed = random zwischen 20 - 30
+     */
     public CircleEnemy() {
         width = 100;
         height = 100;
@@ -25,20 +31,28 @@ public class CircleEnemy extends Entity {
         setPath();
     }
 
+    /**
+     * Überschreibt update() aus superclass und führt Aktionen aus, die pro Tick für CircleEnemy ausgeführt werden müssen. Wie zum Beispiel move()
+     */
     @Override
     public void update() {
         move();
-        if (isObjectOutOfBounce(this)) {
-            game.removeEntity(this);
+        if (isObjectOutOfBounce()) {
+            Game.removeEntity(this);
         }
     }
 
+    /**
+     * Überschreibt move() aus superclass und verändert xPosition und yPosition um die berechnete Geschwindigkeit
+     */
     public void move() {
         xPos += xVelocity * speed;
         yPos += yVelocity * speed;
     }
 
-    //Setzt den Path auf dem der Circle sich bewegt
+    /**
+     * Setzt Weg auf dem sich der CircleEnemy bewegt. Läuft immer über den Punkt auf dem sich der Spieler befindet, wenn der CircleEnemy spawnt
+     */
     public void setPath() {
         //Gibt an welcher Bildschirmkante der Circle spawnt
         int startedge = (int) (Math.random() * 4);
@@ -77,6 +91,10 @@ public class CircleEnemy extends Entity {
         }
     }
 
+    /**
+     * Gibt Sprite von CircleEnemy zurück relative zur Bewegungsrichtung
+     * @return Sprite von CircleEnemy. Variiert je nach Bewegungsrichtung
+     */
     @Override
     public Image getSprite() {
         if (xVelocity > -0.5 && xVelocity < 0.5 && yVelocity == 1) {
@@ -98,15 +116,5 @@ public class CircleEnemy extends Entity {
         } else {
             return SPRITE_IDLE;
         }
-    }
-
-    @Override
-    public int getSpriteWidth() {
-        return (int) getSprite().getWidth();
-    }
-
-    @Override
-    public int getSpriteHeight() {
-        return (int) getSprite().getHeight();
     }
 }

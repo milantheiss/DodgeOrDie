@@ -12,14 +12,11 @@ import me.milthe.ui.Menustates;
  */
 public abstract class UpdateGamemodes {
     protected final Collision col;
-    protected final Game game;
 
     /**
-     * Erstellt eine neuen abstrakten UpdateGamemode mit spezifizierten Game
-     * @param game Das Hauptobjekt von Game.java des Spiels
+     * Erstellt eine neuen abstrakten UpdateGamemode
      */
-    public UpdateGamemodes(Game game) {
-        this.game = game;
+    public UpdateGamemodes() {
         col = new Collision();
     }
 
@@ -37,11 +34,11 @@ public abstract class UpdateGamemodes {
      * Wartet auf Benutzereingabe: Wenn ESCAPE gedrückt wird, wird das Spiel pausiert
      */
     protected void ingamePauseListener() {
-        if (Game.input.isPressed(KeyCode.ESCAPE)) {
-            Game.state = Gamestates.PAUSE;
+        if (Game.getInput().isPressed(KeyCode.ESCAPE)) {
+            Game.setGamestate(Gamestates.PAUSE);
             Gui.menustate = Menustates.PAUSE;
-            Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            Game.jukebox.pauseInGameMusic();
+            Game.getInput().pressed[KeyCode.ESCAPE.getCode()] = false;
+            Game.getJukebox().stopInGameMusic();
         }
     }
 
@@ -50,9 +47,9 @@ public abstract class UpdateGamemodes {
      */
     protected void checkIfWindowIsFocused() {
         if (!Gui.stage.isFocused()) {
-            Game.state = Gamestates.PAUSE;
+            Game.setGamestate(Gamestates.PAUSE);
             Gui.menustate = Menustates.PAUSE;
-            Game.jukebox.pauseInGameMusic();
+            Game.getJukebox().stopInGameMusic();
         }
     }
 }

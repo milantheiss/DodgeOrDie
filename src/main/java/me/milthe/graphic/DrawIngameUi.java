@@ -10,7 +10,9 @@ import me.milthe.ui.Gui;
 
 import java.util.Objects;
 
-
+/**
+ * Draw Klasse für das Ingame UI
+ */
 public class DrawIngameUi {
     private Image heart;
 
@@ -19,6 +21,10 @@ public class DrawIngameUi {
 
     }
 
+    /**
+     * Redert alle Komponenten des Ingame UIs
+     * @param g Grafische Oberfläche auf, die das Bild gemalt werden soll
+     */
     public void render(GraphicsContext g) {
         g.setFill(Color.WHITE);
         g.setFont(Font.loadFont(getClass().getResourceAsStream("/font/DodgeFont.ttf"), 40));

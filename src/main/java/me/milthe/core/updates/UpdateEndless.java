@@ -10,20 +10,13 @@ import java.io.IOException;
  * Wickelt Ereignisse und Aktionen für den Endlos Modus ab
  */
 public class UpdateEndless extends UpdateGamemodes {
-    /**
-     * Erstellt ein neues UpdateEndless mit dem spezifizierten Game
-     * @param game Das Hauptobjekt von Game.java des Spiels
-     */
-    public UpdateEndless(Game game) {
-        super(game);
-    }
 
     /**
      * Führt Updates aus
      */
     @Override
     public void runUpdate() {
-        Game.entities.forEach(Entity::update);
+        Game.getEntities().forEach(Entity::update);
         ingamePauseListener();
         checkIfWindowIsFocused();
         collisionAction();
@@ -34,18 +27,18 @@ public class UpdateEndless extends UpdateGamemodes {
      */
     @Override
     protected void collisionAction() {
-        Game.entities.forEach(entity -> {
+        Game.getEntities().forEach(entity -> {
             if (col.collisionRectangleCircle(Game.getPlayer(), entity) && !(entity instanceof Player)) {
                 if (entity instanceof CircleEnemy || entity instanceof Bouncy) {
-                    game.removeEntity(entity);
-                    Game.jukebox.playSoundEffect("sfx_damage");
+                    Game.removeEntity(entity);
+                    Game.getJukebox().playSoundEffect("sfx_damage");
                     if ((Player.hitpoints - 1) == 0) {
                         Player.hitpoints--;
                         Endless.totalEnemiesSpawned--;
                         try {
-                            Game.state = Gamestates.ENDSCREEN;
-                            game.endless.stopEndless();
-                            Game.state = Gamestates.ENDSCREEN;
+                            Game.setGamestate(Gamestates.ENDSCREEN);
+                            Game.getEndless().stopEndless();
+                            Game.setGamestate(Gamestates.ENDSCREEN);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -54,8 +47,8 @@ public class UpdateEndless extends UpdateGamemodes {
                         Endless.totalEnemiesSpawned--;
                     }
                 } else if (entity instanceof Friend) {
-                    Game.jukebox.playSoundEffect("sfx_good");
-                    game.removeEntity(entity);
+                    Game.getJukebox().playSoundEffect("sfx_good");
+                    Game.removeEntity(entity);
                     Player.hitpoints++;
                     Endless.highestAmountOfHealth = Math.max(Endless.highestAmountOfHealth, Player.hitpoints);
                 }

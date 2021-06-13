@@ -16,15 +16,12 @@ import java.io.IOException;
  */
 public class UpdateMenu {
     private final UpdateController updateController;
-    private final Game game;
 
     /**
      * @param updateController Steuert alle Updates die während des Spiels und im Menü ausgeführt werden müssen
-     * @param game Das Hauptobjekt von Game.java des Spiels
      */
-    public UpdateMenu(UpdateController updateController, Game game) {
+    public UpdateMenu(UpdateController updateController) {
         this.updateController = updateController;
-        this.game = game;
     }
 
     /**
@@ -44,7 +41,7 @@ public class UpdateMenu {
      * Wickelt Benutzereingaben im Hauptmenü ab und definiert Events, die auf Benutzereingaben folgen
      */
     private void mainMenuController() {
-        Gui.menuSetup.MAIN_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
+        Gui.menus.MAIN_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("spielen")) {
                     MouseClicked.clickHandeled = true;
@@ -52,7 +49,7 @@ public class UpdateMenu {
                 }
                 if (buttonUi.getComponentName().equals("tutorial")) {
                     MouseClicked.clickHandeled = true;
-                    Game.state = Gamestates.TUTORIAL;
+                    Game.setGamestate(Gamestates.TUTORIAL);
                 }
                 if (buttonUi.getComponentName().equals("verlassen")) {
                     MouseClicked.clickHandeled = true;
@@ -66,16 +63,16 @@ public class UpdateMenu {
      * Wickelt Benutzereingaben im Endlos Modus Menü ab und definiert Events, die auf Benutzereingaben folgen
      */
     private void EndlessMenuController() {
-        Gui.menuSetup.ENDLESS_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
+        Gui.menus.ENDLESS_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("start")) {
                     MouseClicked.clickHandeled = true;
-                    game.endless.startEndless();
-                    Game.state = Gamestates.INGAME;
+                    Game.getEndless().startEndless();
+                    Game.setGamestate(Gamestates.INGAME);
                 }
                 if (buttonUi.getComponentName().equals("highscore")) {
                     MouseClicked.clickHandeled = true;
-                    Game.state = Gamestates.HIGHSCORE;
+                    Game.setGamestate(Gamestates.HIGHSCORE);
                 }
                 if (buttonUi.getComponentName().equals("zurueck")) {
                     MouseClicked.clickHandeled = true;
@@ -90,46 +87,46 @@ public class UpdateMenu {
      */
     private void pauseMenuController() {
         //Beendet das Menü wenn Escape gedrückt wird
-        if (Game.input.isPressed(KeyCode.ESCAPE)) {
-            Game.state = Gamestates.INGAME;
-            Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-            Game.jukebox.resumeInGameMusic();
+        if (Game.getInput().isPressed(KeyCode.ESCAPE)) {
+            Game.setGamestate(Gamestates.INGAME);
+            Game.getInput().pressed[KeyCode.ESCAPE.getCode()] = false;
+            Game.getJukebox().resumeInGameMusic();
         }
         //Handlet die Buttons im Menü
-        Gui.menuSetup.PAUSE_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
+        Gui.menus.PAUSE_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("weiter")) {
                     MouseClicked.clickHandeled = true;
-                    Game.state = Gamestates.INGAME;
-                    Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-                    Game.jukebox.resumeInGameMusic();
+                    Game.setGamestate(Gamestates.INGAME);
+                    Game.getInput().pressed[KeyCode.ESCAPE.getCode()] = false;
+                    Game.getJukebox().resumeInGameMusic();
                 }
                 if (buttonUi.getComponentName().equals("neustart")) {
                     MouseClicked.clickHandeled = true;
-                    Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
-                    if (Game.mode == Gamemodes.ENDLESS) {
+                    Game.getInput().pressed[KeyCode.ESCAPE.getCode()] = false;
+                    if (Game.getGamemode() == Gamemodes.ENDLESS) {
                         try {
-                            game.endless.stopEndless();
+                            Game.getEndless().stopEndless();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        game.endless.terminateEndless();
-                        game.endless.startEndless();
+                        Game.getEndless().terminateEndless();
+                        Game.getEndless().startEndless();
                     }
                 }
                 if (buttonUi.getComponentName().equals("verlassen")) {
                     MouseClicked.clickHandeled = true;
-                    if (Game.mode == Gamemodes.ENDLESS) {
+                    if (Game.getGamemode() == Gamemodes.ENDLESS) {
                         try {
-                            game.endless.stopEndless();
+                            Game.getEndless().stopEndless();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        game.endless.terminateEndless();
+                        Game.getEndless().terminateEndless();
                     }
-                    Game.state = Gamestates.MENU;
+                    Game.setGamestate(Gamestates.MENU);
                     Gui.menustate = Menustates.MAIN;
-                    Game.input.pressed[KeyCode.ESCAPE.getCode()] = false;
+                    Game.getInput().pressed[KeyCode.ESCAPE.getCode()] = false;
                 }
             }
         });

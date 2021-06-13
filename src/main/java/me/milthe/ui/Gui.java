@@ -16,6 +16,9 @@ import me.milthe.graphic.*;
 
 import java.util.Objects;
 
+/**
+ * Stellt JavaFX Fester ein und enthält integrale Parameter
+ */
 public class Gui {
     public static DrawEnvironment drawEnvironment;
     public static DrawEntities drawEntities;
@@ -30,25 +33,29 @@ public class Gui {
     public static Scene scene;
     public static Stage stage;
 
-    public static MenuSetup menuSetup;
+    public static Menus menus;
     public static Menustates menustate;
 
+    /**
+     * Erstellt neues Gui und setzt width und height auf die Größe des primären Bildschirms
+     */
     public Gui() {
         width = (int) Screen.getPrimary().getBounds().getWidth();
         height = (int) Screen.getPrimary().getBounds().getHeight();
-    }
 
-    public void init() {
         drawEnvironment = new DrawEnvironment();
         drawEntities = new DrawEntities();
         drawUI = new DrawUI();
         drawTutorial = new DrawTutorial();
         drawEndscreenEndless = new DrawEndscreenEndless();
         drawHighscore = new DrawHighscore();
-
-        menuSetup = new MenuSetup();
+        menus = new Menus();
     }
 
+    /**
+     * Erstellt neues JavaFX Fenster
+     * @param stage Primäre Stage
+     */
     public void create(Stage stage) { //JavaFX Setup
         Gui.stage = stage;
         Canvas canvas_main;
@@ -86,8 +93,10 @@ public class Gui {
         });
     }
 
+    /**
+     * Schließt die JavaFX Anwendung
+     */
     public static void close() {
-        System.out.println("close");
         Platform.exit();
         System.exit(0);
         stage.close();

@@ -1,6 +1,5 @@
 package me.milthe.entities.actions;
 
-import me.milthe.core.Game;
 import me.milthe.entities.Bouncy;
 import me.milthe.entities.Entity;
 
