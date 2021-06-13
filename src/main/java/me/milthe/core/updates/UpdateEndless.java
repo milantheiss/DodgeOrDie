@@ -32,9 +32,9 @@ public class UpdateEndless extends UpdateGamemodes {
                 if (entity instanceof CircleEnemy || entity instanceof Bouncy) {
                     Game.removeEntity(entity);
                     Game.getJukebox().playSoundEffect("sfx_damage");
-                    if ((Player.hitpoints - 1) == 0) {
-                        Player.hitpoints--;
-                        Endless.totalEnemiesSpawned--;
+                    if ((Player.getHitpoints() - 1) == 0) {
+                        Player.setHitpoints(-1);
+                        Endless.setTotalEnemiesSurvied(-1);
                         try {
                             Game.setGamestate(Gamestates.ENDSCREEN);
                             Game.getEndless().stopEndless();
@@ -43,14 +43,14 @@ public class UpdateEndless extends UpdateGamemodes {
                             e.printStackTrace();
                         }
                     } else {
-                        Player.hitpoints--;
-                        Endless.totalEnemiesSpawned--;
+                        Player.setHitpoints(-1);
+                        Endless.setTotalEnemiesSurvied(-1);
                     }
                 } else if (entity instanceof Friend) {
                     Game.getJukebox().playSoundEffect("sfx_good");
                     Game.removeEntity(entity);
-                    Player.hitpoints++;
-                    Endless.highestAmountOfHealth = Math.max(Endless.highestAmountOfHealth, Player.hitpoints);
+                    Player.setHitpoints(1);
+                    Endless.setHighestAmountOfHealth(Math.max(Endless.getHighestAmountOfHealth(), Player.getHitpoints()));
                 }
             }
         });

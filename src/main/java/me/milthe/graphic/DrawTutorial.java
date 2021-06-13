@@ -1,10 +1,8 @@
 package me.milthe.graphic;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import me.milthe.ui.Gui;
 import me.milthe.ui.Tutorial;
-import me.milthe.ui.UiButton;
 
 /**
  * Draw Klasse für den Tutorial Screen
@@ -20,8 +18,8 @@ public class DrawTutorial {
      * @param g Grafische Oberfläche auf, die das Bild gemalt werden soll
      */
     public void render(GraphicsContext g) {
-        g.drawImage(tutorial.getTutorialImage(tutorial.getIndex()), (Gui.width - tutorial.getTutorialImage(tutorial.getIndex()).getWidth()) / 2, (Gui.height - tutorial.getTutorialImage(tutorial.getIndex()).getHeight()) / 2, tutorial.getTutorialImage(tutorial.getIndex()).getWidth(), tutorial.getTutorialImage(tutorial.getIndex()).getHeight());
-        tutorial.getZURUECK_BUTTON().setYToBeSum((int) (((Gui.height - tutorial.getTutorialImage(0).getHeight()) / 2) + tutorial.getTutorialImage(0).getHeight()), 50);
+        g.drawImage(tutorial.getTutorialImage(tutorial.getIndex()), (Gui.WIDTH - tutorial.getTutorialImage(tutorial.getIndex()).getWidth()) / 2, (Gui.HEIGHT - tutorial.getTutorialImage(tutorial.getIndex()).getHeight()) / 2, tutorial.getTutorialImage(tutorial.getIndex()).getWidth(), tutorial.getTutorialImage(tutorial.getIndex()).getHeight());
+        tutorial.getZURUECK_BUTTON().setYToBeSum((int) (((Gui.HEIGHT - tutorial.getTutorialImage(0).getHeight()) / 2) + tutorial.getTutorialImage(0).getHeight()), 50);
         tutorial.getLEFT_BUTTON().setY(tutorial.getZURUECK_BUTTON().getY() + 3);
         tutorial.getRIGHT_BUTTON().setY(tutorial.getZURUECK_BUTTON().getY() + 1);
         g.drawImage(tutorial.getZURUECK_BUTTON().getSprite(), tutorial.getZURUECK_BUTTON().getX(), tutorial.getZURUECK_BUTTON().getY(), tutorial.getZURUECK_BUTTON().getWidth(), tutorial.getZURUECK_BUTTON().getHeight());

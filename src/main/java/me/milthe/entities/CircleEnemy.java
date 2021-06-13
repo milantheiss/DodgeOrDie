@@ -27,7 +27,7 @@ public class CircleEnemy extends Entity {
         width = 100;
         height = 100;
         speed = (int) (Math.random() * 30) + 20; //Desto höher desto langsamer
-        Endless.totalEnemiesSpawned++;
+        Endless.setTotalEnemiesSurvied(1);
         setPath();
     }
 
@@ -63,21 +63,21 @@ public class CircleEnemy extends Entity {
 
         if (startedge == 0) {
             //start von Oben -> Y = 0
-            xPos = (int) (Math.random() * Gui.width);
+            xPos = (int) (Math.random() * Gui.WIDTH);
             yPos = 0;
 
         } else if (startedge == 1) {
             //start von Rechts -> X = Screen width
-            xPos = Gui.width;
-            yPos = (int) (Math.random() * Gui.height);
+            xPos = Gui.WIDTH;
+            yPos = (int) (Math.random() * Gui.HEIGHT);
         } else if (startedge == 2) {
             //start von Unten -> Y = Screen height
-            xPos = (int) (Math.random() * Gui.width);
-            yPos = Gui.height;
+            xPos = (int) (Math.random() * Gui.WIDTH);
+            yPos = Gui.HEIGHT;
         } else if (startedge == 3) {
             //start von Links -> X = 0
             xPos = 0;
-            yPos = (int) (Math.random() * Gui.height);
+            yPos = (int) (Math.random() * Gui.HEIGHT);
         }
 
         double m = ((double) targetY - (double) yPos) / ((double) targetX - (double) xPos);

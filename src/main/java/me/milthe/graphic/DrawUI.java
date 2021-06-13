@@ -13,7 +13,7 @@ public class DrawUI {
      * @param g Grafische Oberfläche auf, die das Bild gemalt werden soll
      */
     public void render(GraphicsContext g, UiContainer container) {
-        for (UiComponent uiComponent : container.components) {
+        for (UiComponent uiComponent : container.getComponents()) {
             g.drawImage(uiComponent.getSprite(), uiComponent.getX(), uiComponent.getY(), uiComponent.getWidth(), uiComponent.getHeight());
         }
     }

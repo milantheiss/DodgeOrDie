@@ -41,7 +41,7 @@ public class UpdateMenu {
      * Wickelt Benutzereingaben im Hauptmenü ab und definiert Events, die auf Benutzereingaben folgen
      */
     private void mainMenuController() {
-        Gui.menus.MAIN_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
+        Gui.menus.MAIN_MENU_CONTAINER.getUiButtons().forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("spielen")) {
                     MouseClicked.clickHandeled = true;
@@ -63,7 +63,7 @@ public class UpdateMenu {
      * Wickelt Benutzereingaben im Endlos Modus Menü ab und definiert Events, die auf Benutzereingaben folgen
      */
     private void EndlessMenuController() {
-        Gui.menus.ENDLESS_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
+        Gui.menus.ENDLESS_MENU_CONTAINER.getUiButtons().forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("start")) {
                     MouseClicked.clickHandeled = true;
@@ -93,7 +93,7 @@ public class UpdateMenu {
             Game.getJukebox().resumeInGameMusic();
         }
         //Handlet die Buttons im Menü
-        Gui.menus.PAUSE_MENU_CONTAINER.uiButtons.forEach(buttonUi -> {
+        Gui.menus.PAUSE_MENU_CONTAINER.getUiButtons().forEach(buttonUi -> {
             if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
                 if (buttonUi.getComponentName().equals("weiter")) {
                     MouseClicked.clickHandeled = true;

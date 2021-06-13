@@ -8,9 +8,9 @@ import java.util.List;
  * Behälter um UiComponent zuhalten
  */
 public class UiContainer {
-    public int x, y, width, height;
-    public List<UiComponent> components = new ArrayList<>();
-    public List<UiButton> uiButtons = new ArrayList<>();
+    private int x, y, width, height;
+    private List<UiComponent> components = new ArrayList<>();
+    private List<UiButton> uiButtons = new ArrayList<>();
 
     /**
      * Zentriert den Container zum Screen
@@ -18,14 +18,14 @@ public class UiContainer {
     public void centerContainerToScreen() {
         int maxWidth = 0;
         int tempY = 0;
-        for (UiComponent uiComponent : components) {
+        for (UiComponent uiComponent : getComponents()) {
             maxWidth = Math.max((uiComponent.getWidth() + uiComponent.getMarginLeft() + uiComponent.getMarginRight()), maxWidth);
             this.height += uiComponent.getHeight() + uiComponent.getMarginButtom() + uiComponent.getMarginTop();
         }
         this.width = maxWidth;
-        this.x = (Gui.width - width) / 2;
-        this.y = (Gui.height - height) / 2;
-        for (UiComponent uiComponent : components) {
+        this.x = (Gui.WIDTH - width) / 2;
+        this.y = (Gui.HEIGHT - height) / 2;
+        for (UiComponent uiComponent : getComponents()) {
             uiComponent.setYToBeSum(tempY, this.y);
             uiComponent.applyMarginTop();
             tempY += uiComponent.getHeight() + uiComponent.getMarginTop() + uiComponent.getMarginButtom();
@@ -40,7 +40,23 @@ public class UiContainer {
      */
     public void addButton(String componentName, InputStream filepath) {
         UiButton button = new UiButton(componentName, filepath);
-        components.add(button);
-        uiButtons.add(button);
+        getComponents().add(button);
+        getUiButtons().add(button);
+    }
+
+    /**
+     * Gibt Components Liste zurück
+     * @return Components Liste
+     */
+    public List<UiComponent> getComponents() {
+        return components;
+    }
+
+    /**
+     * Gibt UiButtons Liste zurück
+     * @return UiButton Liste
+     */
+    public List<UiButton> getUiButtons() {
+        return uiButtons;
     }
 }

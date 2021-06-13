@@ -20,9 +20,9 @@ public class Tutorial {
         tutorialImages[2] = new Image(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/circleenemy.png"));
         tutorialImages[3] = new Image(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/bouncy.png"));
         tutorialImages[4] = new Image(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/friend.png"));
-        ZURUECK_BUTTON.setX((Gui.width - ZURUECK_BUTTON.getWidth()) / 2);
-        LEFT_BUTTON.setX((Gui.width - ZURUECK_BUTTON.getWidth()) / 2 - (LEFT_BUTTON.getWidth() * 2));
-        RIGHT_BUTTON.setX((Gui.width - ZURUECK_BUTTON.getWidth()) / 2 + (ZURUECK_BUTTON.getWidth() + RIGHT_BUTTON.getWidth()));
+        ZURUECK_BUTTON.setX((Gui.WIDTH - ZURUECK_BUTTON.getWidth()) / 2);
+        LEFT_BUTTON.setX((Gui.WIDTH - ZURUECK_BUTTON.getWidth()) / 2 - (LEFT_BUTTON.getWidth() * 2));
+        RIGHT_BUTTON.setX((Gui.WIDTH - ZURUECK_BUTTON.getWidth()) / 2 + (ZURUECK_BUTTON.getWidth() + RIGHT_BUTTON.getWidth()));
     }
 
     /**

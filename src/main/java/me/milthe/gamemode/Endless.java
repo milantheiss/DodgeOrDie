@@ -14,10 +14,10 @@ import java.util.TimerTask;
  * Definiert Parameter und Methoden für den Endlos Modus
  */
 public class Endless {
-    public static int totalEnemiesSpawned;
+    private static int totalEnemiesSurvied;
     private Timer timer;
     private static int spawnDelay = 2000;
-    public static int highestAmountOfHealth;
+    private static int highestAmountOfHealth;
 
     /**
      * Startet den Endlos Modus. Dass heißt alles wird auf Null gesetzt und der Spawn Timer wird gestartet
@@ -27,9 +27,9 @@ public class Endless {
         Game.setGamestate(Gamestates.INGAME);
         Game.setGamemode(Gamemodes.ENDLESS);
 
-        Game.setPlayer(new Player(20000000));
+        Game.setPlayer(new Player(4));
 
-        totalEnemiesSpawned = 0;
+        totalEnemiesSurvied = 0;
         highestAmountOfHealth = 4;
 
         Game.addEntity(Game.getPlayer());
@@ -74,7 +74,7 @@ public class Endless {
     public void stopEndless() throws IOException {
         Time.stopTimer();
         Game.getJukebox().stopInGameMusic();
-        Highscore.setNewHighscore(Highscore.isHighscoreBigger(Time.getTimeInSeconds(), totalEnemiesSpawned, highestAmountOfHealth));
+        Highscore.setNewHighscore(Highscore.isHighscoreBigger(Time.getTimeInSeconds(), totalEnemiesSurvied, highestAmountOfHealth));
         timer.cancel();
         Game.setGamestate(Gamestates.PAUSE);
     }
@@ -84,5 +84,37 @@ public class Endless {
      */
     public void terminateEndless() {
         Game.getEntities().clear();
+    }
+
+    /**
+     * Gibt Anzahl der überlebten Gegner im Run zurück
+     * @return Anzahl der überlebten Gegner
+     */
+    public static int getTotalEnemiesSurvied() {
+        return totalEnemiesSurvied;
+    }
+
+    /**
+     * Erhöhte oder verringert überlebte Gegner um factor
+     * @param factor Um wie viel totalEnemiesSurvied erhöht oder verringert werden soll
+     */
+    public static void setTotalEnemiesSurvied(int factor) {
+        Endless.totalEnemiesSurvied += factor;
+    }
+
+    /**
+     * Gibt höchste Nummer an Leben im Run zurück
+     * @return Höchste Nummer an Leben
+     */
+    public static int getHighestAmountOfHealth() {
+        return highestAmountOfHealth;
+    }
+
+    /**
+     * Setzt Höchsten Nummer an Leben neu
+     * @param highestAmountOfHealth neue Anzahl
+     */
+    public static void setHighestAmountOfHealth(int highestAmountOfHealth) {
+        Endless.highestAmountOfHealth = highestAmountOfHealth;
     }
 }

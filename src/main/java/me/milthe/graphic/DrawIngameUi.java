@@ -29,9 +29,9 @@ public class DrawIngameUi {
         g.setFill(Color.WHITE);
         g.setFont(Font.loadFont(getClass().getResourceAsStream("/font/DodgeFont.ttf"), 40));
 
-        g.fillText(Time.getTimeString(Time.getTimeInSeconds()), Gui.width - 140 - (30 * (Time.getTimeString(Time.getTimeInSeconds()).length() - 3)), 57);
+        g.fillText(Time.getTimeString(Time.getTimeInSeconds()), Gui.WIDTH - 140 - (30 * (Time.getTimeString(Time.getTimeInSeconds()).length() - 3)), 57);
 
         g.drawImage(heart, 30, 25, heart.getWidth(), heart.getHeight());
-        g.fillText(String.valueOf(Player.hitpoints), 109, 57);
+        g.fillText(String.valueOf(Player.getHitpoints()), 109, 57);
     }
 }

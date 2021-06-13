@@ -29,20 +29,14 @@ public class Gui {
     public static DrawHighscore drawHighscore;
 
     public static GraphicsContext gc_main;
-    public static int width, height;
+    public final static int WIDTH = (int) Screen.getPrimary().getBounds().getWidth(), HEIGHT = (int) Screen.getPrimary().getBounds().getHeight();
     public static Scene scene;
     public static Stage stage;
 
     public static Menus menus;
     public static Menustates menustate;
 
-    /**
-     * Erstellt neues Gui und setzt width und height auf die Größe des primären Bildschirms
-     */
     public Gui() {
-        width = (int) Screen.getPrimary().getBounds().getWidth();
-        height = (int) Screen.getPrimary().getBounds().getHeight();
-
         drawEnvironment = new DrawEnvironment();
         drawEntities = new DrawEntities();
         drawUI = new DrawUI();
@@ -61,8 +55,8 @@ public class Gui {
         Canvas canvas_main;
         StackPane root = new StackPane();
 
-        int cWidth = width - 10, cHeight = height - 10;
-        canvas_main = new Canvas(width, height);
+        int cWidth = WIDTH - 10, cHeight = HEIGHT - 10;
+        canvas_main = new Canvas(WIDTH, HEIGHT);
         gc_main = canvas_main.getGraphicsContext2D();
 
         drawIngameUi = new DrawIngameUi(Gui.gc_main);

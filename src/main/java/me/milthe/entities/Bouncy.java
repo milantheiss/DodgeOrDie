@@ -21,7 +21,7 @@ public class Bouncy extends Entity {
         width = 60;
         speed = 30;
         bounces = 3;
-        Endless.totalEnemiesSpawned++;
+        Endless.setTotalEnemiesSurvied(1);
         generateStartingPoint();
     }
 
@@ -32,10 +32,10 @@ public class Bouncy extends Entity {
     public void update() {
         move();
         if (isBouncyHittingWall() && bounces > 0) {
-            if ((getxPos() <= 0 || getxPos() >= Gui.width) && !(getyPos() <= 0 || getyPos() >= Gui.height)) {
+            if ((getxPos() <= 0 || getxPos() >= Gui.WIDTH) && !(getyPos() <= 0 || getyPos() >= Gui.HEIGHT)) {
                 xVelocity *= -1;
                 bounces--;
-            } else if (!(getxPos() <= 0 || getxPos() >= Gui.width) && (getyPos() <= 0 || getyPos() >= Gui.height)) {
+            } else if (!(getxPos() <= 0 || getxPos() >= Gui.WIDTH) && (getyPos() <= 0 || getyPos() >= Gui.HEIGHT)) {
                 yVelocity *= -1;
                 bounces--;
             } else {
@@ -66,7 +66,7 @@ public class Bouncy extends Entity {
 
         if (startedge == 0) {
             //start von Oben -> Y = 0
-            xPos = (int) (Math.random() * Gui.width);
+            xPos = (int) (Math.random() * Gui.WIDTH);
             yPos = 0;
             xVelocity = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
             do {
@@ -74,16 +74,16 @@ public class Bouncy extends Entity {
             } while (xVelocity == 0 && yVelocity == 0);
         } else if (startedge == 1) {
             //start von Rechts -> X = Screen width
-            xPos = Gui.width;
-            yPos = (int) (Math.random() * Gui.height);
+            xPos = Gui.WIDTH;
+            yPos = (int) (Math.random() * Gui.HEIGHT);
             do {
                 xVelocity = Math.random() * -1;
             } while (xVelocity == 0 && yVelocity == 0);
             yVelocity = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
         } else if (startedge == 2) {
             //start von Unten -> Y = Screen height
-            xPos = (int) (Math.random() * Gui.width);
-            yPos = Gui.height;
+            xPos = (int) (Math.random() * Gui.WIDTH);
+            yPos = Gui.HEIGHT;
             xVelocity = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
             do {
                 yVelocity = Math.random() * -1;
@@ -91,7 +91,7 @@ public class Bouncy extends Entity {
         } else if (startedge == 3) {
             //start von Links -> X = 0
             xPos = 0;
-            yPos = (int) (Math.random() * Gui.height);
+            yPos = (int) (Math.random() * Gui.HEIGHT);
             do {
                 xVelocity = Math.random();
             } while (xVelocity == 0 && yVelocity == 0);
@@ -113,6 +113,6 @@ public class Bouncy extends Entity {
      * @return true wenn Bouncy eine Wand berührt
      */
     private boolean isBouncyHittingWall() {
-        return getxPos() <= 0 || getxPos() >= Gui.width || getyPos() <= 0 || getyPos() >= Gui.height;
+        return getxPos() <= 0 || getxPos() >= Gui.WIDTH || getyPos() <= 0 || getyPos() >= Gui.HEIGHT;
     }
 }

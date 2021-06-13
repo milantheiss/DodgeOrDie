@@ -60,29 +60,29 @@ public class Friend extends Entity {
 
         if (startingSite == 0) {
             //start von Oben -> Y = 0
-            xPos = (int) (Math.random() * Gui.width);
+            xPos = (int) (Math.random() * Gui.WIDTH);
             yPos = 0;
         } else if (startingSite == 1) {
             //start von Rechts -> X = Screen width
-            xPos = Gui.width;
-            yPos = (int) (Math.random() * Gui.height);
+            xPos = Gui.WIDTH;
+            yPos = (int) (Math.random() * Gui.HEIGHT);
         } else if (startingSite == 2) {
             //start von Unten -> Y = Screen height
-            xPos = (int) (Math.random() * Gui.width);
-            yPos = Gui.height;
+            xPos = (int) (Math.random() * Gui.WIDTH);
+            yPos = Gui.HEIGHT;
         } else if (startingSite == 3) {
             //start von Links -> X = 0
             xPos = 0;
-            yPos = (int) (Math.random() * Gui.height);
+            yPos = (int) (Math.random() * Gui.HEIGHT);
         }
 
-        if ((Gui.width - xPos) < xPos) {
+        if ((Gui.WIDTH - xPos) < xPos) {
             xVelocity = Math.random() * (-1);
         } else {
             xVelocity = Math.random();
         }
 
-        if ((Gui.height - yPos) < yPos) {
+        if ((Gui.HEIGHT - yPos) < yPos) {
             yVelocity = Math.random() * (-1);
         } else {
             yVelocity = Math.random();

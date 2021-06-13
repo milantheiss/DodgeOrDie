@@ -10,12 +10,11 @@ import java.util.Objects;
 
 
 public class Player extends Entity {
-    public int dashCooldown = 500, dashRange = 250;
     private static long lastDash = 0;
     private final Image SPRITE_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/left.png")));
     private final Image SPRITE_CENTER = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/center.png")));
     private final Image SPRITE_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/right.png")));
-    public static int hitpoints;
+    private static int hitpoints;
     public static GIF dashanimation;
 
     /**
@@ -24,8 +23,8 @@ public class Player extends Entity {
      */
     public Player(int hitpoints) {
         Player.hitpoints = hitpoints;
-        xPos = Gui.width / 2 - 25;
-        yPos = Gui.height / 2 - 25;
+        xPos = Gui.WIDTH / 2 - 25;
+        yPos = Gui.HEIGHT / 2 - 25;
         width = 53;
         height = 50;
         speed = 16;
@@ -60,7 +59,7 @@ public class Player extends Entity {
             }
         }
         if (Game.getInput().isPressed(KeyCode.S)) {
-            if ((yPos + speed) <= Gui.height - height) {
+            if ((yPos + speed) <= Gui.HEIGHT - height) {
                 yVelocity++;
                 if (Game.getInput().isPressed(KeyCode.SPACE)) {
                     dash();
@@ -76,7 +75,7 @@ public class Player extends Entity {
             }
         }
         if (Game.getInput().isPressed(KeyCode.D)) {
-            if ((xPos + speed) <= Gui.width - width) {
+            if ((xPos + speed) <= Gui.WIDTH - width) {
                 xVelocity++;
                 if (Game.getInput().isPressed(KeyCode.SPACE)) {
                     dash();
@@ -92,17 +91,19 @@ public class Player extends Entity {
      * Ermöglicht es dem Spieler zu dash um die Dashrange
      */
     public void dash() { //Dash in Richtung in die sich der Spieler bewegt (
+        int dashCooldown = 500;
         if ((System.currentTimeMillis() - dashCooldown) > lastDash) {
             dashanimation.playGIF(xPos-(dashanimation.getWidth()/2-width/2), yPos-(dashanimation.getHeight()/2-height/2));
+            int dashRange = 250;
             if (xVelocity == 1) {
                 int tempX = xPos + dashRange;
-                if (tempX >= 0 && tempX <= Gui.width - width) {
+                if (tempX >= 0 && tempX <= Gui.WIDTH - width) {
                     xPos = tempX;
                 }
                 lastDash = System.currentTimeMillis();
             } else if (xVelocity == -1) {
                 int tempX = xPos - dashRange;
-                if (tempX >= 0 && tempX <= Gui.width - width) {
+                if (tempX >= 0 && tempX <= Gui.WIDTH - width) {
                     xPos = tempX;
                 }
                 lastDash = System.currentTimeMillis();
@@ -110,13 +111,13 @@ public class Player extends Entity {
 
             if (yVelocity == 1) {
                 int tempY = yPos + dashRange;
-                if (tempY >= 0 && tempY <= Gui.height - height) {
+                if (tempY >= 0 && tempY <= Gui.HEIGHT - height) {
                     yPos = tempY;
                 }
                 lastDash = System.currentTimeMillis();
             } else if (yVelocity == -1) {
                 int tempY = yPos - dashRange;
-                if (tempY >= 0 && tempY <= Gui.height - height) {
+                if (tempY >= 0 && tempY <= Gui.HEIGHT - height) {
                     yPos = tempY;
                 }
                 lastDash = System.currentTimeMillis();
@@ -154,5 +155,21 @@ public class Player extends Entity {
     @Override
     public int getSpriteHeight() {
         return 50;
+    }
+
+    /**
+     * Gibt Lebenspunkte des Spielers zurück
+     * @return
+     */
+    public static int getHitpoints() {
+        return hitpoints;
+    }
+
+    /**
+     * Verändert Lebenspunkte des Spielers
+     * @param hitpoints neue Lebenspunkte
+     */
+    public static void setHitpoints(int hitpoints) {
+        Player.hitpoints += hitpoints;
     }
 }

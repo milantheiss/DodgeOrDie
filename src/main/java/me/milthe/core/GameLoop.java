@@ -59,7 +59,7 @@ public class GameLoop implements Runnable {
      * Ruf je nach Gamestate verschiedene Draw Klassen auf. DrawEnvironment wird immer aufgerufen
      */
     private void render() {
-        Gui.gc_main.clearRect(0, 0, Gui.width, Gui.height);
+        Gui.gc_main.clearRect(0, 0, Gui.WIDTH, Gui.HEIGHT);
         Gui.drawEnvironment.render(Gui.gc_main);
 
         if (Game.getGamestate() == Gamestates.INGAME || Game.getGamestate() == Gamestates.PAUSE || Game.getGamestate() == Gamestates.ENDSCREEN) {

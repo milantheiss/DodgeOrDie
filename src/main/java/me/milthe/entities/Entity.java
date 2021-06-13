@@ -1,7 +1,6 @@
 package me.milthe.entities;
 
 import javafx.scene.image.Image;
-import me.milthe.core.Game;
 import me.milthe.ui.Gui;
 
 /**
@@ -81,8 +80,8 @@ public abstract class Entity {
      */
     protected boolean isObjectOutOfBounce() {
         //+200px Margin of Error danach wir Objekt gelöscht
-        if (getxPos() >= (Gui.width + 200) || getxPos() <= -200 || getyPos() >= (Gui
-                .height + 200) || getyPos() <= -200) {
+        if (getxPos() >= (Gui.WIDTH + 200) || getxPos() <= -200 || getyPos() >= (Gui
+                .HEIGHT + 200) || getyPos() <= -200) {
             return true;
         } else {
             return false;
