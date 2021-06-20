@@ -27,7 +27,7 @@ public class CircleEnemy extends Entity {
         width = 100;
         height = 100;
         speed = (int) (Math.random() * 30) + 20; //Desto höher desto langsamer
-        Endless.setTotalEnemiesSurvied(1);
+        Endless.setTotalEnemiesSurvived(1);
         setPath();
     }
 
@@ -55,26 +55,26 @@ public class CircleEnemy extends Entity {
      */
     public void setPath() {
         //Gibt an welcher Bildschirmkante der Circle spawnt
-        int startedge = (int) (Math.random() * 4);
+        int startingedge = (int) (Math.random() * 4);
 
         //Der Circle bewegt sich auf einer Graden, die den Punkt berührt an dem der Spieler stand als der Circle gespawnt ist
         int targetX = Game.getPlayer().getxPos();
         int targetY = Game.getPlayer().getyPos();
 
-        if (startedge == 0) {
+        if (startingedge == 0) {
             //start von Oben -> Y = 0
             xPos = (int) (Math.random() * Gui.WIDTH);
             yPos = 0;
 
-        } else if (startedge == 1) {
+        } else if (startingedge == 1) {
             //start von Rechts -> X = Screen width
             xPos = Gui.WIDTH;
             yPos = (int) (Math.random() * Gui.HEIGHT);
-        } else if (startedge == 2) {
+        } else if (startingedge == 2) {
             //start von Unten -> Y = Screen height
             xPos = (int) (Math.random() * Gui.WIDTH);
             yPos = Gui.HEIGHT;
-        } else if (startedge == 3) {
+        } else if (startingedge == 3) {
             //start von Links -> X = 0
             xPos = 0;
             yPos = (int) (Math.random() * Gui.HEIGHT);

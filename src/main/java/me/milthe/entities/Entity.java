@@ -80,11 +80,7 @@ public abstract class Entity {
      */
     protected boolean isObjectOutOfBounce() {
         //+200px Margin of Error danach wir Objekt gelöscht
-        if (getxPos() >= (Gui.WIDTH + 200) || getxPos() <= -200 || getyPos() >= (Gui
-                .HEIGHT + 200) || getyPos() <= -200) {
-            return true;
-        } else {
-            return false;
-        }
+        return getxPos() >= (Gui.WIDTH + 200) || getxPos() <= -200 || getyPos() >= (Gui
+                .HEIGHT + 200) || getyPos() <= -200;
     }
 }

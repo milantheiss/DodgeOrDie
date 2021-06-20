@@ -8,8 +8,8 @@ import java.io.*;
  * Organisiert den Highscore
  */
 public class Highscore {
-    private static long surviedtime;
-    private static int surviedenemies;
+    private static long survivedtime;
+    private static int survivedenemies;
     private static int highestnumberhealth;
 
     private File directory;
@@ -34,43 +34,43 @@ public class Highscore {
         String temp;
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(highscorelist))) {
-            surviedtime = ((temp = bufferedReader.readLine()) != null) ? Long.parseLong(temp) : 0;
-            surviedenemies = ((temp = bufferedReader.readLine()) != null) ? Integer.parseInt(temp) : 0;
+            survivedtime = ((temp = bufferedReader.readLine()) != null) ? Long.parseLong(temp) : 0;
+            survivedenemies = ((temp = bufferedReader.readLine()) != null) ? Integer.parseInt(temp) : 0;
             highestnumberhealth = ((temp = bufferedReader.readLine()) != null) ? Integer.parseInt(temp) : 0;
         }
-        System.out.println(surviedtime + " " + surviedenemies + " " + highestnumberhealth);
+        System.out.println(survivedtime + " " + survivedenemies + " " + highestnumberhealth);
     }
 
     /**
      * Gibt den Highscore für Zeit zurück
      * @return Highscore Zeit
      */
-    public static long getSurviedtime() {
-        return surviedtime;
+    public static long getSurvivedtime() {
+        return survivedtime;
     }
 
     /**
      * Setzt den Highscore für Zeit
-     * @param surviedtime Neuer Highscore für Zeit
+     * @param survivedtime Neuer Highscore für Zeit
      */
-    public static void setSurviedtime(long surviedtime) {
-        Highscore.surviedtime = surviedtime;
+    public static void setSurvivedtime(long survivedtime) {
+        Highscore.survivedtime = survivedtime;
     }
 
     /**
      * Gibt zurück, wie viele Gegner während des Highscore Runs überlebt wurden
      * @return Überlebte Gegner im Highscore Run
      */
-    public static int getSurviedenemies() {
-        return surviedenemies;
+    public static int getSurvivedenemies() {
+        return survivedenemies;
     }
 
     /**
      * Setzt die überlebten Gegner während eines Highscore Runs neu
-     * @param surviedenemies Neue Anzahl überlebte Gegner
+     * @param survivedenemies Neue Anzahl überlebte Gegner
      */
-    public static void setSurviedenemies(int surviedenemies) {
-        Highscore.surviedenemies = surviedenemies;
+    public static void setSurvivedenemies(int survivedenemies) {
+        Highscore.survivedenemies = survivedenemies;
     }
 
     /**
@@ -97,10 +97,10 @@ public class Highscore {
      * @throws IOException
      */
     public static boolean isHighscoreBigger(long newHighscore, int surviedenemies, int highestnumberhealth) throws IOException {
-        if (surviedtime < newHighscore) {
+        if (survivedtime < newHighscore) {
             if (Game.getGamestate() == Gamestates.ENDSCREEN) Game.getJukebox().playSoundEffect("sfx_highscore");
-            setSurviedtime(newHighscore);
-            setSurviedenemies(surviedenemies);
+            setSurvivedtime(newHighscore);
+            setSurvivedenemies(surviedenemies);
             setHighestnumberhealth(highestnumberhealth);
             System.out.println(newHighscore);
             writeHighscore();
@@ -117,9 +117,9 @@ public class Highscore {
      */
     public static void writeHighscore() throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(highscorelist));
-        bufferedWriter.write("" + surviedtime);
+        bufferedWriter.write("" + survivedtime);
         bufferedWriter.newLine();
-        bufferedWriter.write("" + surviedenemies);
+        bufferedWriter.write("" + survivedenemies);
         bufferedWriter.newLine();
         bufferedWriter.write("" + highestnumberhealth);
         bufferedWriter.close();

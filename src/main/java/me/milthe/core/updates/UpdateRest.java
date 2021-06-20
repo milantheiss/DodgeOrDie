@@ -9,8 +9,6 @@ import me.milthe.gamemode.Gamemodes;
 import me.milthe.graphic.DrawEndscreenEndless;
 import me.milthe.graphic.DrawHighscore;
 import me.milthe.graphic.DrawTutorial;
-import me.milthe.ui.Gui;
-import me.milthe.ui.Menustates;
 
 /**
  * Restliche Methoden, welche geupdated werden müssen
@@ -41,8 +39,8 @@ public class UpdateRest {
      * Wickelt Benutzereingaben im Endscreen und Highscore ab und definiert Events, die auf Benutzereingaben folgen
      */
     private void simpleController() {
-        if (Game.getInput().isPressed(KeyCode.ESCAPE) || ((updateController.isComponentClicked(DrawEndscreenEndless.getZurueck()) || updateController.isComponentClicked(DrawHighscore.getZurueck())) && !MouseClicked.clickHandeled)) {
-            MouseClicked.clickHandeled = true;
+        if (Game.getInput().isPressed(KeyCode.ESCAPE) || ((updateController.isComponentClicked(DrawEndscreenEndless.getZurueck()) || updateController.isComponentClicked(DrawHighscore.getZurueck())) && !MouseClicked.clickHandled)) {
+            MouseClicked.clickHandled = true;
             Game.getInput().pressed[KeyCode.ESCAPE.getCode()] = false;
             if (Game.getGamemode() == Gamemodes.ENDLESS && Game.getGamestate() == Gamestates.ENDSCREEN) {
                 Game.getEndless().terminateEndless();
@@ -59,16 +57,16 @@ public class UpdateRest {
             Game.getInput().pressed[KeyCode.ESCAPE.getCode()] = false;
             Game.setGamestate(Gamestates.MENU);
         }
-        if (updateController.isComponentClicked(DrawTutorial.tutorial.getZURUECK_BUTTON()) && !MouseClicked.clickHandeled) {
-            MouseClicked.clickHandeled = true;
+        if (updateController.isComponentClicked(DrawTutorial.tutorial.getZURUECK_BUTTON()) && !MouseClicked.clickHandled) {
+            MouseClicked.clickHandled = true;
             Game.setGamestate(Gamestates.MENU);
         }
-        if (updateController.isComponentClicked(DrawTutorial.tutorial.getLEFT_BUTTON()) && !MouseClicked.clickHandeled) {
-            MouseClicked.clickHandeled = true;
+        if (updateController.isComponentClicked(DrawTutorial.tutorial.getLEFT_BUTTON()) && !MouseClicked.clickHandled) {
+            MouseClicked.clickHandled = true;
             DrawTutorial.tutorial.setIndex(-1);
         }
-        if (updateController.isComponentClicked(DrawTutorial.tutorial.getRIGHT_BUTTON()) && !MouseClicked.clickHandeled) {
-            MouseClicked.clickHandeled = true;
+        if (updateController.isComponentClicked(DrawTutorial.tutorial.getRIGHT_BUTTON()) && !MouseClicked.clickHandled) {
+            MouseClicked.clickHandled = true;
             DrawTutorial.tutorial.setIndex(1);
         }
     }

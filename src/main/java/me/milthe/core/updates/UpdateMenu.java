@@ -8,7 +8,6 @@ import me.milthe.events.MouseClicked;
 import me.milthe.gamemode.Gamemodes;
 import me.milthe.ui.Gui;
 import me.milthe.ui.Menustates;
-
 import java.io.IOException;
 
 /**
@@ -42,17 +41,17 @@ public class UpdateMenu {
      */
     private void mainMenuController() {
         Gui.menus.MAIN_MENU_CONTAINER.getUiButtons().forEach(buttonUi -> {
-            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
+            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandled) {
                 if (buttonUi.getComponentName().equals("spielen")) {
-                    MouseClicked.clickHandeled = true;
+                    MouseClicked.clickHandled = true;
                     Gui.menustate = Menustates.ENDLESS;
                 }
                 if (buttonUi.getComponentName().equals("tutorial")) {
-                    MouseClicked.clickHandeled = true;
+                    MouseClicked.clickHandled = true;
                     Game.setGamestate(Gamestates.TUTORIAL);
                 }
                 if (buttonUi.getComponentName().equals("verlassen")) {
-                    MouseClicked.clickHandeled = true;
+                    MouseClicked.clickHandled = true;
                     Gui.close();
                 }
             }
@@ -64,18 +63,18 @@ public class UpdateMenu {
      */
     private void EndlessMenuController() {
         Gui.menus.ENDLESS_MENU_CONTAINER.getUiButtons().forEach(buttonUi -> {
-            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
+            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandled) {
                 if (buttonUi.getComponentName().equals("start")) {
-                    MouseClicked.clickHandeled = true;
+                    MouseClicked.clickHandled = true;
                     Game.getEndless().startEndless();
                     Game.setGamestate(Gamestates.INGAME);
                 }
                 if (buttonUi.getComponentName().equals("highscore")) {
-                    MouseClicked.clickHandeled = true;
+                    MouseClicked.clickHandled = true;
                     Game.setGamestate(Gamestates.HIGHSCORE);
                 }
                 if (buttonUi.getComponentName().equals("zurueck")) {
-                    MouseClicked.clickHandeled = true;
+                    MouseClicked.clickHandled = true;
                     Gui.menustate = Menustates.MAIN;
                 }
             }
@@ -94,15 +93,15 @@ public class UpdateMenu {
         }
         //Handlet die Buttons im Menü
         Gui.menus.PAUSE_MENU_CONTAINER.getUiButtons().forEach(buttonUi -> {
-            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandeled) {
+            if (updateController.isComponentClicked(buttonUi) && !MouseClicked.clickHandled) {
                 if (buttonUi.getComponentName().equals("weiter")) {
-                    MouseClicked.clickHandeled = true;
+                    MouseClicked.clickHandled = true;
                     Game.setGamestate(Gamestates.INGAME);
                     Game.getInput().pressed[KeyCode.ESCAPE.getCode()] = false;
                     Game.getJukebox().resumeInGameMusic();
                 }
                 if (buttonUi.getComponentName().equals("neustart")) {
-                    MouseClicked.clickHandeled = true;
+                    MouseClicked.clickHandled = true;
                     Game.getInput().pressed[KeyCode.ESCAPE.getCode()] = false;
                     if (Game.getGamemode() == Gamemodes.ENDLESS) {
                         try {
@@ -115,7 +114,7 @@ public class UpdateMenu {
                     }
                 }
                 if (buttonUi.getComponentName().equals("verlassen")) {
-                    MouseClicked.clickHandeled = true;
+                    MouseClicked.clickHandled = true;
                     if (Game.getGamemode() == Gamemodes.ENDLESS) {
                         try {
                             Game.getEndless().stopEndless();

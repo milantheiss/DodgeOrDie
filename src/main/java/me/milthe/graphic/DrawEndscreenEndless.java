@@ -9,7 +9,6 @@ import me.milthe.gamemode.Endless;
 import me.milthe.scoring.Highscore;
 import me.milthe.ui.Gui;
 import me.milthe.ui.UiButton;
-
 import java.util.Objects;
 
 /**
@@ -40,8 +39,8 @@ public class DrawEndscreenEndless {
         g.setFill(Color.WHITE);
         g.setFont(Font.loadFont(getClass().getResourceAsStream("/font/DodgeFont.ttf"), 40));
         g.fillText("Zeit  überlebt:  " + Time.getTimeString(Time.getTimeInSeconds()), (Gui.WIDTH - 590) / 2, (Gui.HEIGHT - 182) / 2);
-        g.fillText("Gegner  überlebt: " + Endless.getTotalEnemiesSurvied(), (Gui.WIDTH - 560) / 2, (Gui.HEIGHT - 43) / 2);
-        g.fillText("Höhste Anzahl an Leben:   " + Endless.getHighestAmountOfHealth(), (Gui.WIDTH - 730) / 2, (Gui.HEIGHT + 96) / 2);
+        g.fillText("Gegner  überlebt: " + Endless.getTotalEnemiesSurvived(), (Gui.WIDTH - 560) / 2, (Gui.HEIGHT - 43) / 2);
+        g.fillText("Höchste Anzahl an Leben:   " + Endless.getHighestAmountOfHealth(), (Gui.WIDTH - 730) / 2, (Gui.HEIGHT + 96) / 2);
         g.drawImage(zurueck.getSprite(), zurueck.getX(), zurueck.getY(), zurueck.getWidth(), zurueck.getHeight());
     }
 

@@ -34,7 +34,7 @@ public class UpdateEndless extends UpdateGamemodes {
                     Game.getJukebox().playSoundEffect("sfx_damage");
                     if ((Player.getHitpoints() - 1) == 0) {
                         Player.setHitpoints(-1);
-                        Endless.setTotalEnemiesSurvied(-1);
+                        Endless.setTotalEnemiesSurvived(-1);
                         try {
                             Game.setGamestate(Gamestates.ENDSCREEN);
                             Game.getEndless().stopEndless();
@@ -44,7 +44,7 @@ public class UpdateEndless extends UpdateGamemodes {
                         }
                     } else {
                         Player.setHitpoints(-1);
-                        Endless.setTotalEnemiesSurvied(-1);
+                        Endless.setTotalEnemiesSurvived(-1);
                     }
                 } else if (entity instanceof Friend) {
                     Game.getJukebox().playSoundEffect("sfx_good");

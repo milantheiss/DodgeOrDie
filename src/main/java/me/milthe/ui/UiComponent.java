@@ -8,7 +8,7 @@ import java.io.InputStream;
  * Teil des Menüs muss als UiButton angewandt werden
  */
 public abstract class UiComponent {
-    protected int x, y, width, height, marginTop, marginButtom, marginLeft, marginRight;
+    protected int x, y, width, height, marginTop, marginBottom, marginLeft, marginRight;
     protected Image sprite;
     protected String componentName;
 
@@ -124,8 +124,8 @@ public abstract class UiComponent {
      * Gibt die Button Margin zurück
      * @return Button Margin
      */
-    public int getMarginButtom() {
-        return marginButtom;
+    public int getMarginBottom() {
+        return marginBottom;
     }
 
     /**

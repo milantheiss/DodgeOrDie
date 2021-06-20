@@ -13,7 +13,6 @@ import me.milthe.events.KeyPressed;
 import me.milthe.events.KeyReleased;
 import me.milthe.events.MouseClicked;
 import me.milthe.graphic.*;
-
 import java.util.Objects;
 
 /**

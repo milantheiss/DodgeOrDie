@@ -14,9 +14,8 @@ import java.util.TimerTask;
  * Definiert Parameter und Methoden für den Endlos Modus
  */
 public class Endless {
-    private static int totalEnemiesSurvied;
+    private static int totalEnemiesSurvived;
     private Timer timer;
-    private static int spawnDelay = 2000;
     private static int highestAmountOfHealth;
 
     /**
@@ -29,7 +28,7 @@ public class Endless {
 
         Game.setPlayer(new Player(4));
 
-        totalEnemiesSurvied = 0;
+        totalEnemiesSurvived = 0;
         highestAmountOfHealth = 4;
 
         Game.addEntity(Game.getPlayer());
@@ -38,6 +37,7 @@ public class Endless {
 
         Game.getJukebox().playInGameMusic();
 
+        int spawnDelay = 2000;
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -74,7 +74,7 @@ public class Endless {
     public void stopEndless() throws IOException {
         Time.stopTimer();
         Game.getJukebox().stopInGameMusic();
-        Highscore.setNewHighscore(Highscore.isHighscoreBigger(Time.getTimeInSeconds(), totalEnemiesSurvied, highestAmountOfHealth));
+        Highscore.setNewHighscore(Highscore.isHighscoreBigger(Time.getTimeInSeconds(), totalEnemiesSurvived, highestAmountOfHealth));
         timer.cancel();
         Game.setGamestate(Gamestates.PAUSE);
     }
@@ -90,16 +90,16 @@ public class Endless {
      * Gibt Anzahl der überlebten Gegner im Run zurück
      * @return Anzahl der überlebten Gegner
      */
-    public static int getTotalEnemiesSurvied() {
-        return totalEnemiesSurvied;
+    public static int getTotalEnemiesSurvived() {
+        return totalEnemiesSurvived;
     }
 
     /**
      * Erhöhte oder verringert überlebte Gegner um factor
      * @param factor Um wie viel totalEnemiesSurvied erhöht oder verringert werden soll
      */
-    public static void setTotalEnemiesSurvied(int factor) {
-        Endless.totalEnemiesSurvied += factor;
+    public static void setTotalEnemiesSurvived(int factor) {
+        Endless.totalEnemiesSurvived += factor;
     }
 
     /**

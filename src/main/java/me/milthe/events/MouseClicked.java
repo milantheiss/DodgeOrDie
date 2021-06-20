@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class MouseClicked implements EventHandler<MouseEvent> {
     public static int x, y;
-    public static boolean clickHandeled;
+    public static boolean clickHandled;
 
     /**
      * Setzt bei Maus Klick die Position der Maus um und setzt clickHandeled auf false
@@ -18,6 +18,6 @@ public class MouseClicked implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         x = (int) mouseEvent.getX();
         y = (int) mouseEvent.getY();
-        clickHandeled = false;
+        clickHandled = false;
     }
 }

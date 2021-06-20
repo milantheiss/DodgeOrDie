@@ -20,7 +20,7 @@ public class UiContainer {
         int tempY = 0;
         for (UiComponent uiComponent : getComponents()) {
             maxWidth = Math.max((uiComponent.getWidth() + uiComponent.getMarginLeft() + uiComponent.getMarginRight()), maxWidth);
-            this.height += uiComponent.getHeight() + uiComponent.getMarginButtom() + uiComponent.getMarginTop();
+            this.height += uiComponent.getHeight() + uiComponent.getMarginBottom() + uiComponent.getMarginTop();
         }
         this.width = maxWidth;
         this.x = (Gui.WIDTH - width) / 2;
@@ -28,7 +28,7 @@ public class UiContainer {
         for (UiComponent uiComponent : getComponents()) {
             uiComponent.setYToBeSum(tempY, this.y);
             uiComponent.applyMarginTop();
-            tempY += uiComponent.getHeight() + uiComponent.getMarginTop() + uiComponent.getMarginButtom();
+            tempY += uiComponent.getHeight() + uiComponent.getMarginTop() + uiComponent.getMarginBottom();
             uiComponent.setX(this.x);
         }
     }

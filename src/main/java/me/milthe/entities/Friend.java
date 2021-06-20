@@ -3,7 +3,6 @@ package me.milthe.entities;
 import javafx.scene.image.Image;
 import me.milthe.core.Game;
 import me.milthe.ui.Gui;
-
 import java.util.Objects;
 
 /**

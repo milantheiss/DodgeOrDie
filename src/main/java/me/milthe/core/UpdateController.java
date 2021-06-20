@@ -44,7 +44,7 @@ public class UpdateController {
      */
     public boolean isComponentClicked(UiComponent uiComponent) {
         if(MouseClicked.x > uiComponent.getX() && MouseClicked.x < (uiComponent.getX() + uiComponent.getWidth()) && MouseClicked.y > uiComponent.getY() && MouseClicked.y < (uiComponent.getY() + uiComponent.getHeight())){
-            if (!MouseClicked.clickHandeled) Game.getJukebox().playSoundEffect("sfx_click");
+            if (!MouseClicked.clickHandled) Game.getJukebox().playSoundEffect("sfx_click");
             return true;
         }else {
             return false;

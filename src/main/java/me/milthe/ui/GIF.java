@@ -1,7 +1,6 @@
 package me.milthe.ui;
 
 import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

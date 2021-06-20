@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import me.milthe.core.Game;
 import me.milthe.gamemode.Endless;
 import me.milthe.ui.Gui;
-
 import java.util.Objects;
 
 /**
@@ -21,7 +20,7 @@ public class Bouncy extends Entity {
         width = 60;
         speed = 30;
         bounces = 3;
-        Endless.setTotalEnemiesSurvied(1);
+        Endless.setTotalEnemiesSurvived(1);
         generateStartingPoint();
     }
 
@@ -62,9 +61,9 @@ public class Bouncy extends Entity {
      * Generiert einen Startpunkt für Bouncy, wenn es gespawnt wird und gibt Bouncy eine Zufällige Velocity
      */
     public void generateStartingPoint() {
-        int startedge = (int) (Math.random() * 4);
+        int startingedge = (int) (Math.random() * 4);
 
-        if (startedge == 0) {
+        if (startingedge == 0) {
             //start von Oben -> Y = 0
             xPos = (int) (Math.random() * Gui.WIDTH);
             yPos = 0;
@@ -72,7 +71,7 @@ public class Bouncy extends Entity {
             do {
                 yVelocity = Math.random();
             } while (xVelocity == 0 && yVelocity == 0);
-        } else if (startedge == 1) {
+        } else if (startingedge == 1) {
             //start von Rechts -> X = Screen width
             xPos = Gui.WIDTH;
             yPos = (int) (Math.random() * Gui.HEIGHT);
@@ -80,7 +79,7 @@ public class Bouncy extends Entity {
                 xVelocity = Math.random() * -1;
             } while (xVelocity == 0 && yVelocity == 0);
             yVelocity = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
-        } else if (startedge == 2) {
+        } else if (startingedge == 2) {
             //start von Unten -> Y = Screen height
             xPos = (int) (Math.random() * Gui.WIDTH);
             yPos = Gui.HEIGHT;
@@ -88,7 +87,7 @@ public class Bouncy extends Entity {
             do {
                 yVelocity = Math.random() * -1;
             } while (xVelocity == 0 && yVelocity == 0);
-        } else if (startedge == 3) {
+        } else if (startingedge == 3) {
             //start von Links -> X = 0
             xPos = 0;
             yPos = (int) (Math.random() * Gui.HEIGHT);

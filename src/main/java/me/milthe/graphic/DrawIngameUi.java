@@ -14,7 +14,7 @@ import java.util.Objects;
  * Draw Klasse für das Ingame UI
  */
 public class DrawIngameUi {
-    private Image heart;
+    private final Image heart;
 
     public DrawIngameUi(GraphicsContext g) {
         heart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/heart.png")));

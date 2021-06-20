@@ -3,6 +3,8 @@ package me.milthe.ui;
 import javafx.scene.image.Image;
 import me.milthe.graphic.DrawTutorial;
 
+import java.util.Objects;
+
 /**
  * Ermöglicht das Tutorial anzuzeigen
  */
@@ -15,11 +17,11 @@ public class Tutorial {
 
     public Tutorial() {
         index = 0;
-        tutorialImages[0] = new Image(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/spieler.png"));
-        tutorialImages[1] = new Image(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/endless.png"));
-        tutorialImages[2] = new Image(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/circleenemy.png"));
-        tutorialImages[3] = new Image(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/bouncy.png"));
-        tutorialImages[4] = new Image(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/friend.png"));
+        tutorialImages[0] = new Image(Objects.requireNonNull(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/spieler.png")));
+        tutorialImages[1] = new Image(Objects.requireNonNull(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/endless.png")));
+        tutorialImages[2] = new Image(Objects.requireNonNull(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/circleenemy.png")));
+        tutorialImages[3] = new Image(Objects.requireNonNull(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/bouncy.png")));
+        tutorialImages[4] = new Image(Objects.requireNonNull(DrawTutorial.class.getResourceAsStream("/sprites/tutorial/friend.png")));
         ZURUECK_BUTTON.setX((Gui.WIDTH - ZURUECK_BUTTON.getWidth()) / 2);
         LEFT_BUTTON.setX((Gui.WIDTH - ZURUECK_BUTTON.getWidth()) / 2 - (LEFT_BUTTON.getWidth() * 2));
         RIGHT_BUTTON.setX((Gui.WIDTH - ZURUECK_BUTTON.getWidth()) / 2 + (ZURUECK_BUTTON.getWidth() + RIGHT_BUTTON.getWidth()));
