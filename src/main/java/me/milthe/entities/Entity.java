@@ -7,8 +7,18 @@ import me.milthe.ui.Gui;
  * Abstrakte Entity Klasse. Gibt Variablen und Methoden vor.
  */
 public abstract class Entity {
-    protected int xPos, yPos, width, height, speed, spriteWidth, spriteHeight;
+    protected int xPos, yPos, width, height, speed;
     protected double xVelocity, yVelocity;
+
+    protected Image SPRITE_IDLE;
+    protected Image SPRITE_BOTTOM;
+    protected Image SPRITE_BOTTOM_RIGHT;
+    protected Image SPRITE_RIGHT;
+    protected Image SPRITE_TOP_RIGHT;
+    protected Image SPRITE_TOP;
+    protected Image SPRITE_TOP_LEFT;
+    protected Image SPRITE_LEFT;
+    protected Image SPRITE_BOTTOM_LEFT;
 
     /**
      * Abstract: Soll Aktionen ausführen, die pro Tick ausgeführt werden müssen. Wie zum Beispiel move()
@@ -22,6 +32,7 @@ public abstract class Entity {
 
     /**
      * Gibt xPosition von Entity zurück
+     *
      * @return xPos der Entity
      */
     public int getxPos() {
@@ -30,6 +41,7 @@ public abstract class Entity {
 
     /**
      * Gibt yPosition von Entity zurück
+     *
      * @return yPos der Entity
      */
     public int getyPos() {
@@ -38,6 +50,7 @@ public abstract class Entity {
 
     /**
      * Gibt Breite von Entity zurück
+     *
      * @return Breite der Entity
      */
     public int getWidth() {
@@ -46,6 +59,7 @@ public abstract class Entity {
 
     /**
      * Gibt Höhe von Entity zurück
+     *
      * @return Höhe der Entity
      */
     public int getHeight() {
@@ -53,29 +67,49 @@ public abstract class Entity {
     }
 
     /**
-     * Abstract: Soll Sprites von Entity zurück geben
+     * Gibt Richtung spezifisches Sprite zurück
+     *
      * @return Sprites der Entity
      */
-    public abstract Image getSprite();
+    public Image getSprite() {
+        if ((xVelocity < 1 && xVelocity >= 0.05 && yVelocity >= 0) || (xVelocity >= 0 && yVelocity < 1 && yVelocity >= 0.05)) {
+            return SPRITE_BOTTOM_RIGHT;
+        } else if ((xVelocity > -1 && xVelocity < -0.05 && yVelocity >= 0) || (xVelocity <= 0 && yVelocity < 1 && yVelocity >= 0.05)) {
+            return SPRITE_BOTTOM_LEFT;
+        } else if ((xVelocity < 1 && xVelocity >= 0.05 && yVelocity <= 0) || (xVelocity >= 0 && yVelocity > -1 && yVelocity <= -0.05)) {
+            return SPRITE_TOP_RIGHT;
+        } else if ((xVelocity > -1 && xVelocity <= -0.05 && yVelocity <= 0) || (xVelocity <= 0 && yVelocity > -1 && yVelocity <= -0.05)) {
+            return SPRITE_TOP_LEFT;
+        } else if (xVelocity > -0.055 && xVelocity < 0.05 && yVelocity >= 0) {
+            return SPRITE_BOTTOM;
+        } else if (xVelocity >= 0 && yVelocity > -0.05 && yVelocity < 0.05) {
+            return SPRITE_RIGHT;
+        } else if (xVelocity > -0.05 && xVelocity < 0.05 && yVelocity <= 0) {
+            return SPRITE_TOP;
+        } else if (xVelocity <= 0 && yVelocity > -0.05 && yVelocity < 0.05) {
+            return SPRITE_LEFT;
+        } else {
+            return SPRITE_IDLE;
+        }
+    }
 
     /**
      * Gibt die Breite des momentanen Sprites der Entity zurück. Kann von Hitbox abweichen
+     *
      * @return Breite des momentanen Sprites
      */
-    public int getSpriteWidth() {
-        return (int) Math.round(getSprite().getWidth());
-    }
+    public abstract int getSpriteWidth();
 
     /**
      * Gibt die Höhe des momentanen Sprites der Entity zurück. Kann von Hitbox abweichen
+     *
      * @return Breite Höhe des momentanen Sprites
      */
-    public int getSpriteHeight() {
-        return (int) Math.round(getSprite().getHeight());
-    }
+    public abstract int getSpriteHeight();
 
     /**
      * Überprüft ob Entity Out of Bounce ist
+     *
      * @return true wenn Entity +200px bzw. -200px von Bildschirmgrenze entfernt ist
      */
     protected boolean isObjectOutOfBounce() {

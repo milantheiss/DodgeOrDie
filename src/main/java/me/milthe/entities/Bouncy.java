@@ -10,13 +10,22 @@ import java.util.Objects;
  * Gegnerklasse Bouncy: Springt von Wänden ab
  */
 public class Bouncy extends Entity {
-    private final Image SPRITE_IDLE = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_idle.png")));
     private int bounces;
 
     /**
      * Erstellt neuen Bouncy und setzt Parameter für width = 60, speed = 30, bounces = 3
      */
     public Bouncy() {
+        SPRITE_IDLE = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_idle.png")));
+        SPRITE_BOTTOM = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_bottom.png")));
+        SPRITE_BOTTOM_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_bottomright.png")));
+        SPRITE_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_right.png")));
+        SPRITE_TOP_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_topright.png")));
+        SPRITE_TOP = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_top.png")));
+        SPRITE_TOP_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_topleft.png")));
+        SPRITE_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_left.png")));
+        SPRITE_BOTTOM_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/bouncy/bouncy_bottomleft.png")));
+
         width = 60;
         speed = 30;
         bounces = 3;
@@ -58,6 +67,24 @@ public class Bouncy extends Entity {
     }
 
     /**
+     * Gibt die Breite des momentanen Sprites zurück
+     * @return Breite des momentanen Sprites
+     */
+    @Override
+    public int getSpriteWidth() {
+        return (int) Math.round(getSprite().getWidth());
+    }
+
+    /**
+     * Gibt die Höhe des momentanen Sprites zurück
+     * @return Höhe des momentanen Sprites
+     */
+    @Override
+    public int getSpriteHeight() {
+        return (int) Math.round(getSprite().getHeight());
+    }
+
+    /**
      * Generiert einen Startpunkt für Bouncy, wenn es gespawnt wird und gibt Bouncy eine Zufällige Velocity
      */
     public void generateStartingPoint() {
@@ -96,15 +123,6 @@ public class Bouncy extends Entity {
             } while (xVelocity == 0 && yVelocity == 0);
             yVelocity = (Math.random() < 0.5) ? Math.random() : Math.random() * -1;
         }
-    }
-
-    /**
-     * Gibt Sprite von Bouncy zurück
-     * @return Momentanen Sprite von Bouncy
-     */
-    @Override
-    public Image getSprite() {
-        return SPRITE_IDLE;
     }
 
     /**

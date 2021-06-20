@@ -9,12 +9,20 @@ import java.util.Objects;
  * Freundklasse Friend: Fliegt zufällig über Bildschirm und gibt wenn er mit dem Spieler kollidiert +1 Leben wieder
  */
 public class Friend extends Entity {
-    private final Image SPRITE_IDLE = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_idle.png")));
-
-    /**
+        /**
      * Erstellt neuen Friend und setzt Parameter für width = 100, height = 100, speed = zufällig zwischen 10 - 15
      */
     public Friend() {
+        SPRITE_IDLE = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_idle.png")));
+        SPRITE_BOTTOM = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_bottom.png")));
+        SPRITE_BOTTOM_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_bottomright.png")));
+        SPRITE_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_right.png")));
+        SPRITE_TOP_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_topright.png")));
+        SPRITE_TOP = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_top.png")));
+        SPRITE_TOP_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_topleft.png")));
+        SPRITE_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_left.png")));
+        SPRITE_BOTTOM_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/enemies/friend/friend_bottomleft.png")));
+
         width = 100;
         height = 100;
         setPath();
@@ -42,12 +50,21 @@ public class Friend extends Entity {
     }
 
     /**
-     * Überschreibt getSprite aus superclass und gibt Sprite zurück
-     * @return momentaner Sprite
+     * Gibt die Breite des momentanen Sprites zurück
+     * @return Breite des momentanen Sprites
      */
     @Override
-    public Image getSprite() {
-        return SPRITE_IDLE;
+    public int getSpriteWidth() {
+        return (int) Math.round(getSprite().getWidth());
+    }
+
+    /**
+     * Gibt die Höhe des momentanen Sprites zurück
+     * @return Höhe des momentanen Sprites
+     */
+    @Override
+    public int getSpriteHeight() {
+        return (int) Math.round(getSprite().getHeight());
     }
 
     /**

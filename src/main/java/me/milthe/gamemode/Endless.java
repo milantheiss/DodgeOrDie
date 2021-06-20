@@ -26,7 +26,7 @@ public class Endless {
         Game.setGamestate(Gamestates.INGAME);
         Game.setGamemode(Gamemodes.ENDLESS);
 
-        Game.setPlayer(new Player(4));
+        Game.setPlayer(new Player(2000));
 
         totalEnemiesSurvived = 0;
         highestAmountOfHealth = 4;

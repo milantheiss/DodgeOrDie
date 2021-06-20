@@ -8,12 +8,8 @@ import me.milthe.ui.GIF;
 import me.milthe.ui.Gui;
 import java.util.Objects;
 
-
 public class Player extends Entity {
     private static long lastDash = 0;
-    private final Image SPRITE_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/left.png")));
-    private final Image SPRITE_CENTER = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/center.png")));
-    private final Image SPRITE_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/right.png")));
     private static int hitpoints;
     public static GIF dashanimation;
 
@@ -22,6 +18,10 @@ public class Player extends Entity {
      * @param hitpoints Lebenspunkte des Spielers
      */
     public Player(int hitpoints) {
+        SPRITE_LEFT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/left.png")));
+        SPRITE_IDLE = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/center.png")));
+        SPRITE_RIGHT = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/entities/player/right.png")));
+
         Player.hitpoints = hitpoints;
         xPos = Gui.WIDTH / 2 - 25;
         yPos = Gui.HEIGHT / 2 - 25;
@@ -130,13 +130,14 @@ public class Player extends Entity {
      * Gibt den Spieler Sprite relative zur momentanen Bewegungsrichtung zurück
      * @return Sprite für + oder - X Richtung
      */
+    @Override
     public Image getSprite() {
         if (xVelocity == 1) {
             return SPRITE_RIGHT;
         } else if (xVelocity == -1) {
             return SPRITE_LEFT;
         } else {
-            return SPRITE_CENTER;
+            return SPRITE_IDLE;
         }
     }
 
